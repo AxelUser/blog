@@ -1,31 +1,18 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import styles from './css/header.module.css'
 
 const Header = ({ siteTitle }) => (
   <div
-    style={{
-      background: 'rebeccapurple',
-      marginBottom: '1.45rem',
-    }}
+    className = {styles.headerBlock}
   >
     <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 960,
-        padding: '1.45rem 1.0875rem',
-      }}
+      className = {styles.headerTitle}
     >
-      <h1 style={{ 
-            margin: 0,
-            borderBottomWidth: 0,
-          }}
-        >
+      <h1>
         <Link
           to="/"
-          style={{
-            color: 'white',
-            textDecoration: 'none',
-          }}
+          className={styles.headerMainLink}
         >
           {siteTitle}
         </Link>
