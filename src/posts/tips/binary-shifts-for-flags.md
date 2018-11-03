@@ -1,4 +1,8 @@
-# 26-10-18 [C#] Bitwise shift for flags
+---
+date: "2018-10-26"
+tag: "C#"
+title: "Bitwise shifts for flags"
+---
 
 If you want easily increment your flags in `Enum`, you can represent it's values with bitwise shift operator:
 ```csharp
