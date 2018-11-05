@@ -62,7 +62,18 @@ module.exports = {
         background_color: '#663399',
         theme_color: '#663399',
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
+        icons: [
+          {
+            src: '/android-chrome-192x192.png?v=6946GROn29',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/android-chrome-512x512.png?v=6946GROn29',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
       },
     },
     'gatsby-plugin-offline',
