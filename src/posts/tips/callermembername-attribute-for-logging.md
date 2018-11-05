@@ -11,7 +11,7 @@ This attributes are targeted to change default value of optional parameters in m
 Well, compiler always translate optional parameters into default values, if other is not defined. That's mean when you invoke method `void Log(string msg, string method = null) { }` like that `Log(msg);`, compiler will translate this invokation into `Log(msg, null);`.
 
 So, with this trio you can tune this behavior. Just put them before optional parameters at you method and the compiler will change the pre-defined values:
-- `[CallerFilePath`]` will pass the full path of your source code file, where method was invoked.
+- `[CallerFilePath]` will pass the full path of your source code file, where method was invoked.
 - `[CallerLineNumber]` will pass the line number (`int`)  of code, where method was invoked.
 - `[CallerMemberName]` will pass the name of member (ctor, method, property, event, etc), which invoked method.
 
