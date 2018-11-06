@@ -33,8 +33,11 @@ const IndexPage = ({data}) => (
 export default IndexPage
 
 export const query = graphql`
-  query {
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+  query AllPostsList {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: {frontmatter: {draft: {ne: true}}}
+    ) {
       totalCount
       edges {
         node {

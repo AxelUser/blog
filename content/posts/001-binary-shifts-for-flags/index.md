@@ -2,6 +2,7 @@
 date: "2018-10-26"
 tag: "C#"
 title: "Bitwise shifts for flags"
+draft: false
 ---
 
 If you want easily increment your flags in `Enum`, you can represent it's values with bitwise shift operator:

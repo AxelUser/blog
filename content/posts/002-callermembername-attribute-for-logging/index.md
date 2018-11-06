@@ -2,6 +2,7 @@
 date: "2018-10-27"
 tag: "C#"
 title: "CallerMemberName attribute for logging"
+draft: false
 ---
 
 Since C# 4.5 you can use "magic" attributes to retrieve caller information: `[CallerFilePath]`, `[CallerLineNumber]`, `[CallerMemberName]`.
