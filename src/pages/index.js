@@ -3,6 +3,7 @@ import { Link } from 'gatsby'
 import Layout from '../components/layout'
 import styles from './css/index.module.css'
 import { graphql } from 'gatsby'
+import Tags from '../components/tags';
 
 const IndexPage = ({data}) => (
   <Layout>
@@ -11,21 +12,21 @@ const IndexPage = ({data}) => (
         Recent posts
       </h1>
       <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
-        {data.allMarkdownRemark.edges.map(({ node }) => (
-          <div key={node.id}>
-            <Link
-              to={node.fields.slug}
-            >
-              <h3>
-                {node.frontmatter.title}{` [${node.frontmatter.tag}] `}
-                <span>
-                  — {node.frontmatter.date}
-                </span>
-              </h3>
-              <p>{node.excerpt}</p>
-            </Link>
-          </div>
-        ))}
+      {data.allMarkdownRemark.edges.map(({ node }) => (
+        <div key={node.id}>
+          <Link
+            to={node.fields.slug}
+          >
+            <h4>
+              {node.frontmatter.title}{node.frontmatter.tags.map((tag) => ` [${tag}] `)}
+              <span>
+                — {node.frontmatter.date}
+              </span>
+            </h4>
+            <p>{node.frontmatter.preview}</p>
+          </Link>
+        </div>
+      ))}
     </div>
   </Layout>
 )
@@ -44,13 +45,13 @@ export const query = graphql`
           id
           frontmatter {
             title
-            tag
+            tags
             date(formatString: "DD MMMM, YYYY")
+            preview
           }
           fields {
             slug
           }
-          excerpt
         }
       }
     }
