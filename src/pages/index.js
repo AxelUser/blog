@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import Layout from '../components/layout'
 import styles from './css/index.module.css'
 import { graphql } from 'gatsby'
+import PostPreview from '../components/postPreview'
 
 const IndexPage = ({data}) => (
   <Layout>
@@ -12,19 +12,14 @@ const IndexPage = ({data}) => (
       </h1>
       <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
       {data.allMarkdownRemark.edges.map(({ node }) => (
-        <div key={node.id}>
-          <Link
-            to={node.fields.slug}
-          >
-            <h4>
-              {node.frontmatter.title}{node.frontmatter.tags.map((tag) => ` [${tag}] `)}
-              <span>
-                — {node.frontmatter.date}
-              </span>
-            </h4>
-            <p>{node.frontmatter.preview}</p>
-          </Link>
-        </div>
+        <PostPreview
+          key = {node.id}
+          title = {node.frontmatter.title}
+          date = {node.frontmatter.date}
+          preview = {node.frontmatter.preview}
+          tags = {node.frontmatter.tags}
+          link = {node.fields.slug}
+        />
       ))}
     </div>
   </Layout>

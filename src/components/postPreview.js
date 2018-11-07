@@ -1,17 +1,18 @@
 import React from 'react'
+import { Link } from 'gatsby'
 
-const PostPreview = ({title, preview, date, link}) => (
+const PostPreview = ({title, preview, tags, date, link}) => (
 	<div>
 		<Link
-			to={node.fields.slug}
+			to={link}
 		>
 			<h4>
-				{node.frontmatter.title}{node.frontmatter.tags.map((tag) => ` [${tag}] `)}
+				{title}{tags.map((tag) => ` [${tag}] `)}
 				<span>
-				— {node.frontmatter.date}
+				— {date}
 				</span>
 			</h4>
-				<p>{node.frontmatter.preview}</p>
+				<p>{preview}</p>
 		</Link>
 	</div>
 )
