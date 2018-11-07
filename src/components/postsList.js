@@ -1,6 +1,6 @@
 import React from 'react'
 import { StaticQuery, graphql, Link } from 'gatsby'
-import styles from './css/postslist.module.css'
+import styles from './css/postslist.module.less'
 import Tag from './tag';
 
 const PostPreview = ({title, preview, tags, date, link}) => (

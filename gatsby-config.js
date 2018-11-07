@@ -3,6 +3,7 @@ module.exports = {
     title: "Maltsev's",
   },
   plugins: [
+    `gatsby-plugin-less`,
     'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-source-filesystem`,
