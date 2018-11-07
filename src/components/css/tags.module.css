@@ -1,13 +1,13 @@
 .tagsList {
-    margin: 0;
-    padding: 4px;
+	margin: 0;
+	padding: 4px;
 }
 
 .tagsItem {
-    display: inline;
-    margin-right: 5px;
-    background-color: green;
-    border-radius: 5px;
-    padding: 6px 10px;
-    color: whitesmoke;
+	display: inline;
+	margin-right: 5px;
+	background-color: green;
+	border-radius: 5px;
+	padding: 6px 10px;
+	color: whitesmoke;
 }

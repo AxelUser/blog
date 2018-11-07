@@ -3,7 +3,6 @@ import { Link } from 'gatsby'
 import Layout from '../components/layout'
 import styles from './css/index.module.css'
 import { graphql } from 'gatsby'
-import Tags from '../components/tags';
 
 const IndexPage = ({data}) => (
   <Layout>

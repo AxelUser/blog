@@ -5,19 +5,19 @@ import styles from './css/tags.module.css'
 const Tags = (tags) => (
 	<StaticQuery
 		query={
-				graphql`
-					query AllTagsList {
-						allMarkdownRemark(
-							sort: { fields: [frontmatter___date], order: DESC }
-							filter: {frontmatter: {draft: {ne: true}}}
-							) {
-							tags:group(field: frontmatter___tags){
-								name:fieldValue,
-								count:totalCount
-							}
+			graphql`
+				query AllTagsList {
+					allMarkdownRemark(
+						sort: { fields: [frontmatter___date], order: DESC }
+						filter: {frontmatter: {draft: {ne: true}}}
+						) {
+						tags:group(field: frontmatter___tags){
+							name:fieldValue,
+							count:totalCount
 						}
 					}
-				`}
+				}
+			`}
 		render={data => (
 			<div>
 				{data.allMarkdownRemark.tags.map((tag) =>
