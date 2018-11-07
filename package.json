@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-default",
-  "description": "Gatsby default starter",
+  "name": "maltsevs-blog",
+  "description": "Alexey Maltsev Blog",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Alexey Maltsev",
   "dependencies": {
     "emotion": "^9.2.12",
     "emotion-server": "^9.2.12",
@@ -47,9 +47,5 @@
   },
   "devDependencies": {
     "prettier": "^1.14.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
   }
 }

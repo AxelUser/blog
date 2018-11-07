@@ -56,4 +56,4 @@ enum ProgrammingLanguages
 }
 ```
 
-More fun with bitwise operators and Enums: https://www.alanzucconi.com/2015/07/26/enum-flags-and-bitwise-operators/
+More info about bitwise operators and Enums you can learn from [this post](https://www.alanzucconi.com/2015/07/26/enum-flags-and-bitwise-operators/).
