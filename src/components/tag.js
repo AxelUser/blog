@@ -5,9 +5,9 @@ import { Link } from 'gatsby';
 
 const Tag = ({name, count}) => {
   if(count){
-    return <Link to={'/category/'} className={styles.tag}>{`${name}:\u00A0${count}`}</Link>
+    return <Link to={'/'} className={styles.tag}>{`${name}:\u00A0${count}`}</Link>
   } else {
-    return <Link to={'/category/'} className={styles.tag}>{`${name}`}</Link>
+    return <Link to={'/'} className={styles.tag}>{`${name}`}</Link>
   }
 }
 
