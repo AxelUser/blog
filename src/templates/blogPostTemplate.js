@@ -9,7 +9,7 @@ const BlogPostTemplate = ({data}) => {
 	return (
 		<Layout>
 			<h1>{frontmatter.title}</h1>
-			<h2>{frontmatter.date}</h2>
+			<h5>{'Published '+frontmatter.date}</h5>
 			<div dangerouslySetInnerHTML = {{__html: html}} />
 		</Layout>
 	)
