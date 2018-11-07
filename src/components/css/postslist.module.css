@@ -1,0 +1,45 @@
+.listWrapper {
+  margin: 0 0;
+}
+
+.previewContainer {
+  padding: 20px 15px 5px 15px;
+  min-height: 200px;
+  list-style-type: none;
+  border-bottom: 1px dotted #303030;
+}
+
+.previewContainer:hover {
+  background-color: #fcf5f5;
+}
+
+.previewLink {
+  color: #424242;
+  text-decoration: none;
+}
+
+.previewLink:visited {
+  color: gray;
+}
+
+.date {
+  color: gray;
+}
+
+.previewContainer:hover .date {
+  color: #00a0fc;
+}
+
+.tags {
+  float: right;
+}
+
+.title {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.previewLink .preview {
+  font-weight: normal;
+  margin: 0 0 30px 0;
+}

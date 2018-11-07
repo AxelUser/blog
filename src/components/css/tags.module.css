@@ -1,13 +1,18 @@
-.tagsList {
+.tags {
 	margin: 0;
 	padding: 4px;
 }
 
-.tagsItem {
+.tag {
 	display: inline;
 	margin-right: 5px;
 	background-color: green;
 	border-radius: 5px;
 	padding: 6px 10px;
+	color: whitesmoke;
+	text-decoration: none;
+}
+
+.tag:visited {
 	color: whitesmoke;
 }

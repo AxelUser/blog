@@ -1,11 +1,5 @@
 import Typography from 'typography'
-import githubTheme from 'typography-theme-github'
+import noriegaTheme from 'typography-theme-noriega'
 
-githubTheme.overrideThemeStyles = ({ rhythm }, options) => ({
-	'h1': {
-			borderBottom: 'none'
-	}
-});
-
-const typography = new Typography(githubTheme)
+const typography = new Typography(noriegaTheme)
 export default typography
