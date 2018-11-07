@@ -4,6 +4,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-less`,
+    'gatsby-plugin-react-svg',
     'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-source-filesystem`,
