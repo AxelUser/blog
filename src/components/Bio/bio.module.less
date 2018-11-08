@@ -5,14 +5,28 @@
   padding: 1rem 1.8rem;
   align-items: center;
 
+  @media (max-width: @sz_small) {
+    flex-direction: column;
+    padding: 1rem 1rem;
+  }
+
   .photo {
     align-self: flex-start;
     height: 4em;
     width: 4em;
     border-radius: 50%;
+
+    @media (max-width: @sz_small) {
+      align-self: center;
+    }
   }
 
   .info {
     margin: 0 0.6rem 0 2rem;
+    
+    @media (max-width: @sz_small) {
+      text-align: center;
+      margin: 0 0;
+    }
   }
 }
