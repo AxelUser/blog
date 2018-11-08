@@ -51,10 +51,6 @@ const PostsList = () => (
 
     render = {data => (
       <div>
-        <h1>
-          Development posts
-        </h1>
-        {/* <h4>{data.allMarkdownRemark.totalCount} Posts</h4> */}
         <ol className = {styles.listWrapper}>
           {data.allMarkdownRemark.edges.map(({ node }) => (
             <PostPreview
