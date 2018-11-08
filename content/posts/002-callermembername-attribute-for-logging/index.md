@@ -2,7 +2,7 @@
 date: "2018-10-27"
 tags:
 - "C#"
-title: "CallerMemberName attribute for logging"
+title: "CallerMember's attribute for logging"
 preview: "Get caller information via attributes"
 draft: false
 ---
