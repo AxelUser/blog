@@ -1,6 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Layout from '../components/layout'
+import Layout from '../../components/layout'
+import Bio from '../../components/Bio/bio'
+import styles from './blogPost.module.less'
 
 const BlogPostTemplate = ({data}) => {
 	const {markdownRemark} = data;
@@ -10,7 +12,8 @@ const BlogPostTemplate = ({data}) => {
 		<Layout>
 			<h1>{frontmatter.title}</h1>
 			<h5>{'Published '+frontmatter.date}</h5>
-			<div dangerouslySetInnerHTML = {{__html: html}} />
+			<div className={styles.text} dangerouslySetInnerHTML = {{__html: html}} />
+			<Bio/>
 		</Layout>
 	)
 }
