@@ -55,8 +55,8 @@ module.exports = {
         name: 'Maltsev`s Development Blog',
         short_name: 'Maltsev Blog',
         start_url: '/blog',
-        background_color: '#663399',
-        theme_color: '#663399',
+        background_color: '#ef3507',
+        theme_color: '#ef3507',
         display: 'minimal-ui',
         icons: [
           {
