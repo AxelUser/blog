@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import styles from './css/header.module.less'
-import TwitterIcon from '../images/social/twitter.svg'
-import GitHubIcon from '../images/social/github.svg'
-import LinkedInIcon from '../images/social/linkedin.svg'
+import styles from './header.module.less'
+import TwitterIcon from '../../images/social/twitter.svg'
+import GitHubIcon from '../../images/social/github.svg'
+import LinkedInIcon from '../../images/social/linkedin.svg'
 
 const Header = ({ siteTitle }) => (
   <div

@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Layout from '../../components/layout'
+import Layout from '../../components/Layout/layout'
 import Bio from '../../components/Bio/bio'
 import styles from './blogPost.module.less'
 

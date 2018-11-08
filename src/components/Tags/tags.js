@@ -1,6 +1,6 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
-import styles from './css/tags.module.less'
+import styles from './tags.module.less'
 
 const Tags = (tags) => (
 	<StaticQuery

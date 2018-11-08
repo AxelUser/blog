@@ -1,6 +1,6 @@
 
 import React from 'react'
-import styles from './css/tags.module.less'
+import styles from './tags.module.less'
 import { Link } from 'gatsby';
 
 const Tag = ({name, count}) => {
