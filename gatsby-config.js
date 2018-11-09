@@ -1,5 +1,9 @@
+const config = {
+  pathPrefix: "/blog"
+}
+
 module.exports = {
-  pathPrefix: "/blog",
+  pathPrefix: config.pathPrefix,
   siteMetadata: {
     title: "Maltsev's",
   },
@@ -54,18 +58,18 @@ module.exports = {
       options: {
         name: 'Maltsev`s Development Blog',
         short_name: 'Maltsev Blog',
-        start_url: '/blog',
+        start_url: config.pathPrefix,
         background_color: '#ef3507',
         theme_color: '#ef3507',
         display: 'minimal-ui',
         icons: [
           {
-            src: '/android-chrome-192x192.png?v=6946GROn29',
+            src: config.pathPrefix + '/android-chrome-192x192.png?v=6946GROn29',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: '/android-chrome-512x512.png?v=6946GROn29',
+            src: config.pathPrefix + '/android-chrome-512x512.png?v=6946GROn29',
             sizes: '512x512',
             type: 'image/png',
           },
