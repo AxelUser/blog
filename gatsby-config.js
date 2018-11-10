@@ -1,5 +1,5 @@
 const config = {
-  pathPrefix: "/blog"
+  pathPrefix: ""
 }
 
 module.exports = {
