@@ -23,10 +23,12 @@ const Layout = ({ children }) => (
           meta={[
             { name: 'description', content: 'Sample' },
             { name: 'keywords', content: 'sample, something' },
+            { name: "google-site-verification", content: "8Dy4lxRZAH8BAi86GsiP9mlM_ELJLCh839CXT3W32SI" },
           ]}
         >
           <html lang="en" />
-
+          
+          <meta name="google-site-verification" content="8Dy4lxRZAH8BAi86GsiP9mlM_ELJLCh839CXT3W32SI" />
           {/* Favicon stuff from realfavicongenerator.net */}
           <link rel="apple-touch-icon" sizes="180x180" href={withPrefix('/apple-touch-icon.png')}/>
           <link rel="icon" type="image/png" sizes="32x32" href={withPrefix('/favicon-32x32.png')}/>
