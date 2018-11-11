@@ -38,6 +38,11 @@ const SEO = ({title = null, description = null}) => (
               <meta name="google-site-verification" content="8Dy4lxRZAH8BAi86GsiP9mlM_ELJLCh839CXT3W32SI" />
               <meta name="description" content={seo.description}/>
               <meta name="image" content={image}/>
+
+              {/*Open Graph*/}
+              <meta name="og:title" content={seo.title}/>
+              <meta name="og:description" content={seo.description}/>
+              <meta name="og:image" content={image}/>
           </Helmet>
           <TwitterSEO username={twitter}/>
         </>
