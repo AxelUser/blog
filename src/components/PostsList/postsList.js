@@ -6,8 +6,8 @@ import Tag from '../Tags/tag';
 const PostPreview = ({title, preview, tags, date, link}) => (
   <li className = {styles.previewContainer}>
     <time className = {styles.date}>{date}</time>
-    <div class={styles.tags}>
-      {tags.map((tag) => <Tag name={tag}/>)}
+    <div className={styles.tags}>
+      {tags.map((tag, index) => <Tag key={index} name={tag}/>)}
     </div>
     <Link
       to={link}
