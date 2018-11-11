@@ -4,6 +4,7 @@ import Helmet from 'react-helmet'
 import { StaticQuery, graphql, withPrefix } from 'gatsby'
 
 import Header from '../Header/header'
+import SEO from '../SEO/seo';
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -18,17 +19,11 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
-        <Helmet
-          title={data.site.siteMetadata.title}
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-            { name: "google-site-verification", content: "8Dy4lxRZAH8BAi86GsiP9mlM_ELJLCh839CXT3W32SI" },
-          ]}
-        >
+        <Helmet>
           <html lang="en" />
-          
-          <meta name="google-site-verification" content="8Dy4lxRZAH8BAi86GsiP9mlM_ELJLCh839CXT3W32SI" />
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />        
+
           {/* Favicon stuff from realfavicongenerator.net */}
           <link rel="apple-touch-icon" sizes="180x180" href={withPrefix('/apple-touch-icon.png')}/>
           <link rel="icon" type="image/png" sizes="32x32" href={withPrefix('/favicon-32x32.png')}/>
@@ -37,6 +32,7 @@ const Layout = ({ children }) => (
           <meta name="msapplication-TileColor" content="#da532c"/>
           <meta name="theme-color" content="#ffffff"/>
         </Helmet>
+        <SEO/>
         <Header siteTitle={data.site.siteMetadata.title} />
         <div
           style={{

@@ -8,6 +8,7 @@ module.exports = {
   pathPrefix: config.pathPrefix,
   siteMetadata: {
     title: "Maltsev's",
+    description: "Blog of Alexey Maltsev, full-stack developer from Russia",
   },
   plugins: [
     `gatsby-plugin-less`,
