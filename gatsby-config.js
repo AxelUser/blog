@@ -5,9 +5,9 @@ const config = {
 }
 
 module.exports = {
-  siteUrl = "https://www.maltsev.space",
   pathPrefix: config.pathPrefix,
   siteMetadata: {
+    siteUrl: "https://www.maltsev.space",
     title: "Maltsev's",
     description: "Blog of Alexey Maltsev, full-stack developer from Russia",
     image: urljoin(config.pathPrefix, "/seo-image.png"),
@@ -59,6 +59,13 @@ module.exports = {
     },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        policy: [{ userAgent: '*', allow: '/' }]
+      }
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -81,13 +88,6 @@ module.exports = {
           },
         ],
       },
-    },
-    `gatsby-plugin-sitemap`,
-    {
-      resolve: 'gatsby-plugin-robots-txt',
-      options: {
-        policy: [{ userAgent: '*', allow: '/' }]
-      }
     },
     'gatsby-plugin-offline',
   ],
