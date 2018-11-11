@@ -1,5 +1,7 @@
+const urljoin = require('url-join');
+
 const config = {
-  pathPrefix: ""
+  pathPrefix: "/"
 }
 
 module.exports = {
@@ -64,12 +66,12 @@ module.exports = {
         display: 'minimal-ui',
         icons: [
           {
-            src: config.pathPrefix + '/android-chrome-192x192.png?v=6946GROn29',
+            src: urljoin(config.pathPrefix, '/android-chrome-192x192.png?v=6946GROn29'),
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: config.pathPrefix + '/android-chrome-512x512.png?v=6946GROn29',
+            src: urljoin(config.pathPrefix, '/android-chrome-512x512.png?v=6946GROn29'),
             sizes: '512x512',
             type: 'image/png',
           },
