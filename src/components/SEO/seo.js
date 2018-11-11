@@ -1,7 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
-import TwitterSEO from './twitterSeo';
+import TwitterSEO from './twitterSeo'
 
 const SEO = ({title = null, description = null}) => (
   <StaticQuery
