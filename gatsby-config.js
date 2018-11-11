@@ -81,6 +81,14 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://www.maltsev.space/',
+        sitemap: 'https://www.maltsev.space/sitemap.xml',
+        policy: [{ userAgent: '*', allow: '/' }]
+      }
+    },
     'gatsby-plugin-offline',
   ],
 }
