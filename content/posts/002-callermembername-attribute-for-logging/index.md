@@ -7,9 +7,12 @@ preview: "Get caller information via attributes"
 draft: false
 ---
 
-Since C# 4.5 you can use "magic" attributes to retrieve caller information: `[CallerFilePath]`, `[CallerLineNumber]`, `[CallerMemberName]`.
+Since C# 4.5 you can use "magic" attributes to retrieve caller information:
+- CallerFilePath
+- CallerLineNumber
+- CallerMemberName
 
-This attributes are targeted to change default value of optional parameters in methods. They pass the information about place in code, where method was called. 
+These attributes are targeted to change default value of optional parameters in methods. They pass the information about place in code, where method was called. 
 
 Well, compiler always translate optional parameters into default values, if other is not defined.
 For example you have some logging method:
