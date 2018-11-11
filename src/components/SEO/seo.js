@@ -9,7 +9,8 @@ const SEO = () => (
         site {
           siteMetadata {
             title,
-            description
+            description,
+            image
           }
         }
       }
@@ -19,13 +20,15 @@ const SEO = () => (
       site: {
         siteMetadata: {
           title,
-          description
+          description,
+          image
         },
       },
     }) => (
       <Helmet title={title}>
           <meta name="google-site-verification" content="8Dy4lxRZAH8BAi86GsiP9mlM_ELJLCh839CXT3W32SI" />
           <meta name="description" content={description}/>
+          <meta name="image" content={image}/>
       </Helmet>
     )}
   />

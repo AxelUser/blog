@@ -1,11 +1,34 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
 import styles from './header.module.less'
 import TwitterIcon from '../../images/social/twitter.svg'
 import GitHubIcon from '../../images/social/github.svg'
 import LinkedInIcon from '../../images/social/linkedin.svg'
 
-const Header = ({ siteTitle }) => (
+const Header = () => (
+  <StaticQuery 
+    query={graphql`
+      query HeaderQuery {
+        site {
+          siteMetadata {
+            title
+          }
+        }
+      }
+    `}
+
+    render={({
+      site: {
+        siteMetadata: {
+          title
+        }
+      }
+    }) => (<HeaderForTitle siteTitle={title}/>)}
+  />
+)
+
+const HeaderForTitle = ({ siteTitle }) => (
   <div
     className = {styles.headerBlock}
   >

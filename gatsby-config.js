@@ -9,6 +9,7 @@ module.exports = {
   siteMetadata: {
     title: "Maltsev's",
     description: "Blog of Alexey Maltsev, full-stack developer from Russia",
+    image: urljoin(config.pathPrefix, "/seo-image.png")
   },
   plugins: [
     `gatsby-plugin-less`,
