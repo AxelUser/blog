@@ -3,13 +3,15 @@ import { graphql } from 'gatsby'
 import Layout from '../../components/Layout/layout'
 import Bio from '../../components/Bio/bio'
 import styles from './blogPost.module.less'
+import SEO from '../../components/SEO/seo';
 
 const BlogPostTemplate = ({data}) => {
 	const {markdownRemark} = data;
-	const {html, frontmatter} = markdownRemark;
+	const {excerpt, html, frontmatter} = markdownRemark;
 
 	return (
 		<Layout>
+			<SEO title = {frontmatter.title} description={excerpt}/>
 			<h1>{frontmatter.title}</h1>
 			<h5>{'Published '+frontmatter.date}</h5>
 			<div className={styles.text} dangerouslySetInnerHTML = {{__html: html}} />
@@ -22,6 +24,7 @@ export default BlogPostTemplate;
 export const postQuery = graphql`
 	query($path: String!) {
 		markdownRemark(fields: { slug: { eq: $path } }) {
+			excerpt
 			html
 			frontmatter {
 				date(formatString: "MMMM DD, YYYY"),
