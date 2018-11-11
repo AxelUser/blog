@@ -5,6 +5,7 @@ const config = {
 }
 
 module.exports = {
+  siteUrl = "https://www.maltsev.space",
   pathPrefix: config.pathPrefix,
   siteMetadata: {
     title: "Maltsev's",
@@ -81,11 +82,10 @@ module.exports = {
         ],
       },
     },
+    `gatsby-plugin-sitemap`,
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: 'https://www.maltsev.space/',
-        sitemap: 'https://www.maltsev.space/sitemap.xml',
         policy: [{ userAgent: '*', allow: '/' }]
       }
     },
