@@ -48,7 +48,7 @@
     "develop": "gatsby develop",
     "format": "prettier --write \"src/**/*.js\"",
     "test": "echo \"Warning: no test specified\" && exit 0",
-    "preDeploy": "gatsby build",
+    "preDeploy": "gatsby build --no-cache",
     "deploy": "npm run preDeploy && gh-pages -d public"
   },
   "devDependencies": {

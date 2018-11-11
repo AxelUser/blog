@@ -12,6 +12,7 @@ deploy:
   keep-history: true
   on:
     branch: master
+  fqdn: www.maltsev.space
 before_script:
   - "npm i -g gatsby"
   - "npm i"
