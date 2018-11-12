@@ -11,7 +11,7 @@ module.exports = {
     siteUrl: config.siteUrl,
     siteName: "Maltsev's",
     title: "Posts",
-    titleTemplate: "%s | Maltsev's Blog",
+    titleTemplate: "%s — Maltsev's Blog",
     description: "Blog of Alexey Maltsev, full-stack developer from Russia",
     image: urljoin(config.siteUrl, "/seo-image.png"),
     twitter: "@axel_user"
