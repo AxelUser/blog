@@ -12,7 +12,7 @@ const Header = () => (
       query HeaderQuery {
         site {
           siteMetadata {
-            title
+            siteName
           }
         }
       }
@@ -21,10 +21,10 @@ const Header = () => (
     render={({
       site: {
         siteMetadata: {
-          title
+          siteName
         }
       }
-    }) => (<HeaderForTitle siteTitle={title}/>)}
+    }) => (<HeaderForTitle siteTitle={siteName}/>)}
   />
 )
 
