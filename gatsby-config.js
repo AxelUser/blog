@@ -9,7 +9,8 @@ module.exports = {
   pathPrefix: config.pathPrefix,
   siteMetadata: {
     siteUrl: config.siteUrl,
-    title: "Maltsev's",
+    title: "Posts",
+    titleTemplate: "%s | Maltsev's Blog",
     description: "Blog of Alexey Maltsev, full-stack developer from Russia",
     image: urljoin(config.siteUrl, "/seo-image.png"),
     twitter: "@axel_user"

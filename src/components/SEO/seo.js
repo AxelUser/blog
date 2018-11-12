@@ -9,10 +9,11 @@ const SEO = ({title = null, description = null}) => (
       query SEOQuery {
         site {
           siteMetadata {
+            titleTemplate,
             defaultTitle: title,
             defaultDescription: description,
             image,
-            twitter
+            twitter            
           }
         }
       }
@@ -21,6 +22,7 @@ const SEO = ({title = null, description = null}) => (
     render={({
       site: {
         siteMetadata: {
+          titleTemplate,
           defaultTitle,
           defaultDescription,
           image,
@@ -34,7 +36,10 @@ const SEO = ({title = null, description = null}) => (
       }
       return (
         <>
-          <Helmet title={seo.title}>
+          <Helmet 
+            title={seo.title}
+            titleTemplate={titleTemplate}
+          >
               <meta name="google-site-verification" content="8Dy4lxRZAH8BAi86GsiP9mlM_ELJLCh839CXT3W32SI" />
               <meta name="description" content={seo.description}/>
               <meta name="image" content={image}/>
