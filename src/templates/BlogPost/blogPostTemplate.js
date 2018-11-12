@@ -27,7 +27,7 @@ export const postQuery = graphql`
 			excerpt
 			html
 			frontmatter {
-				date(formatString: "MMMM DD, YYYY"),
+				date(formatString: "DD MMMM, YYYY"),
 				title
 			}
 			fields {
