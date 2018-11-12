@@ -53,7 +53,7 @@ namespace InternalsVisibleTests
 }
 ```
 
-We can't access property `Counter` in assembly `InternalsVisibleTests`, cause it's modifier is `internal`. To open internal logic for other assemblies, you need to provide attribute for whole testable assembly in file `AssemblyInfo.cs` or just above the devinition of your class, it doesn't really matter.
+We can't access property `Counter` in assembly `InternalsVisibleTests`, cause it's modifier is `internal`. To open internal logic for other assemblies, you need to provide attribute for whole testable assembly in file `AssemblyInfo.cs` or just above the definition of your class, it doesn't really matter.
 Let's put attribute invocation in `AssemblyInfo.cs` for project `InternalsLib`:
 ```csharp
 [assembly: InternalsVisibleTo("InternalsVisibleTests")]
