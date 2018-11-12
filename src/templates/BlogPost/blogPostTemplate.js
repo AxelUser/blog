@@ -12,8 +12,8 @@ const BlogPostTemplate = ({data}) => {
 	return (
 		<Layout>
 			<SEO title = {frontmatter.title} description={excerpt}/>
-			<h1>{frontmatter.title}</h1>
-			<h5>{'Published '+frontmatter.date}</h5>
+			<p className={styles.meta}>{frontmatter.date}</p>
+			<h1 className={styles.title}>{frontmatter.title}</h1>
 			<div className={styles.text} dangerouslySetInnerHTML = {{__html: html}} />
 			<Bio/>
 		</Layout>
