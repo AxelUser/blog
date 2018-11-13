@@ -12,10 +12,13 @@ const BlogPostTemplate = ({data}) => {
 	return (
 		<Layout>
 			<SEO title = {frontmatter.title} description={excerpt}/>
-			<p className={styles.meta}>{frontmatter.date}</p>
-			<h1 className={styles.title}>{frontmatter.title}</h1>
-			<div className={styles.text} dangerouslySetInnerHTML = {{__html: html}} />
-			<Bio/>
+			<article itemScope itemType={'http://schema.org/CreativeWork'}>
+				<meta itemProp={"description"} content={frontmatter.preview}/>
+				<time className={styles.meta} itemProp={'datePublished'}>{frontmatter.date}</time>
+				<h1 className={styles.title} itemProp={'headline'}>{frontmatter.title}</h1>
+				<div className={styles.text} itemProp={'text'} dangerouslySetInnerHTML = {{__html: html}} />
+				<Bio itemProp={"author"}/>
+			</article>
 		</Layout>
 	)
 }
@@ -28,7 +31,8 @@ export const postQuery = graphql`
 			html
 			frontmatter {
 				date(formatString: "DD MMMM, YYYY"),
-				title
+				title,
+				preview
 			}
 			fields {
 				slug
