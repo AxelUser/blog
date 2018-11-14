@@ -2,16 +2,17 @@ const urljoin = require('url-join');
 
 const config = {
   pathPrefix: "/",
-  siteUrl: "https://www.maltsev.space"
+  siteUrl: "https://www.maltsev.space",
+  siteName: "Maltsev's Blog",
 }
 
 module.exports = {
   pathPrefix: config.pathPrefix,
   siteMetadata: {
     siteUrl: config.siteUrl,
-    siteName: "Maltsev's",
+    siteName: config.siteName,
     title: "Posts",
-    titleTemplate: "%s — Maltsev's Blog",
+    titleTemplate: `%s — ${config.siteName}`,
     description: "Blog of Alexey Maltsev, full-stack developer from Russia",
     image: urljoin(config.siteUrl, "/seo-image.png"),
     twitter: "@axel_user"
