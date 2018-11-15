@@ -16,20 +16,25 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   return new Promise((resolve, reject) => {
-    graphql(`
-      {
-        allMarkdownRemark {
-          edges {
-            node {
-              fields {
-                slug
-              }
+    graphql(`query AllPosts {
+      allMarkdownRemark(sort: {fields: frontmatter___date, order: ASC}) {
+        edges {
+          node {
+            frontmatter {
+              title
+            }
+            fields {
+              slug
             }
           }
         }
       }
-    `).then(result => {
-      result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    }`).then(result => {
+      var posts = result.data.allMarkdownRemark.edges;
+      posts.forEach(({ node }, index) => {
+        const prev = index === 0 ? null : posts[index - 1].node;
+        const next =
+          index === posts.length - 1 ? null : posts[index + 1].node;
         createPage({
           path: node.fields.slug,
           component: path.resolve(`./src/templates/BlogPost/blogPostTemplate.js`),
@@ -37,6 +42,8 @@ exports.createPages = ({ graphql, actions }) => {
             // Data passed to context is available
             // in page queries as GraphQL variables.
             slug: node.fields.slug,
+            prev: prev,
+            next: next
           },
         })
       })

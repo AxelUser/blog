@@ -1,11 +1,24 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphq, Link } from 'gatsby'
 import Layout from '../../components/Layout/layout'
 import Bio from '../../components/Bio/bio'
 import styles from './blogPost.module.less'
 import SEO from '../../components/SEO/seo';
 
-const BlogPostTemplate = ({data: {
+const FooterNavigation = ({prev, next}) => {
+	return (
+		<div className={styles.postNavigation + " " + styles.postNavigationSinge}>
+			{prev != null ? ( 
+				<Link className={styles.postLinkPrev} to={prev.fields.slug}>{"← " + prev.frontmatter.title}</Link>
+			) : (<div></div>)}
+			{next != null ? ( 
+				<Link className={styles.postLinkNext} to={next.fields.slug}>{next.frontmatter.title + " →"}</Link>
+			) : (<div></div>)}
+		</div>
+	)
+}
+
+const BlogPostTemplate = ({pageContext, data: {
 	markdownRemark: {
 		excerpt,
 		html,
@@ -18,6 +31,7 @@ const BlogPostTemplate = ({data: {
 		}
 	}
 }}) => {
+	var {next, prev} = pageContext;
 	return (
 		<Layout>
 			<SEO title = {title} description={excerpt}/>
@@ -27,10 +41,11 @@ const BlogPostTemplate = ({data: {
 				<span className={styles.meta}>
 					<time itemProp={'datePublished'}>{date}</time>
 					<span>~{timeToRead} min to read</span>
-					{tags.map((tag) => <span>[{tag}]</span>)}
+					{tags.map((tag, i) => <span key={i}>[{tag}]</span>)}
 				</span>
 				<h1 className={styles.title} itemProp={'headline'}>{title}</h1>				
 				<div className={styles.text} itemProp={'text'} dangerouslySetInnerHTML = {{__html: html}} />
+				<FooterNavigation prev={prev} next={next}/>
 				<Bio itemProp={"author"}/>
 			</article>
 		</Layout>
