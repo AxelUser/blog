@@ -1,32 +1,56 @@
 @import '../../css/theme.less';
 
 .container {
-  display: flex;
-  padding: 1rem 1.8rem;
-  align-items: center;
+  margin-bottom: 2.3rem;
 
-  @media (max-width: @sz_small) {
-    flex-direction: column;
-    padding: 1rem 1rem;
-  }
-
-  .photo {
-    align-self: flex-start;
-    height: 4em;
-    width: 4em;
-    border-radius: 50%;
-
+  .profile {
+    display: flex;
+    padding: 1rem 1.8rem 0 1.8rem;
+    align-items: center;
+  
     @media (max-width: @sz_small) {
-      align-self: center;
+      flex-direction: column;
+      padding: 1rem 1rem;
+    }
+
+    .photo {
+      align-self: flex-start;
+      height: 4em;
+      width: 4em;
+      border-radius: 50%;
+      margin-bottom: 0;
+  
+      @media (max-width: @sz_small) {
+        margin-bottom: 1.61rem;
+        align-self: center;
+      }
+    }
+
+    .info {
+      margin: 0 0.6rem 0 2rem;
+      align-self: flex-start;
+
+      & > p {
+        margin-bottom: 0;
+      }
+
+      @media (max-width: @sz_small) {
+        text-align: center;
+        margin: 0 0;
+      }
     }
   }
 
-  .info {
-    margin: 0 0.6rem 0 2rem;
-    
-    @media (max-width: @sz_small) {
-      text-align: center;
-      margin: 0 0;
+  .socialBlock {
+    margin: .8rem auto 0 auto;
+    display: flex;
+    justify-content: space-between;
+    width: 5.4rem;
+    height: 1.33rem;
+
+    .socialIcon {
+      height: inherit;
+      fill: @cl_social;
     }
   }
 }
