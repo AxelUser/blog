@@ -9,6 +9,7 @@ const BlogPostTemplate = ({data: {
 	markdownRemark: {
 		excerpt,
 		html,
+		timeToRead,
 		frontmatter: {
 			date,
 			title,
@@ -25,9 +26,10 @@ const BlogPostTemplate = ({data: {
 				<meta itemProp="keywords" content={tags.join(", ")} />
 				<span className={styles.meta}>
 					<time itemProp={'datePublished'}>{date}</time>
-					{tags.map((tag) => <span className={styles.tag}>[{tag}]</span>)}
+					<span>~{timeToRead} min to read</span>
+					{tags.map((tag) => <span>[{tag}]</span>)}
 				</span>
-				<h1 className={styles.title} itemProp={'headline'}>{title}</h1>
+				<h1 className={styles.title} itemProp={'headline'}>{title}</h1>				
 				<div className={styles.text} itemProp={'text'} dangerouslySetInnerHTML = {{__html: html}} />
 				<Bio itemProp={"author"}/>
 			</article>
