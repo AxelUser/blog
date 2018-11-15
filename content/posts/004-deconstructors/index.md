@@ -1,5 +1,5 @@
 ---
-date: "2018-11-14"
+date: "2018-11-15"
 tags:
 - "C#"
 title: "Deconstuctors for custom types"
