@@ -5,17 +5,29 @@ import Bio from '../../components/Bio/bio'
 import styles from './blogPost.module.less'
 import SEO from '../../components/SEO/seo';
 
-const BlogPostTemplate = ({data}) => {
-	const {markdownRemark} = data;
-	const {excerpt, html, frontmatter} = markdownRemark;
-
+const BlogPostTemplate = ({data: {
+	markdownRemark: {
+		excerpt,
+		html,
+		frontmatter: {
+			date,
+			title,
+			preview,
+			tags
+		}
+	}
+}}) => {
 	return (
 		<Layout>
-			<SEO title = {frontmatter.title} description={excerpt}/>
+			<SEO title = {title} description={excerpt}/>
 			<article itemScope itemType={'http://schema.org/CreativeWork'}>
-				<meta itemProp={"description"} content={frontmatter.preview}/>
-				<time className={styles.meta} itemProp={'datePublished'}>{frontmatter.date}</time>
-				<h1 className={styles.title} itemProp={'headline'}>{frontmatter.title}</h1>
+				<meta itemProp={"description"} content={preview}/>
+				<meta itemProp="keywords" content={tags.join(", ")} />
+				<span className={styles.meta}>
+					<time itemProp={'datePublished'}>{date}</time>
+					{tags.map((tag) => <span className={styles.tag}>[{tag}]</span>)}
+				</span>
+				<h1 className={styles.title} itemProp={'headline'}>{title}</h1>
 				<div className={styles.text} itemProp={'text'} dangerouslySetInnerHTML = {{__html: html}} />
 				<Bio itemProp={"author"}/>
 			</article>
@@ -29,10 +41,12 @@ export const postQuery = graphql`
 		markdownRemark(fields: { slug: { eq: $path } }) {
 			excerpt
 			html
+			timeToRead
 			frontmatter {
-				date(formatString: "DD MMMM, YYYY"),
-				title,
+				date(formatString: "DD MMMM, YYYY")
+				title
 				preview
+				tags
 			}
 			fields {
 				slug
