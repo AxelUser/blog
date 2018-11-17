@@ -9,6 +9,7 @@ const SEO = ({title = null, description = null}) => (
       query SEOQuery {
         site {
           siteMetadata {
+            siteName,
             titleTemplate,
             defaultTitle: title,
             defaultDescription: description,
@@ -22,6 +23,7 @@ const SEO = ({title = null, description = null}) => (
     render={({
       site: {
         siteMetadata: {
+          siteName,
           titleTemplate,
           defaultTitle,
           defaultDescription,
@@ -45,9 +47,10 @@ const SEO = ({title = null, description = null}) => (
               <meta name="image" content={image}/>
 
               {/*Open Graph*/}
-              <meta name="og:title" content={seo.title}/>
-              <meta name="og:description" content={seo.description}/>
-              <meta name="og:image" content={image}/>
+              <meta property="og:site_name" content={siteName}/>
+              <meta property="og:title" content={seo.title}/>
+              <meta property="og:description" content={seo.description}/>
+              <meta property="og:image" content={image}/>
           </Helmet>
           <TwitterSEO username={twitter}/>
         </>
@@ -56,4 +59,16 @@ const SEO = ({title = null, description = null}) => (
   />
 )
 
+const PublicationSEO = ({publicationDate = null, tags = []}) => (
+  <>
+    <Helmet>
+      <meta property="og:type" content={"article"}/>
+      <meta property="article:published_time" content={publicationDate}/>
+      {tags.map((tag, index) => <meta key={index} property="article:tag" content={tag}/>)}
+    </Helmet>
+  </>
+)
+
 export default SEO;
+
+export {SEO, PublicationSEO}

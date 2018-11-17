@@ -1,9 +1,9 @@
 import React from 'react'
-import { graphq, Link } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import Layout from '../../components/Layout/layout'
 import Bio from '../../components/Bio/bio'
 import styles from './blogPost.module.less'
-import SEO from '../../components/SEO/seo';
+import {SEO, PublicationSEO} from '../../components/SEO/seo';
 
 const FooterNavigation = ({prev, next}) => {
 	return (
@@ -35,6 +35,7 @@ const BlogPostTemplate = ({pageContext, data: {
 	return (
 		<Layout>
 			<SEO title = {title} description={excerpt}/>
+			<PublicationSEO publicationDate={date} tags={tags}/>
 			<article itemScope itemType={'http://schema.org/CreativeWork'}>
 				<meta itemProp={"description"} content={preview}/>
 				<meta itemProp="keywords" content={tags.join(", ")} />
