@@ -29,6 +29,7 @@ const FooterNavigation = ({prev, next}) => {
 }
 
 const BlogPostTemplate = ({location, pageContext, data: {
+	allTagsMapJson,
 	markdownRemark: {
 		excerpt,
 		html,
@@ -41,23 +42,32 @@ const BlogPostTemplate = ({location, pageContext, data: {
 		}
 	}
 }}) => {
+	const getTagCaption = (tagName) => {
+		var mapping = allTagsMapJson.edges.map(edge => {
+			return {name: edge.node.name, caption: edge.node.caption}
+		});
+		var found = mapping.filter(map => map.name == tagName);
+		return found.length > 0? found[0].caption: tagName;
+	}
+
 	var {next, prev} = pageContext;
+	var tagCaptions = tags.map(tagName => getTagCaption(tagName));
 	return (
 		<Layout>
 			<SEO title = {title} description={excerpt}/>
-			<PublicationSEO publicationDate={date} tags={tags}/>
+			<PublicationSEO publicationDate={date} tags={tagCaptions}/>
 			<article itemScope itemType={'http://schema.org/CreativeWork'}>
 				<meta itemProp={"description"} content={preview}/>
-				<meta itemProp="keywords" content={tags.join(", ")} />
+				<meta itemProp="keywords" content={tagCaptions.join(", ")} />
 				<span className={styles.meta}>
 					<time itemProp={'datePublished'}>{date}</time>
 					<span>~{timeToRead} min to read</span>
-					{tags.map((tag, i) => <span key={i}>[{tag}]</span>)}
+					{tagCaptions.map((tag, i) => <span key={i}>[{tag}]</span>)}
 				</span>
 				<h1 className={styles.title} itemProp={'headline'}>{title}</h1>
 				<div className={styles.text} itemProp={'text'} dangerouslySetInnerHTML = {{__html: html}} />
 				<div className={styles.share}>
-					<SocialSharing shareUrl={location.href} title={title} description={preview} tags={["dotnet"]}/>
+					<SocialSharing shareUrl={location.href} title={title} description={preview} tags={tags}/>
 				</div>
 				<FooterNavigation prev={prev} next={next}/>
 				<Bio itemProp={"author"}/>
@@ -69,6 +79,14 @@ const BlogPostTemplate = ({location, pageContext, data: {
 export default BlogPostTemplate;
 export const postQuery = graphql`
 	query($path: String!) {
+		allTagsMapJson {
+			edges {
+				node {
+					name
+					caption
+				}
+			}
+		}
 		markdownRemark(fields: { slug: { eq: $path } }) {
 			excerpt
 			html

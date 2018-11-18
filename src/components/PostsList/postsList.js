@@ -26,6 +26,14 @@ const PostsList = () => (
     query = {
       graphql`
         query {
+          allTagsMapJson {
+            edges {
+              node {
+                name
+                caption
+              }
+            }
+          }
           allMarkdownRemark(
             sort: { fields: [frontmatter___date], order: DESC }
             filter: {frontmatter: {draft: {ne: true}}}
@@ -49,22 +57,31 @@ const PostsList = () => (
         }
     `}
 
-    render = {data => (
-      <div>
-        <ol className = {styles.listWrapper}>
-          {data.allMarkdownRemark.edges.map(({ node }) => (
-            <PostPreview
-              key = {node.id}
-              title = {node.frontmatter.title}
-              date = {node.frontmatter.date}
-              preview = {node.frontmatter.preview}
-              tags = {node.frontmatter.tags}
-              link = {node.fields.slug}
-            />
-          ))}
-        </ol>
-      </div>
-    )}
+    render = {data => {
+      const getTagCaption = (tagName) => {
+        var mapping = data.allTagsMapJson.edges.map(edge => {
+          return {name: edge.node.name, caption: edge.node.caption}
+        });
+        var found = mapping.filter(map => map.name == tagName);
+        return found.length > 0? found[0].caption: tagName;
+      }
+      
+      return (
+        <div>
+          <ol className = {styles.listWrapper}>
+            {data.allMarkdownRemark.edges.map(({ node }) => (
+              <PostPreview
+                key = {node.id}
+                title = {node.frontmatter.title}
+                date = {node.frontmatter.date}
+                preview = {node.frontmatter.preview}
+                tags = {node.frontmatter.tags.map(tagName => getTagCaption(tagName))}
+                link = {node.fields.slug}
+              />
+            ))}
+          </ol>
+        </div>
+    )}}
   />
 )
 
