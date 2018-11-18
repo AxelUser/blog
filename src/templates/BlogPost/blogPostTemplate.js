@@ -4,6 +4,7 @@ import Layout from '../../components/Layout/layout'
 import Bio from '../../components/Bio/bio'
 import styles from './blogPost.module.less'
 import {SEO, PublicationSEO} from '../../components/SEO/seo';
+import SocialSharing from '../../components/SocialSharing/sharing';
 
 const FooterNavigation = ({prev, next}) => {
 	return (
@@ -18,7 +19,7 @@ const FooterNavigation = ({prev, next}) => {
 	)
 }
 
-const BlogPostTemplate = ({pageContext, data: {
+const BlogPostTemplate = ({location, pageContext, data: {
 	markdownRemark: {
 		excerpt,
 		html,
@@ -44,7 +45,8 @@ const BlogPostTemplate = ({pageContext, data: {
 					<span>~{timeToRead} min to read</span>
 					{tags.map((tag, i) => <span key={i}>[{tag}]</span>)}
 				</span>
-				<h1 className={styles.title} itemProp={'headline'}>{title}</h1>				
+				<h1 className={styles.title} itemProp={'headline'}>{title}</h1>
+				<SocialSharing shareUrl={location.href} title={title} description={preview} tags={["dotnet"]}/>
 				<div className={styles.text} itemProp={'text'} dangerouslySetInnerHTML = {{__html: html}} />
 				<FooterNavigation prev={prev} next={next}/>
 				<Bio itemProp={"author"}/>
