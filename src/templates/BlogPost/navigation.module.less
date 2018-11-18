@@ -1,0 +1,75 @@
+@import '../../css/theme.less';
+
+.postNavigation {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+
+  @media (max-width: @sz_small) {
+    flex-flow: column;
+    margin-bottom: 1.2rem;
+  }
+
+  .postLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: @cl_post-navigation-link;
+    border: 2px solid @cl_post-navigation-link;
+    border-radius: 2rem;
+    padding: .5rem .8rem;
+    
+    &:not(:last-child) {
+      @media (max-width: @sz_small) {
+        margin-bottom: 1rem;
+      }
+    }
+
+    &:visited {
+      color: @cl_post-navigation-link;
+    }
+
+    &:hover {
+      color: @cl_post-navigation-link__hover;
+      border-color: @cl_post-navigation-link__hover;
+    }
+
+    .navArror {
+      font-size: 1.5rem;
+    }
+    
+    .navTitle {
+      font-size: 1rem;
+    }
+
+    &.prev {
+      justify-content: flex-start;
+      margin-right: 1rem;
+
+      @media (max-width: @sz_small) {
+        margin-right: 0;
+        justify-content: space-around;
+      }
+      
+      .navTitle {
+        text-align: start;
+        margin-left: 1rem;
+      }
+    }
+  
+    &.next {
+      justify-content: flex-end;
+      margin-left: 1rem;
+
+      @media (max-width: @sz_small) {
+        margin-left: 0;
+        justify-content: space-around;
+      }
+
+      .navTitle {
+        text-align: end;
+        margin-right: 1rem;
+      }
+    }
+  }
+}
