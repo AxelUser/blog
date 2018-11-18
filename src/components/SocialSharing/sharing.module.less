@@ -8,6 +8,11 @@
     border: 1px solid @brand-color;
     color: @brand-color;
 
+    @media (max-width: @sz_small) {
+      background-color: @brand-color;
+      color: @cl_text__light;
+    }
+
     &:hover {
       background-color: @brand-color;
       color: @cl_text__light;
@@ -23,6 +28,25 @@
     border-radius: 1rem;    
     padding: .14rem .9rem;
     cursor: pointer;
+
+    &:focus {
+      outline:0;
+    }
+
+    .name {
+      @media (max-width: @sz_small) {
+        display: none;
+      }
+    }
+
+    .icon {
+      margin-right: .4rem;
+      
+      @media (max-width: @sz_small) {
+        width: 2rem;
+        margin-right: 0;
+      }
+    }
 
     &:not(:last-child) {
       margin-right: .5rem;

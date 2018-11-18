@@ -4,9 +4,18 @@ import {
   TwitterShareButton,
   LinkedinShareButton,
 } from 'react-share';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTwitter, faFacebookF, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import { StaticQuery, graphql } from 'gatsby';
 
 import styles from './sharing.module.less';
+
+const ButtonContent = ({text, icon}) => (
+  <>
+    <FontAwesomeIcon icon={icon} className={styles.icon}/>
+    <span className={styles.name}>{text}</span>
+  </>
+)
 
 const SocialSharing = ({shareUrl, title, description, tags}) => (
   <StaticQuery
@@ -28,7 +37,7 @@ const SocialSharing = ({shareUrl, title, description, tags}) => (
           title={title}
           hashtags={tags}
         >
-          Twitter
+          <ButtonContent text={"Twitter"} icon={faTwitter}/>
         </TwitterShareButton>
         
         <FacebookShareButton 
@@ -37,7 +46,7 @@ const SocialSharing = ({shareUrl, title, description, tags}) => (
           quote={title}
           hashtag={"#"+tags[0]}
         >
-          Facebook
+          <ButtonContent text={"Facebook"} icon={faFacebookF}/>
         </FacebookShareButton>
         
         <LinkedinShareButton
@@ -46,7 +55,7 @@ const SocialSharing = ({shareUrl, title, description, tags}) => (
           title={title}
           description={description}
         >
-          Linkedin
+          <ButtonContent text={"Linkedin"} icon={faLinkedinIn}/>
         </LinkedinShareButton>
       </div>
     )}

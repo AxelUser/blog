@@ -46,8 +46,10 @@ const BlogPostTemplate = ({location, pageContext, data: {
 					{tags.map((tag, i) => <span key={i}>[{tag}]</span>)}
 				</span>
 				<h1 className={styles.title} itemProp={'headline'}>{title}</h1>
-				<SocialSharing shareUrl={location.href} title={title} description={preview} tags={["dotnet"]}/>
 				<div className={styles.text} itemProp={'text'} dangerouslySetInnerHTML = {{__html: html}} />
+				<div className={styles.share}>
+					<SocialSharing shareUrl={location.href} title={title} description={preview} tags={["dotnet"]}/>
+				</div>
 				<FooterNavigation prev={prev} next={next}/>
 				<Bio itemProp={"author"}/>
 			</article>
