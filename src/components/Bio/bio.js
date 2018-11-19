@@ -1,9 +1,14 @@
 import React from 'react';
 import styles from './bio.module.less';
 import ProfileImage from '../../images/profile.jpg'
-import TwitterIcon from '../../images/social/twitter.svg'
-import GitHubIcon from '../../images/social/github.svg'
-import LinkedInIcon from '../../images/social/linkedin.svg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faLinkedin, faGithub, faTwitter, faStackOverflow} from '@fortawesome/free-brands-svg-icons';
+
+const SocialLink = ({url, icon}) => (
+  <a href={url} className={styles.socialIcon}>
+    <FontAwesomeIcon icon={icon}/>
+  </a>
+)
 
 const Bio = ({itemProp}) => (
   <div className={styles.container}>
@@ -15,15 +20,10 @@ const Bio = ({itemProp}) => (
       </div>
     </div>
     <div className={styles.socialBlock}>
-      <a href="https://linkedin.com/in/dev-alexey-maltsev">
-        <LinkedInIcon className={styles.socialIcon}/>
-      </a>
-      <a href="https://github.com/AxelUser">
-        <GitHubIcon className={styles.socialIcon}/>
-      </a>
-      <a href="https://twitter.com/axel_user">
-        <TwitterIcon className={styles.socialIcon}/>
-      </a>
+      <SocialLink url={"https://linkedin.com/in/dev-alexey-maltsev"} icon={faLinkedin}/>
+      <SocialLink url={"https://github.com/AxelUser"} icon={faGithub}/>
+      <SocialLink url={"https://twitter.com/axel_user"} icon={faTwitter}/>
+      <SocialLink url={"https://stackoverflow.com/users/4205978/axeluser"} icon={faStackOverflow}/>
     </div>
   </div>
 )

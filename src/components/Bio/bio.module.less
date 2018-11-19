@@ -42,15 +42,21 @@
   }
 
   .socialBlock {
-    margin: .8rem auto 0 auto;
+    margin: .5rem auto 0 auto;
     display: flex;
-    justify-content: space-between;
-    width: 5.4rem;
-    height: 1.33rem;
+    justify-content: center;
 
     .socialIcon {
-      height: inherit;
-      fill: @cl_social;
+      font-size: 1.33rem;
+      color: @cl_social;
+      
+      &:visited {
+        color: @cl_social;
+      }
+
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
     }
   }
 }
