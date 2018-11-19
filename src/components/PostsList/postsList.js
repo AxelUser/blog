@@ -62,7 +62,7 @@ const PostsList = () => (
         var mapping = data.allTagsMapJson.edges.map(edge => {
           return {name: edge.node.name, caption: edge.node.caption}
         });
-        var found = mapping.filter(map => map.name == tagName);
+        var found = mapping.filter(map => map.name === tagName);
         return found.length > 0? found[0].caption: tagName;
       }
       
