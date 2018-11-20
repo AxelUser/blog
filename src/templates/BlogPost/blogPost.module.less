@@ -1,33 +1,39 @@
 @import '../../css/theme.less';
 
-.meta {
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: @cl_post-meta;
-  margin-bottom: 1rem;
-
-  span {
-    margin-left: .7rem;
+.post {
+  .meta {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: @cl_post-meta;
+    margin-bottom: 1rem;
+  
+    span {
+      margin-left: .7rem;
+    }
   }
-}
-
-.title {
-  font-size: 2.5rem;
-}
-
-.text {
-  border-bottom: 1px dotted @cl_post_separator;
-  padding-bottom: 1.39rem;
-  margin-bottom: 1.39rem;
-
-  div[data-language] ~ h2 {
-    margin-top: 2rem;
+  
+  .title {
+    font-size: 2.5rem;
   }
-}
-
-.share {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
+  
+  .text {
+    border-bottom: 1px dotted @cl_post_separator;
+    padding-bottom: 1.39rem;
+    margin-bottom: 1.39rem;
+    
+    @media (min-width: @sz_small) {
+      font-size: 1.1rem;
+    }
+  
+    div[data-language] ~ h2 {
+      margin-top: 2rem;
+    }
+  }
+  
+  .share {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
 }
 

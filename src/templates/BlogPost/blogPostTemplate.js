@@ -56,7 +56,7 @@ const BlogPostTemplate = ({location, pageContext, data: {
 		<Layout>
 			<SEO title = {title} description={excerpt}/>
 			<PublicationSEO publicationDate={date} tags={tagCaptions}/>
-			<article itemScope itemType={'http://schema.org/CreativeWork'}>
+			<article className={styles.post} itemScope itemType={'http://schema.org/CreativeWork'}>
 				<meta itemProp={"description"} content={preview}/>
 				<meta itemProp="keywords" content={tagCaptions.join(", ")} />
 				<span className={styles.meta}>
