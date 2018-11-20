@@ -2,7 +2,7 @@
 date: "2018-10-27"
 tags:
 - "csharp"
-title: "Use CallerMemberName for logging and INotifyPropertyChanged"
+title: "Use CallerMemberName for logging"
 preview: "Get caller information via attributes"
 draft: false
 ---
