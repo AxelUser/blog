@@ -2,9 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { withPrefix } from 'gatsby'
-
 import Header from '../Header/header'
 import SEO from '../SEO/seo';
+import { config } from '@fortawesome/fontawesome-svg-core'
+
+import "./layout.less";
+
+config.autoAddCss = false;
 
 const Layout = ({ children }) => (
   <>
