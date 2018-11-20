@@ -14,8 +14,8 @@ Since C# 4.5 you can use "magic" attributes to retrieve caller information:
 
 These attributes are targeted to change default value of optional parameters in methods. They pass the information about place in code, where method was called. 
 
-Well, compiler always translate optional parameters into default values, if other is not defined.
-For example you have some logging method:
+Well, compiler always translate optional parameters into default values, if other behavior is not defined.
+For example, you have some logging method:
 ```csharp
 void Log(string msg, string method = null)
 {
@@ -24,7 +24,7 @@ void Log(string msg, string method = null)
 ```
 If you invoke it like `Log(msg)`, compiler will translate this invokation into `Log(msg, null)`.
 
-So, with this trio you can tune this behavior. Just put them before optional parameters at you method and the compiler will change the pre-defined values:
+So, with this trio you can tune this behavior. Just put them before optional parameters at you method and the compiler will change pre-defined values:
 - `[CallerFilePath]` will pass the full path of your source code file, where method was invoked.
 - `[CallerLineNumber]` will pass the line number (`int`)  of code, where method was invoked.
 - `[CallerMemberName]` will pass the name of member (ctor, method, property, event, etc), which invoked method.
@@ -61,7 +61,7 @@ source line number: 11
 ```
 
 And if you aware of `INotifyPropertyChanged`, you can implement `PropertyChanged` 
-event invocator without any hassle, like always passing name of property that was changed:
+event invocator without any hassle, like always passing name of a property, that was changed:
 ```csharp
 public class ViewModel: INotifyPropertyChanged
 {
@@ -87,4 +87,4 @@ public class ViewModel: INotifyPropertyChanged
 }
 ```
 
-[More info about these attributes](https://docs.microsoft.com/ru-ru/dotnet/csharp/programming-guide/concepts/caller-information)
+[Documentation about these attributes](https://docs.microsoft.com/ru-ru/dotnet/csharp/programming-guide/concepts/caller-information)

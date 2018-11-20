@@ -7,18 +7,20 @@ preview: "How to test internal or private logic with the help of attribute Inter
 draft: false
 ---
 
+## About tests for private code
+
 Well, most of the time, if you need to test some private logic, maybe you it's better to be SPECIFIC and extract it to public members of new classes. Sometimes decomposition "rocks" and you code became more clear and maintainable, so check it out before.
 
-However, this private logic can be really specific to domain of single class and it isn't worth of extracting somewhere else, but it somehow must be tested. 
+However, this private logic can be really connected to the domain of a single class and isn't worth of extracting it somewhere else.
 
-In that case you have 3 simple options to do that and they all break the idea of incapsulation:
-- Make those members `public` and treat them in your test-classes as usual. It may be OK, if you writing really simple app and for now you don't care about clean public interfaces. However if you provide it as a public library, This approach opens you internal logic for every user, so, if "dirty" usage of these members could break state of your objects or even whole application.
-- Make those members `protected`, inherit from your class in your testable stub, which opens those members, or derive your test-fixture from it. This can also works, but you have to write boilerplate code for that. Howerever, you class can be sealed, for example if you don't want users to extend it, as it may break logic of connected classes.
+In that case you have 3 simple options and all of them somehow break the idea of incapsulation:
+- Make those members `public` and treat them in your test-fixtures as usual. It may be OK, if you are writing really simple app and for now you don't care about clean public interfaces. However if you provide it as a public library, This approach opens you internal logic for every user, so, if "dirty" usage of these members could break state of your objects or even whole application.
+- Make those members `protected`, inherit into your testable stub, which will make those members `public`, or derive your test-fixture from it. This can also work, but you have to write some boilerplate code. Howerever it is not suitable, if your class is sealed. For example, if you don't want users to extend it, as it may break the logic of connected classes.
 - Make those members `internal` and add `InternalsVisibleTo` attibute on assembly-level. This approach also breaks incapsulation, but only inside you assembly, all you public interfaces for users will stay clean and secure. And you don't need to use inheritance and write stubs.
 
 ## How to use `InternalsVisibleTo`
 
-For example you have got a class `Some` with public method `Increment()` and internal property `Counter` as object's state:
+For example you have got a class `Some` with public method `Increment` and internal property `Counter` as object's state:
 ```csharp
 namespace InternalsLib
 {
@@ -34,7 +36,7 @@ namespace InternalsLib
 }
 ```
 
-You want to assert it's state in some CLI or test-fixture, let it be like that:
+You want to assert its state in some CLI or test-fixture:
 ```csharp
 using System.Diagnostics;
 using InternalsLib;
@@ -53,12 +55,12 @@ namespace InternalsVisibleTests
 }
 ```
 
-We can't access property `Counter` in assembly `InternalsVisibleTests`, cause it's modifier is `internal`. To open internal logic for other assemblies, you need to provide attribute for whole testable assembly in file `AssemblyInfo.cs` or just above the definition of your class, it doesn't really matter.
-Let's put attribute invocation in `AssemblyInfo.cs` for project `InternalsLib`:
+We can't access property `Counter` in assembly `InternalsVisibleTests`, because it's modifier is `internal`. To open internal logic for other assemblies, you need to provide attribute for whole testable assembly in file `AssemblyInfo.cs` or just above the definition of your class, it doesn't really matter.
+Let's put attribute invocation into `AssemblyInfo.cs` of project `InternalsLib`:
 ```csharp
 [assembly: InternalsVisibleTo("InternalsVisibleTests")]
 ```
 
-Now `InternalsVisibleTests` became a friend assembly and internal members from assembly `InternalsLib` became visible inside `InternalsVisibleTests`.
+Now `InternalsVisibleTests` became a friend assembly and internal members from assembly `InternalsLib` became visible inside of its scope.
 
 You can learn more about `InternalsVisibleTo` at [documentation](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.internalsvisibletoattribute).
