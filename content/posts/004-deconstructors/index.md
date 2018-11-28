@@ -2,6 +2,11 @@
 date: "2018-11-15"
 tags:
 - "csharp"
+keywords:
+- "C#"
+- "deconstuctors"
+- "tuples"
+- "operation-result"
 title: "Benefits of deconstuctors for custom types"
 preview: "How and when to use deconstruction syntax-sugar for your custom types in C#"
 draft: false

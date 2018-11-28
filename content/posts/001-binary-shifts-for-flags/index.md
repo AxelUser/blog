@@ -2,6 +2,10 @@
 date: "2018-10-26"
 tags:
 - "csharp"
+keywords:
+- "C#"
+- ".Net"
+- "Enums"
 title: "Bitwise shifts for flags"
 preview: "Use bitwise shift operator to easily increment your Flags"
 draft: false

@@ -2,6 +2,10 @@
 date: "2018-11-12"
 tags:
 - "csharp"
+keywords:
+- "C#"
+- "testing"
+- "InternalsVisibleTo"
 title: "Testing private logic"
 preview: "How to test internal or private logic with the help of attribute InternalsVisibleTo"
 draft: false

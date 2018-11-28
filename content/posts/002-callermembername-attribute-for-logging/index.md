@@ -2,6 +2,9 @@
 date: "2018-10-27"
 tags:
 - "csharp"
+keywords:
+- "C#"
+- "CallerMemberName"
 title: "Use CallerMemberName for logging"
 preview: "Get caller information via attributes"
 draft: false
