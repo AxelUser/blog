@@ -11,7 +11,7 @@ module.exports = {
   siteMetadata: {
     siteUrl: config.siteUrl,
     siteName: config.siteName,
-    title: "Posts about .Net and C#",
+    title: "Useful tips about .Net",
     titleTemplate: `%s — ${config.siteName}`,
     description: "Blog of Alexey Maltsev, full-stack developer from Russia. Here published posts about his experience in web and mobile development with .Net",
     image: urljoin(config.siteUrl, "/seo-image.png"),
