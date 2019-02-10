@@ -7,6 +7,7 @@ import SEO from '../SEO/seo';
 import { config } from '@fortawesome/fontawesome-svg-core'
 
 import "./layout.less";
+import Footer from '../Footer/footer';
 
 config.autoAddCss = false;
 
@@ -37,6 +38,7 @@ const Layout = ({ children }) => (
     >
       {children}
     </div>
+    <Footer/>
   </>
 )
 
