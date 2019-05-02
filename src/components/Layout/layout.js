@@ -6,7 +6,8 @@ import Header from '../Header/header'
 import SEO from '../SEO/seo';
 import { config } from '@fortawesome/fontawesome-svg-core'
 
-import "./layout.less";
+import '../../../node_modules/@fortawesome/fontawesome-svg-core/styles.css'
+import styles from "./layout.module.less";
 import Footer from '../Footer/footer';
 
 config.autoAddCss = false;
@@ -28,14 +29,7 @@ const Layout = ({ children }) => (
     </Helmet>
     <SEO/>
     <Header/>
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 960,
-        padding: '0px 1.0875rem 1.45rem',
-        paddingTop: 0,
-      }}
-    >
+    <div className={styles.block}>
       {children}
     </div>
     <Footer/>

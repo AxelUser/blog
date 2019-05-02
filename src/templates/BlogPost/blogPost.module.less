@@ -1,6 +1,7 @@
 @import '../../css/theme.less';
 
 .post {
+  padding: 0 0.8rem;
   .meta {
     display: flex;
     flex-flow: row wrap;
@@ -23,10 +24,6 @@
     border-bottom: 1px dotted @cl_post_separator;
     padding-bottom: 1.39rem;
     margin-bottom: 1.39rem;
-    
-    @media (min-width: @sz_small) {
-      font-size: 1.1rem;
-    }
   
     div[data-language] ~ h2 {
       margin-top: 2rem;
