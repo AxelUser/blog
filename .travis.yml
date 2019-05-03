@@ -12,6 +12,7 @@ deploy:
     branch: master
   fqdn: www.maltsev.space
 before_script:
+  - "rm -rf node_modules/"
   - "npm i -g gatsby"
   - "npm i"
 script:
