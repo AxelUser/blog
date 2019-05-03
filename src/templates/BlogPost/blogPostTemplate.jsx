@@ -61,9 +61,9 @@ const BlogPostTemplate = ({location, pageContext, data: {
 				<div className={styles.share}>
 					<SocialSharing shareUrl={location.href} title={title} description={preview} tags={tags}/>
 				</div>
-				<FooterNavigation prev={prev} next={next}/>
-				<Bio itemProp={"author"}/>
+				<FooterNavigation prev={prev} next={next}/>				
 			</article>
+			<Bio itemProp={"author"}/>
 		</Layout>
 	)
 }
