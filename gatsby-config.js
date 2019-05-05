@@ -94,8 +94,8 @@ module.exports = {
         name: 'Maltsev`s Development Blog',
         short_name: 'Maltsev Blog',
         start_url: config.pathPrefix,
-        background_color: '#ef3507',
-        theme_color: '#ef3507',
+        background_color: '#202834',
+        theme_color: '#202834',
         display: 'minimal-ui',
         icons: [
           {
