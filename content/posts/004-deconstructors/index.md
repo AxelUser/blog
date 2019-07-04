@@ -4,7 +4,7 @@ tags:
 - "csharp"
 keywords:
 - "C#"
-- "deconstuctors"
+- "deconstructors"
 - "tuples"
 - "operation-result"
 title: "Benefits of deconstuctors for custom types"
