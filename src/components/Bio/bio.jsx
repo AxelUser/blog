@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './bio.module.less';
-import ProfileImage from '../../images/profile.jpg'
+import ProfileImage from '../../images/profile.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faLinkedin, faGithub, faTwitter, faStackOverflow} from '@fortawesome/free-brands-svg-icons';
 
