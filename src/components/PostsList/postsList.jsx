@@ -67,20 +67,18 @@ const PostsList = () => (
       }
       
       return (
-        <div>
-          <ol className = {styles.listWrapper}>
-            {data.allMarkdownRemark.edges.map(({ node }) => (
-              <PostPreview
-                key = {node.id}
-                title = {node.frontmatter.title}
-                date = {node.frontmatter.date}
-                preview = {node.frontmatter.preview}
-                tags = {node.frontmatter.tags.map(tagName => getTagCaption(tagName))}
-                link = {node.fields.slug}
-              />
-            ))}
-          </ol>
-        </div>
+        <ol className = {styles.listWrapper}>
+          {data.allMarkdownRemark.edges.map(({ node }) => (
+            <PostPreview
+              key = {node.id}
+              title = {node.frontmatter.title}
+              date = {node.frontmatter.date}
+              preview = {node.frontmatter.preview}
+              tags = {node.frontmatter.tags.map(tagName => getTagCaption(tagName))}
+              link = {node.fields.slug}
+            />
+          ))}
+        </ol>
     )}}
   />
 )

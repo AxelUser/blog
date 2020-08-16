@@ -25,8 +25,8 @@ const BlogPostTemplate = ({location, pageContext, data: {
 }}) => {
 	var {next, prev} = pageContext;
 	return (
-		<div>
-			<Layout>
+		<Layout>
+			<div className={styles.postBlock}>
 				<SEO title = {title} description={excerpt}/>
 				<PublicationSEO publicationDate={date} tags={keywords}/>
 				<article className={styles.post} itemScope itemType={'http://schema.org/CreativeWork'}>
@@ -45,9 +45,9 @@ const BlogPostTemplate = ({location, pageContext, data: {
 					<FooterNavigation prev={prev} next={next}/>				
 				</article>
 				<Bio itemProp={"author"}/>
-			</Layout>
+			</div>
 			<SidebarNavigation headers={["Header 1", "Header 2", "Header 3", "Header 4"]}/>
-		</div>
+		</Layout>
 	)
 }
 
