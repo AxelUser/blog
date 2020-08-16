@@ -78,9 +78,7 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
-    'gatsby-transformer-sharp',
     `gatsby-transformer-json`,
-    'gatsby-plugin-sharp',
     `gatsby-plugin-sitemap`,
     {
       resolve: 'gatsby-plugin-robots-txt',
