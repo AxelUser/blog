@@ -169,7 +169,7 @@ Before we dig into optimizations, **it's HIGHLY recommended to track the perform
 
 The easiest way to create benchmarks of that kind is using a popular nuget package [**BenchmarkDotNet**](https://benchmarkdotnet.org/). I won't include in the article how to write good benchmarks for every situation, because this theme is quite vast. However, if you're not familiar with benchmarking or BenchmarkDotNet, you may follow the links to BenchmarkDotNet documentation at the section **References**.
 
-Franky speaking, I shall mention that maintainers of the BenchmarkDotNet did a great job in providing an easy API for creating benchmarks, which gives ability to include lots of useful indicators and will be clear to the most of .Net developers.
+Frankly speaking, I shall mention that maintainers of the BenchmarkDotNet did a great job in providing an easy API for creating benchmarks, which gives ability to include lots of useful indicators and will be clear to the most of .Net developers.
 
 Firstly we need to know how solutions are fast and how much memory they consume. In BenchmarkDotNet speed indicator come out of the box, and memory consumption can be tracked via [`MemoryDiagnoser`](https://adamsitnik.com/the-new-Memory-Diagnoser/) attribute for the benchmark class. Here is a code snippet of configuration:
 

@@ -25,14 +25,14 @@ void Log(string msg, string method = null)
     // logging somewhere
 }
 ```
-If you invoke it like `Log(msg)`, compiler will translate this invokation into `Log(msg, null)`.
+If you invoke it like `Log(msg)`, compiler will translate this invocation into `Log(msg, null)`.
 
 So, with this trio you can tune this behavior. Just put them before optional parameters at you method and the compiler will change pre-defined values:
 - `[CallerFilePath]` will pass the full path of your source code file, where method was invoked.
 - `[CallerLineNumber]` will pass the line number (`int`)  of code, where method was invoked.
 - `[CallerMemberName]` will pass the name of member (ctor, method, property, event, etc), which invoked method.
 
-For example you want to write tracing or logging, and you want to know place in code, where some event occurred.
+For example, you want to write tracing or logging, and you want to know place in code, where some event occurred.
 Now, you can just write like this:
 ```csharp
 public static void TraceEvent(string message,

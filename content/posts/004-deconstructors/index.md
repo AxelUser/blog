@@ -7,7 +7,7 @@ keywords:
 - "deconstructors"
 - "tuples"
 - "operation-result"
-title: "Benefits of deconstuctors for custom types"
+title: "Benefits of deconstructors for custom types"
 preview: "How and when to use deconstruction syntax-sugar for your custom types in C#"
 draft: false
 ---
@@ -25,7 +25,7 @@ Moreover, the deconstruction can be used not only for build-in tuples, but also 
 
 Let's start with the original usage for tuples. If you are already familiar with it, you may jump to [the next block]( #implementing-deconstruction-for-custom-types).
 
-For example, you have a method, which returns a statistics about most frequent word in a form of a tuple with two fields: word and count. Below is the example of such method:
+For example, you have a method, which returns a statistic about most frequent word in a form of a tuple with two fields: word and count. Below is the example of such method:
 ```csharp
 static (string, int) GetMostFrequentWord(string text)
 {
@@ -125,7 +125,7 @@ Generic tuples are great, but there are several reasons for using your own model
 
 So, we will use `WordStat` instead of a tuple, but can we use deconstruction for our model? 
 
-We are lucky, because we can add this feature to our type. All is needed is adding new public method `Deconstruct` with `out` parameters, that will be extracted during deconstruction:
+We are lucky because we can add this feature to our type. All is needed is adding new public method `Deconstruct` with `out` parameters, that will be extracted during deconstruction:
 ```csharp
 public void Deconstruct(out string word, out int count)
 {
@@ -145,7 +145,7 @@ static void Main(string[] args)
 }
 ```
 
-Deconstructed fields must be of same types and in same order and count, as they appear in `Deconstuct`. You can have as much configurations of deconstruction, as how many overrides of `Deconstruct` you have.
+Deconstructed fields must be of same types and in same order and count, as they appear in `Deconstruct`. You can have as many configurations of deconstruction, as how many overrides of `Deconstruct` you have.
 One more thing - `Deconstruct` may be an extension-method!
 
 Let's add a new field `WordLength` to `WordStat` and write an extension to get all those three fields:
@@ -263,7 +263,7 @@ public class Consumer
 }
 ```
 
-Ths main idea is that it is grouping result and errors, so we have full information about result of the operation and may react as we want. In our case we want to show user any result, even if it isn't full.
+The main idea is that it is grouping result and errors, so we have full information about result of the operation and may react as we want. In our case we want to show user any result, even if it isn't full.
 
 So, as in the example with frequent word, our model of complex result just group everything together. It's useful when we construct complex result via our factory-methods, but then in the consumer we need only its fields. 
 
@@ -288,9 +288,9 @@ if(totalSuccess)
     Trace.WriteLine($"Total count: {count}");    
 ```
 
-And thats it, were are ready to go on!
+And that's it, were are ready to go on!
 
 ## Further reading
 - [Documentation about deconstruction](https://docs.microsoft.com/ru-ru/dotnet/csharp/deconstruct)
-- [Some invesitgation about how new tuples work](https://blogs.msdn.microsoft.com/seteplia/2017/11/01/dissecting-the-tuples-in-c-7/)
+- [Some investigation about how new tuples work](https://blogs.msdn.microsoft.com/seteplia/2017/11/01/dissecting-the-tuples-in-c-7/)
 - [Article about different kinds of error handling, like OperationResult](https://www.codeproject.com/Articles/1022462/Error-Handling-in-SOLID-Csharp-NET-The-Operation-R)
