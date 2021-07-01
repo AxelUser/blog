@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.maltsev.space/sitemap.xml
+Host: https://www.maltsev.space
