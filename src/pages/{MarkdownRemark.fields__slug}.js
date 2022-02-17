@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby'
 import * as React from 'react'
-import Layout from '../../components/layout'
+import Layout from '../components/layout'
 
 const BlogPost = ({ data: { markdownRemark: { frontmatter: {title, date}, html, timeToRead } } }) => {
 	return (
@@ -9,9 +9,7 @@ const BlogPost = ({ data: { markdownRemark: { frontmatter: {title, date}, html, 
 				<time>{date}</time>
 				<span>~{timeToRead} min to read</span>
 			</span>
-			<div dangerouslySetInnerHTML={{ __html: html }}>
-
-			</div>
+			<div dangerouslySetInnerHTML={{ __html: html }} />
 		</Layout>
 	)
 }
