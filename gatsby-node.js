@@ -13,25 +13,34 @@ exports.onCreateNode = ({ node, actions }) => {
 }
 
 exports.createPages = async function ({ actions, graphql }) {
-  const { data } = await graphql(`
+	const { data } = await graphql(`
     query {
       allMarkdownRemark {
         edges {
           node {
+			frontmatter {
+                title
+                date(formatString: "MMMM D, YYYY")
+            }
+            html
+			timeToRead
             fields {
               slug
             }
           }
         }
       }
-    }
-  `)
-  data.allMarkdownRemark.edges.forEach(edge => {
-    const slug = edge.node.fields.slug
-    actions.createPage({
-      path: `blog/${slug}`,
-      component: require.resolve(`./src/templates/blogPost.js`),
-      context: { slug: slug },
-    })
-  })
+    }`)
+	
+	data.allMarkdownRemark.edges.forEach((edge, idx) => {
+		const prev = idx === 0 ? null : data.allMarkdownRemark.edges[idx - 1].node;
+		const next = idx === data.allMarkdownRemark.edges.length - 1 ? null : data.allMarkdownRemark.edges[idx + 1].node;
+
+		const slug = edge.node.fields.slug
+		actions.createPage({
+			path: `blog/${slug}`,
+			component: require.resolve(`./src/templates/blogPost.js`),
+			context: { current: edge.node, prev, next },
+		})
+	})
 }

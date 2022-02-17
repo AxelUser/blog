@@ -1,30 +1,18 @@
-import { graphql } from 'gatsby'
+import { Link } from 'gatsby'
 import * as React from 'react'
 import Layout from '../components/layout'
 
-const BlogPost = ({ data: { markdownRemark: { frontmatter: {title, date}, html, timeToRead } } }) => {
+const BlogPost = ({pageContext: {current, prev, next}}) => {
 	return (
-		<Layout pageTitle={title}>
+		<Layout pageTitle={current.frontmatter.title}>
 			<span>
-				<time>{date}</time>
-				<span>~{timeToRead} min to read</span>
+				<time>{current.frontmatter.date}</time>
+				<span>~{current.timeToRead} min to read</span>
 			</span>
-			<div dangerouslySetInnerHTML={{ __html: html }} />
+			<div dangerouslySetInnerHTML={{ __html: current.html }} />
+			<Link to={`/blog/${next.fields.slug}`}>Next</Link>
 		</Layout>
 	)
 }
-
-export const query = graphql`
-    query ($id: String) {
-        markdownRemark(id: {eq: $id}){
-            frontmatter {
-                title
-                date(formatString: "MMMM D, YYYY")
-            }
-            html
-			timeToRead
-        }
-    }
-`
 
 export default BlogPost
