@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/react'
 
-const Header = ({ title }) => (
+const Header = () => (
 	<div css={css`
 		width: 800px;
 		display: flex;
