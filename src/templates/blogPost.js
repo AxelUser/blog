@@ -1,8 +1,36 @@
+import { css } from '@emotion/react'
 import { Link } from 'gatsby'
 import * as React from 'react'
 import Layout from '../components/layout'
 
-const BlogPost = ({pageContext: {current, prev, next}}) => {
+const NavigationLink = ({ to, ...props }) => {
+	if (to) {
+		return (
+			<span {...props}>
+				<Link to={`/blog/${to.fields.slug}`}>
+					{to.frontmatter.title}
+				</Link>
+			</span>
+		)
+	}
+
+	return (
+		<></>
+	)
+}
+
+const Navigation = ({ prev, next }) => (
+	<div>
+		<NavigationLink to={prev} css={css`
+			float: left;
+		`} />
+		<NavigationLink to={next} css={css`
+			float: right;
+		`} />
+	</div>
+)
+
+const BlogPost = ({ pageContext: { current, prev, next } }) => {
 	return (
 		<Layout pageTitle={current.frontmatter.title}>
 			<span>
@@ -10,7 +38,7 @@ const BlogPost = ({pageContext: {current, prev, next}}) => {
 				<span>~{current.timeToRead} min to read</span>
 			</span>
 			<div dangerouslySetInnerHTML={{ __html: current.html }} />
-			<Link to={`/blog/${next.fields.slug}`}>Next</Link>
+			<Navigation prev={prev} next={next} />
 		</Layout>
 	)
 }
