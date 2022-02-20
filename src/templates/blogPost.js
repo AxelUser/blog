@@ -33,12 +33,16 @@ const Navigation = ({ prev, next }) => (
 const BlogPost = ({ pageContext: { current, prev, next } }) => {
 	return (
 		<Layout pageTitle={current.frontmatter.title}>
-			<span>
-				<time>{current.frontmatter.date}</time>
-				<span>~{current.timeToRead} min to read</span>
-			</span>
-			<div dangerouslySetInnerHTML={{ __html: current.html }} />
-			<Navigation prev={prev} next={next} />
+			<div css={css`
+				padding: 1.1rem 0 0 1.1rem;
+			`}>
+				<span>
+					<time>{current.frontmatter.date}</time>
+					<span>~{current.timeToRead} min to read</span>
+				</span>
+				<div dangerouslySetInnerHTML={{ __html: current.html }} />
+				<Navigation prev={prev} next={next} />
+			</div>
 		</Layout>
 	)
 }
