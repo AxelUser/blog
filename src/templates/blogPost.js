@@ -1,7 +1,7 @@
-import { css } from '@emotion/react'
 import { Link } from 'gatsby'
 import * as React from 'react'
 import Layout from '../components/layout'
+import * as blogStyles from '../styles.module.css'
 
 const NavigationLink = ({ to, ...props }) => {
 	if (to) {
@@ -21,21 +21,15 @@ const NavigationLink = ({ to, ...props }) => {
 
 const Navigation = ({ prev, next }) => (
 	<div>
-		<NavigationLink to={prev} css={css`
-			float: left;
-		`} />
-		<NavigationLink to={next} css={css`
-			float: right;
-		`} />
+		<NavigationLink to={prev} className={blogStyles.prev} />
+		<NavigationLink to={next} className={blogStyles.next} />
 	</div>
 )
 
 const BlogPost = ({ pageContext: { current, prev, next } }) => {
 	return (
 		<Layout pageTitle={current.frontmatter.title}>
-			<div css={css`
-				padding: 1.1rem 0 0 1.1rem;
-			`}>
+			<div className={blogStyles.article}>
 				<span>
 					<time>{current.frontmatter.date}</time>
 					<span>~{current.timeToRead} min to read</span>
