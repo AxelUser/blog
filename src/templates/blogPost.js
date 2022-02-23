@@ -30,7 +30,7 @@ const BlogPost = ({ pageContext: { current, prev, next } }) => {
 	return (
 		<Layout pageTitle={current.frontmatter.title}>
 			<div className={blogStyles.article}>
-				<span>
+				<span className={blogStyles.meta}>
 					<time>{current.frontmatter.date}</time>
 					<span>~{current.timeToRead} min to read</span>
 				</span>

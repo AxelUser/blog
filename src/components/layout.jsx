@@ -5,7 +5,7 @@ import * as blogStyles from '../styles.module.css'
 const Header = () => (
 	<div className={`${blogStyles.header} ${blogStyles.content}`}>
 		<nav>
-			<Link className={blogStyles.item} to='/'>Blog</Link>
+			<Link to='/'>Blog</Link>
 		</nav>
 	</div>
 )

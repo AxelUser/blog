@@ -3,6 +3,7 @@
 :root {
     --dark-1: rgb(35, 35, 35);
     --dark-2: rgb(60, 60, 60);
+    --dark-3: rgb(120, 120, 120);
     --white: rgb(210, 210, 210);
     --red: rgb(175, 13, 13);
 }
@@ -31,10 +32,18 @@ a:visited {
 
 .header nav {
     padding: 1.45rem 1.1rem;
+    font-weight: bold;
 }
 
-.header nav .item {
-    margin-right: 1rem;
+.header nav a {
+    font-size: 1.05rem;
+    padding-bottom: 0.3rem;
+    color: var(--dark-2);
+}
+
+.header nav a:hover {
+    color: var(--white);
+    border-bottom: 2px solid var(--white);
 }
 
 .container {
@@ -77,15 +86,21 @@ a:visited {
     padding: 1.1rem 0 0 1.1rem;
 }
 
-.article .prev {
-    float: left;
-}
-
-.article .next {
-    float: right;   
-}
-
 .article a {
     color: var(--red);
     text-decoration: underline;
+}
+
+.meta {
+    color: var(--dark-3);
+    display: flex;
+    gap: 1.6rem;
+}
+
+.prev {
+    float: left;
+}
+
+.next {
+    float: right;   
 }
