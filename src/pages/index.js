@@ -3,6 +3,7 @@ import { graphql, Link } from 'gatsby'
 import Layout from '../components/layout'
 import Tag from '../components/tag';
 import * as blogStyles from '../styles.module.css'
+import Bio from '../components/bio';
 
 const PostPreview = ({ title, preview, tags, date, link }) => (
 	<div className={blogStyles.preview}>
@@ -20,6 +21,7 @@ const PostPreview = ({ title, preview, tags, date, link }) => (
 const BlogPage = ({data: { allMarkdownRemark: { edges } }}) => {
 	return (
 		<Layout pageTitle="Blog">
+			<Bio />
 			<div>
 				{edges.map(({ node }) => (
 					<PostPreview

@@ -1,5 +1,6 @@
 import { Link } from 'gatsby'
 import * as React from 'react'
+import Bio from '../components/bio'
 import Layout from '../components/layout'
 import * as blogStyles from '../styles.module.css'
 
@@ -38,6 +39,7 @@ const BlogPost = ({ pageContext: { current, prev, next } }) => {
 				<div className={blogStyles.text} dangerouslySetInnerHTML={{ __html: current.html }} />
 				<Navigation prev={prev} next={next} />
 			</div>
+			<Bio />
 		</Layout>
 	)
 }
