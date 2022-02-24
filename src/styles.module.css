@@ -88,7 +88,11 @@ footer {
 
 /* Article */
 .article {
-    padding: 1.1rem 0 0 1.1rem;
+    padding: 1.1rem;
+}
+
+.article .text {
+    border-bottom: 1px dotted var(--dark-2);
 }
 
 .article a {
@@ -102,10 +106,20 @@ footer {
     gap: 1.6rem;
 }
 
-.prev {
-    float: left;
+.article nav {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.article nav span {
+    max-width: 300px;
+}
+
+.article nav span .prefix {
+    color: aquamarine;    
 }
 
 .next {
-    float: right;   
+    margin-left: auto;
 }

@@ -3,12 +3,12 @@ import * as React from 'react'
 import Layout from '../components/layout'
 import * as blogStyles from '../styles.module.css'
 
-const NavigationLink = ({ to, ...props }) => {
+const NavigationLink = ({ prefix, to, ...props }) => {
 	if (to) {
 		return (
 			<span {...props}>
 				<Link to={`/blog/${to.fields.slug}`}>
-					{to.frontmatter.title}
+					{prefix}: {to.frontmatter.title}
 				</Link>
 			</span>
 		)
@@ -20,10 +20,10 @@ const NavigationLink = ({ to, ...props }) => {
 }
 
 const Navigation = ({ prev, next }) => (
-	<div>
-		<NavigationLink to={prev} className={blogStyles.prev} />
-		<NavigationLink to={next} className={blogStyles.next} />
-	</div>
+	<nav>
+		<NavigationLink prefix="Previous" to={prev} />
+		<NavigationLink prefix="Next" to={next} className={blogStyles.next} />
+	</nav>
 )
 
 const BlogPost = ({ pageContext: { current, prev, next } }) => {
@@ -34,7 +34,8 @@ const BlogPost = ({ pageContext: { current, prev, next } }) => {
 					<time>{current.frontmatter.date}</time>
 					<span>~{current.timeToRead} min to read</span>
 				</span>
-				<div dangerouslySetInnerHTML={{ __html: current.html }} />
+				<h1>{current.frontmatter.title}</h1>
+				<div className={blogStyles.text} dangerouslySetInnerHTML={{ __html: current.html }} />
 				<Navigation prev={prev} next={next} />
 			</div>
 		</Layout>
