@@ -26,22 +26,22 @@ a:visited {
 }
 
 /* Global layout */
-.header {
+header {
     display: flex;
 }
 
-.header nav {
+header nav {
     padding: 1.45rem 1.1rem;
     font-weight: bold;
 }
 
-.header nav a {
+header nav a {
     font-size: 1.05rem;
     padding-bottom: 0.3rem;
     color: var(--dark-2);
 }
 
-.header nav a:hover {
+header nav a:hover {
     color: var(--white);
     border-bottom: 2px solid var(--white);
 }
@@ -56,12 +56,17 @@ a:visited {
     width: 800px;
 }
 
+footer {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
 /* Blog */
 
 .preview {
     border-bottom: 1px dotted var(--dark-2);
     min-height: 11.1rem;
-    padding-top: 1.1rem;
+    padding-top: 2rem;
     padding-bottom: 0.28rem;
     padding-left: 1.1rem;
     padding-right: 1.1rem;
@@ -77,8 +82,8 @@ a:visited {
 }
 
 .preview h1 {
-    padding-top: 0.56rem;
-    padding-bottom: 0.56rem;
+    padding-top: 0.26rem;
+    padding-bottom: 0.26rem;
 }
 
 /* Article */

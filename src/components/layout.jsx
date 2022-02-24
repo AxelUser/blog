@@ -3,11 +3,17 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 import * as blogStyles from '../styles.module.css'
 
 const Header = () => (
-	<div className={`${blogStyles.header} ${blogStyles.content}`}>
+	<header className={blogStyles.content}>
 		<nav>
 			<Link to='/'>Blog</Link>
 		</nav>
-	</div>
+	</header>
+)
+
+const Footer = ({author, currentYear}) => (
+	<footer>
+		<small>© {currentYear} {author}</small>
+	</footer>
 )
 
 const Layout = ({ pageTitle, children }) => {
@@ -16,6 +22,8 @@ const Layout = ({ pageTitle, children }) => {
             site {
                 siteMetadata {
                     title
+					author
+					currentYear
                 }
             }
         }
@@ -31,6 +39,7 @@ const Layout = ({ pageTitle, children }) => {
 				<div className={blogStyles.content}>
 					{children}
 				</div>
+				<Footer author={data.site.siteMetadata.author} currentYear={data.site.siteMetadata.currentYear} />
 			</div>
 		</>
 	)

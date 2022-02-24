@@ -1,6 +1,8 @@
 module.exports = {
 	siteMetadata: {
 		title: `Maltsev's Space`,
+		author: `Alexey Maltsev`,
+		currentYear: (new Date()).getFullYear(),
 		siteUrl: `https://www.maltsev.space`
 	},
 	plugins: [
