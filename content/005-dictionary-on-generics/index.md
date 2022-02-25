@@ -1,7 +1,7 @@
 ---
 date: "2020-06-22"
 tags:
-- "csharp"
+- "C#"
 keywords:
 - "C#"
 - "generics"

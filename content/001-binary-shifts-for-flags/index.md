@@ -2,7 +2,7 @@
 date: "2018-10-26"
 slug: "/blog/001-binary-shifts-for-flags/"
 tags:
-- "csharp"
+- "C#"
 keywords:
 - "C#"
 - ".Net"

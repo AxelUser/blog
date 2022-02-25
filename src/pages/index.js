@@ -1,15 +1,15 @@
 import * as React from 'react'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/layout'
-import Tag from '../components/tag';
 import * as blogStyles from '../styles.module.css'
 import Bio from '../components/bio';
+import Tags from '../components/tags';
 
 const PostPreview = ({ title, preview, tags, date, link }) => (
 	<div className={blogStyles.preview}>
-		<time>{date}</time>
-		<div>
-			{tags.map((tag, index) => <Tag key={index} name={tag} />)}
+		<div className={blogStyles.previewMeta}>
+			<time>{date}</time>
+			<Tags tags={tags} />
 		</div>
 		<Link to={link}>
 			<h1>{title}</h1>
@@ -28,7 +28,7 @@ const BlogPage = ({data: { allMarkdownRemark: { edges } }}) => {
 						title={node.frontmatter.title}
 						preview={node.frontmatter.preview}
 						date={node.frontmatter.date}
-						tags={[]}
+						tags={node.frontmatter.tags}
 						link={`/blog/${node.fields.slug}`}
 					/>
 				))}
