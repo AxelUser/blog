@@ -74,13 +74,7 @@ footer {
     color: var(--red);
 }
 
-/* Tags */
-.tag {
-    margin-left: 1rem;
-}
-
 /* Blog */
-
 .preview {
     border-bottom: 1px dotted var(--dark-2);
     min-height: 11.1rem;
@@ -91,6 +85,8 @@ footer {
 }
 
 .previewMeta {
+    display: flex;
+    gap: 1.6rem;
     color: var(--dark-3);
 }
 

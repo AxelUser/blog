@@ -21,6 +21,7 @@ exports.createPages = async function ({ actions, graphql }) {
 			frontmatter {
                 title
                 date(formatString: "DD MMMM, YYYY")
+				tags
             }
             html
 			timeToRead

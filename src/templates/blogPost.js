@@ -2,6 +2,7 @@ import { Link } from 'gatsby'
 import * as React from 'react'
 import Bio from '../components/bio'
 import Layout from '../components/layout'
+import Tags from '../components/tags'
 import * as blogStyles from '../styles.module.css'
 
 const NavigationLink = ({ prefix, to, ...props }) => {
@@ -34,6 +35,7 @@ const BlogPost = ({ pageContext: { current, prev, next } }) => {
 				<span className={blogStyles.meta}>
 					<time>{current.frontmatter.date}</time>
 					<span>~{current.timeToRead} min to read</span>
+					<Tags tags={current.frontmatter.tags} />
 				</span>
 				<h1>{current.frontmatter.title}</h1>
 				<div className={blogStyles.text} dangerouslySetInnerHTML={{ __html: current.html }} />
