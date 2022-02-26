@@ -20,7 +20,7 @@ exports.createPages = async function ({ actions, graphql }) {
           node {
 			frontmatter {
                 title
-                date(formatString: "MMMM D, YYYY")
+                date(formatString: "DD MMMM, YYYY")
             }
             html
 			timeToRead
