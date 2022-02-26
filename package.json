@@ -33,7 +33,7 @@
     "gatsby-transformer-json": "^2.4.11",
     "gatsby-transformer-remark": "^2.8.28",
     "less": "^3.12.2",
-    "prismjs": "^1.21.0",
+    "prismjs": "^1.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-emotion": "^9.2.12",
