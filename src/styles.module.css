@@ -6,6 +6,7 @@
     --dark-3: rgb(120, 120, 120);
     --white: rgb(210, 210, 210);
     --red: rgb(175, 13, 13);
+    --main-width: 800px
 }
 
 html,
@@ -28,8 +29,9 @@ a:visited {
 /* Global layout */
 .container {
     display: flex;
-    align-items: center;
     flex-direction: column;
+    max-width: var(--main-width);
+    margin: auto;
 }
 
 header {
@@ -52,13 +54,11 @@ header nav a:hover {
     border-bottom: 2px solid var(--white);
 }
 
-.content {
-    width: 800px;
-}
-
 footer {
     margin-top: 1.5rem;
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
 }
 
 /* Bio */
@@ -120,13 +120,14 @@ footer {
 .meta {
     color: var(--dark-3);
     display: flex;
-    gap: 1.6rem;
+    gap: 1.5rem;
+    font-size: 1rem;
 }
 
 .article nav {
     margin-top: 2rem;
     display: flex;
-    justify-content: space-between;
+    gap: 1.5rem;
 }
 
 .article nav span {

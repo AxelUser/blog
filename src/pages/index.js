@@ -50,7 +50,7 @@ export const query = graphql`
 					frontmatter {
 						title
 						tags
-						date(formatString: "DD MMMM, YYYY")
+						date(formatString: "DD MMM, YYYY")
 						preview
 					}
 					fields {
