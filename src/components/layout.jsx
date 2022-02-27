@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import * as blogStyles from '../styles.module.css'
+import { Helmet } from 'react-helmet'
 
 const Header = () => (
 	<header className={blogStyles.content}>
@@ -29,13 +30,13 @@ const Layout = ({ pageTitle, children }) => {
         }
     `)
 
+	const title = pageTitle ? `${data.site.siteMetadata.title} | ${pageTitle}` : data.site.siteMetadata.title
+
 	return (
 		<>
-			<head>
-				<title>{pageTitle | data.site.siteMetadata.title}</title>
-			</head>
+			<Helmet title={title}/>
 			<div className={blogStyles.container}>
-				<Header title={data.site.siteMetadata.title} />
+				<Header />
 				<div className={blogStyles.content}>
 					{children}
 				</div>
