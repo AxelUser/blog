@@ -13,7 +13,7 @@ const PostPreview = ({ title, preview, tags, date, link }) => (
 		</div>
 		<Link to={link}>
 			<h1>{title}</h1>
-			<h4>{preview}</h4  >
+			<p>{preview}</p>
 		</Link>
 	</div>
 )

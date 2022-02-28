@@ -5,7 +5,12 @@ module.exports = {
 		currentYear: (new Date()).getFullYear(),
 		siteUrl: `https://www.maltsev.space`
 	},
-	plugins: [
+	plugins: [{
+			resolve: "gatsby-plugin-typography",
+			options: {
+				pathToConfigModule: "src/typography.js"
+			}
+		},
 		"gatsby-plugin-image",
 		"gatsby-plugin-react-helmet",
 		"gatsby-plugin-sitemap", {

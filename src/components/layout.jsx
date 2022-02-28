@@ -4,7 +4,7 @@ import * as blogStyles from '../styles.module.css'
 import { Helmet } from 'react-helmet'
 
 const Header = () => (
-	<header className={blogStyles.content}>
+	<header>
 		<nav>
 			<Link to='/'>Blog</Link>
 		</nav>
