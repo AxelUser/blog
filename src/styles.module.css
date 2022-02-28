@@ -144,3 +144,16 @@ footer {
 .next {
     margin-left: auto;
 }
+
+.notFound {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.notFound a {
+    margin-top: 3rem;
+    color: var(--red);
+}
