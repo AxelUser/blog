@@ -1,53 +1,47 @@
-const path = require("path")
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const path = require('path')
 
-exports.onCreateNode = ({ node, getNode, actions }) => {
-  const { createNodeField } = actions
-  if (node.internal.type === `MarkdownRemark`) {
-    const slug = createFilePath({ node, getNode })
-    createNodeField({
-      node,
-      name: `slug`,
-      value: slug,
-    })
-  }
+exports.onCreateNode = ({ node, actions }) => {
+	const { createNode, createNodeField } = actions
+	if (node.internal.type == "MarkdownRemark") {
+		const slug = path.basename(path.dirname(node.fileAbsolutePath))
+		createNodeField({
+			node,
+			name: "slug",
+			value: slug
+		})
+	}
 }
 
-exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions
-  return new Promise((resolve, reject) => {
-    graphql(`query AllPosts {
-      allMarkdownRemark(sort: {fields: frontmatter___date, order: ASC}) {
+exports.createPages = async function ({ actions, graphql }) {
+	const { data } = await graphql(`
+    query {
+      allMarkdownRemark {
         edges {
           node {
-            frontmatter {
-              title
+			frontmatter {
+                title
+                date(formatString: "DD MMM, YYYY")
+				tags
             }
+            html
+			timeToRead
             fields {
               slug
             }
           }
         }
       }
-    }`).then(result => {
-      var posts = result.data.allMarkdownRemark.edges;
-      posts.forEach(({ node }, index) => {
-        const prev = index === 0 ? null : posts[index - 1].node;
-        const next =
-          index === posts.length - 1 ? null : posts[index + 1].node;
-        createPage({
-          path: node.fields.slug,
-          component: path.resolve(`./src/templates/BlogPost/blogPostTemplate.jsx`),
-          context: {
-            // Data passed to context is available
-            // in page queries as GraphQL variables.
-            slug: node.fields.slug,
-            prev: prev,
-            next: next
-          },
-        })
-      })
-      resolve()
-    })
-  })
+    }`)
+	
+	data.allMarkdownRemark.edges.forEach((edge, idx) => {
+		const prev = idx === 0 ? null : data.allMarkdownRemark.edges[idx - 1].node;
+		const next = idx === data.allMarkdownRemark.edges.length - 1 ? null : data.allMarkdownRemark.edges[idx + 1].node;
+
+		const slug = edge.node.fields.slug
+		actions.createPage({
+			path: `blog/${slug}`,
+			component: require.resolve(`./src/templates/blogPost.js`),
+			context: { current: edge.node, prev, next },
+		})
+	})
 }

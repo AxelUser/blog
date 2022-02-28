@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');
+
+:root {
+    --dark-1: rgb(35, 35, 35);
+    --dark-2: rgb(60, 60, 60);
+    --dark-3: rgb(120, 120, 120);
+    --white: rgb(210, 210, 210);
+    --red: rgb(175, 13, 13);
+    --main-width: 800px
+}
+
+html,
+body {
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.5;
+    color: var(--white);
+    background-color: var(--dark-1);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:visited {
+    color: inherit;
+}
+
+/* Global layout */
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: var(--main-width);
+    margin: auto;
+}
+
+header {
+    display: flex;
+}
+
+header nav {
+    padding: 1.45rem 1.1rem;
+    font-weight: bold;
+}
+
+header nav a {
+    font-size: 1.05rem;
+    padding-bottom: 0.3rem;
+    color: var(--dark-2);
+}
+
+header nav a:hover {
+    color: var(--white);
+    border-bottom: 2px solid var(--white);
+}
+
+footer {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Bio */
+.bio {
+    border: 1px solid var(--dark-3);
+    border-radius: 10px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+.bio a {
+    color: var(--red);
+}
+
+/* Blog */
+.preview {
+    border-bottom: 1px dotted var(--dark-2);
+    min-height: 11.1rem;
+    padding-top: 2rem;
+    padding-bottom: 0.28rem;
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+}
+
+.previewMeta {
+    display: flex;
+    gap: 1.6rem;
+    color: var(--dark-3);
+}
+
+.preview:hover {
+    background-color: var(--white);
+    color: var(--dark-1);
+}
+
+.preview a:visited {
+    color: inherit;
+}
+
+.preview h1 {
+    padding-top: 0.26rem;
+    padding-bottom: 0.26rem;
+}
+
+/* Article */
+.article {
+    padding: 1.1rem 1.1rem 2rem 1.1rem;
+}
+
+.article .text {
+    border-bottom: 1px dotted var(--dark-2);
+}
+
+.article a {
+    color: var(--red);
+}
+
+.meta {
+    color: var(--dark-3);
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1rem;
+}
+
+.article nav {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.article nav span {
+    max-width: 300px;
+}
+
+.next {
+    margin-left: auto;
+}
