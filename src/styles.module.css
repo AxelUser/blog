@@ -158,3 +158,16 @@ footer {
     margin-top: 3rem;
     color: var(--red);
 }
+
+/* Announcement */
+.announcement {
+    border: 2px solid var(--red);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.statement {
+    color: var(--red);
+    border-bottom: 1px solid var(--red);
+}
