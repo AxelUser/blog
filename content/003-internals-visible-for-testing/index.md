@@ -9,6 +9,7 @@ keywords:
 title: "Testing private logic"
 preview: "How to test internal or private logic with the help of attribute InternalsVisibleTo"
 draft: false
+legacy: true
 ---
 
 ## About tests for private code

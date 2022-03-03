@@ -22,6 +22,7 @@ exports.createPages = async function ({ actions, graphql }) {
                 title
                 date(formatString: "DD MMM, YYYY")
 				tags
+				legacy
             }
             html
 			timeToRead
@@ -37,11 +38,17 @@ exports.createPages = async function ({ actions, graphql }) {
 		const prev = idx === 0 ? null : data.allMarkdownRemark.edges[idx - 1].node;
 		const next = idx === data.allMarkdownRemark.edges.length - 1 ? null : data.allMarkdownRemark.edges[idx + 1].node;
 
-		const slug = edge.node.fields.slug
-		actions.createPage({
-			path: `blog/${slug}`,
+		const createPage = (path) => actions.createPage({
+			path: path,
 			component: require.resolve(`./src/templates/blogPost.js`),
 			context: { current: edge.node, prev, next },
 		})
+		
+		const slug = edge.node.fields.slug
+		createPage(`blog/${slug}`);
+
+		if (edge.node.frontmatter.legacy) {
+			createPage(slug);
+		}
 	})
 }

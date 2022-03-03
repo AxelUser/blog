@@ -8,6 +8,7 @@ keywords:
 title: "Dictionary on generics"
 preview: "Do you want to improve performance of caching? Get rid of Dictionary and use just CLR for that!"
 draft: false
+legacy: true
 ---
 
 ## Disclaimer

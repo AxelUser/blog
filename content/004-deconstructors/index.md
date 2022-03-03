@@ -10,6 +10,7 @@ keywords:
 title: "Benefits of deconstructors for custom types"
 preview: "How and when to use deconstruction syntax-sugar for your custom types in C#"
 draft: false
+legacy: true
 ---
 
 ## About tuples in C# 7

@@ -8,6 +8,7 @@ keywords:
 title: "Use CallerMemberName for logging"
 preview: "Get caller information via attributes"
 draft: false
+legacy: true
 ---
 
 Since C# 4.5 you can use "magic" attributes to retrieve caller information:
