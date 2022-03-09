@@ -25,7 +25,6 @@ exports.createPages = async function ({ actions, graphql }) {
 				legacy
             }
             html
-			timeToRead
             fields {
               slug
             }
