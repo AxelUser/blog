@@ -38,7 +38,6 @@ const Layout = ({ pageTitle, children }) => {
 			<Helmet title={title}/>
 			<div className={blogStyles.container}>
 				<Header />
-				<Announcement />
 				{children}
 				<Footer author={data.site.siteMetadata.author} currentYear={data.site.siteMetadata.currentYear} />
 			</div>
