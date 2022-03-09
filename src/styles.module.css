@@ -4,7 +4,7 @@
     --dark-3: rgb(120, 120, 120);
     --white: rgb(210, 210, 210);
     --red: rgb(175, 13, 13);
-    --main-width: 800px
+    --main-width: 800px;
 }
 
 html,
@@ -28,7 +28,12 @@ a:visited {
     flex-direction: column;
     max-width: var(--main-width);
     margin: auto;
-    padding: 0 10px 0 10px;
+}
+
+@media (max-width: 820px) {
+    .container {
+        padding: 0 10px 0 10px;
+    }
 }
 
 header {
@@ -139,14 +144,27 @@ footer {
     gap: 1.5rem;
 }
 
-.article nav span {
-    max-width: 300px;
-}
-
 .next {
     margin-left: auto;
 }
 
+@media (max-width: 650px) {
+    .article nav {
+        flex-direction: column;
+    }
+
+    .next {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 650px) {
+    .article nav span {
+        max-width: 300px;
+    }
+}
+
+/* Not found page */
 .notFound {
     display: flex;
     flex-direction: column;
