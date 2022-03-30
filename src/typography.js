@@ -9,8 +9,8 @@ const typography = new Typography({
     ],
     bodyFontFamily: ['JetBrains Mono', 'monospace'],
     headerFontFamily: ['JetBrains Mono', 'monospace'],
-    baseLineHeight: 1.5,
-    baseFontSize: "18px",
+    baseLineHeight: 1.7,
+    baseFontSize: "16px",
     overrideStyles: ({ rhythm }) => ({
         h1: {
             paddingBottom: `calc(${rhythm(1 / 4)} - 1px)`,
