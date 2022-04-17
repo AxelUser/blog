@@ -6,7 +6,10 @@ import * as blogStyles from '../styles.module.css'
 const NotFoundPage = () => {
 	return (
 		<main>
-			<Helmet title="Not found" />
+			<Helmet>
+				<title>Not found</title>
+				<meta name="google-site-verification" content="8Dy4lxRZAH8BAi86GsiP9mlM_ELJLCh839CXT3W32SI" />
+			</Helmet>
 			<div className={blogStyles.notFound}>
 				<h1>Page not found</h1>
 				<small>or maybe it's hidden somewhere</small>

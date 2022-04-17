@@ -35,7 +35,10 @@ const Layout = ({ pageTitle, children }) => {
 
 	return (
 		<>
-			<Helmet title={title}/>
+			<Helmet>
+				<title>{title}</title>
+				<meta name="google-site-verification" content="8Dy4lxRZAH8BAi86GsiP9mlM_ELJLCh839CXT3W32SI" />
+			</Helmet>
 			<div className={blogStyles.container}>
 				<Header />
 				{children}
