@@ -183,6 +183,16 @@ footer {
     }
 }
 
+/* Article header links */
+:global a.anchor {
+    fill: var(--white);
+    padding-right: 7px;
+}
+
+:global a.anchor:hover {
+    border-bottom: none;
+}
+
 /* Not found page */
 .notFound {
     display: flex;
