@@ -13,7 +13,7 @@ legacy: true
 
 ## Disclaimer
 
-1. This article shows how to simulate dictionary behavior with generic static classes. However, **the way to this solution goes through other examples with lots of design details** to make you familiar with the situation. If you're interested only in "hacking" part, you may go directly to the section [**Implementing a generic-based cached producer**](#implementing-a-generic-based-cached-producer).
+1. This article shows how to simulate dictionary behavior with generic static classes. However, **the way to this solution goes through other examples with lots of design details** to make you familiar with the situation. If you're interested only in "hacking" part, you may go directly to the section [Implementing a generic-based cached producer](#implementing-a-generic-based-cached-producer).
 2. In code examples I've used **Nullable Reference Types**, which is a new feature from **C# 8**. They don't affect the performance and definitely not a main point of the article. If you're curious, check the [documentation](https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references).
 3. All code is available on [GitHub](https://github.com/AxelUser/examples/tree/master/DotNet/DictionaryOfTypes).
 
@@ -21,7 +21,7 @@ legacy: true
 
 When you are integrating different services into each other, it's always a very time-consuming process to write clients for all of them. Luckily, if those RESTful services provide their API schema in **OpenAPI** (or previously named **Swagger**) format, chances are great that there's a generator of clients for this common type of schema format.
 
-.Net has several packages for client generation, for example [**NSwag**](https://github.com/RicoSuter/NSwag). There are different opinions on how generated clients should be look like, but let's consider that their constructors receive *HttpClient* instance for sending requests and classes themselves are derived from generated interfaces, containing all public methods for the API.
+.Net has several packages for client generation, for example [NSwag](https://github.com/RicoSuter/NSwag). There are different opinions on how generated clients should be look like, but let's consider that their constructors receive *HttpClient* instance for sending requests and classes themselves are derived from generated interfaces, containing all public methods for the API.
 
 The first requirement helps to manipulate *HttpClient* creation and lifetime, which means that we can even reuse one from the pool. The second requirement will be handy, when it's needed to write unit-tests for code, that uses service's clients - in that case they must be mocked and mocking in .Net's frameworks "mostly" requires passing an interface.
 
@@ -55,7 +55,7 @@ Although clients are implementing their own interfaces, it's still hard to test 
 
 However sometimes it's necessary to control base url to your service or to dynamically pass some values into request's headers, like authorization tokens or distributed tracing ids. So it may be preferred to pass a valid *HttpClient* manually and that's why for the sake of the article let's stick to this format.
 
-The most appropriate way of extracting object construction into dedicated dependency is implementing a [**Factory**](https://refactoring.guru/design-patterns/factory-method) for clients. Unfortunately, all clients implement different interfaces and it isn't possible to write base interface as returned value for the factory method. However it's still possible to invoke the creation of specific client by redesigning the factory into generic class. 
+The most appropriate way of extracting object construction into dedicated dependency is implementing a [Factory](https://refactoring.guru/design-patterns/factory-method) for clients. Unfortunately, all clients implement different interfaces and it isn't possible to write base interface as returned value for the factory method. However it's still possible to invoke the creation of specific client by redesigning the factory into generic class. 
 
 Let's discuss possible interface:
 
@@ -66,7 +66,7 @@ public interface IClientFactory<out T> where T: class
 }
 ```
 
-Why it's preferred to make whole class as generic and not just the method `Create`? If it will be only a generic method, the factory will be similar to the [**Service Locator**](https://blog.ploeh.dk/2010/02/03/ServiceLocatorisanAnti-Pattern/), which has some maintainability issues and hides the information which clients the outer code depends on.
+Why it's preferred to make whole class as generic and not just the method `Create`? If it will be only a generic method, the factory will be similar to the [Service Locator](https://blog.ploeh.dk/2010/02/03/ServiceLocatorisanAnti-Pattern/), which has some maintainability issues and hides the information which clients the outer code depends on.
 
 Here is an example:
 
@@ -86,7 +86,7 @@ As factory should create clients of specific types, there are some more question
 1. How factory should invoke a constructor of the concrete client?
 2. How factory should effectively guess object of which class should be created, if only interface is passed to the generic type parameter?
 
-Solution for the first question is quite trivial - invoking constructor via handy static helper [**Activator.CreateInstance**](https://docs.microsoft.com/en-gb/dotnet/api/system.activator.createinstance?view=netcore-3.1#System_Activator_CreateInstance_System_Type_System_Object___). Internally it's an old friend reflection does all the job, but activator provides a simpler API.
+Solution for the first question is quite trivial - invoking constructor via handy static helper [Activator.CreateInstance](https://docs.microsoft.com/en-gb/dotnet/api/system.activator.createinstance?view=netcore-3.1#System_Activator_CreateInstance_System_Type_System_Object___). Internally it's an old friend reflection does all the job, but activator provides a simpler API.
 
 For the second problem another reflection-based mechanism should be involved. As I mentioned above, mocking frameworks for .Net work better, if they create mocks that implement base interfaces. Thus the factory method should expose client's interface in returned value. It can be easily achieved with the help of generic type parameter, but nevertheless factory method should create an object of the concrete class.
 
@@ -168,7 +168,7 @@ Even so, what about making this mechanism by ourselves? If you're interested, I'
 
 Before we dig into optimizations, **it's HIGHLY recommended to track the performance of made solutions**. As we are dealing with isolated modules, micro-benchmarking will suit our needs.
 
-The easiest way to create benchmarks of that kind is using a popular nuget package [**BenchmarkDotNet**](https://benchmarkdotnet.org/). I won't include in the article how to write good benchmarks for every situation, because this theme is quite vast. However, if you're not familiar with benchmarking or BenchmarkDotNet, you may follow the links to BenchmarkDotNet documentation at the section **References**.
+The easiest way to create benchmarks of that kind is using a popular nuget package [BenchmarkDotNet](https://benchmarkdotnet.org/). I won't include in the article how to write good benchmarks for every situation, because this theme is quite vast. However, if you're not familiar with benchmarking or BenchmarkDotNet, you may follow the links to BenchmarkDotNet documentation at the section **References**.
 
 Frankly speaking, I shall mention that maintainers of the BenchmarkDotNet did a great job in providing an easy API for creating benchmarks, which gives ability to include lots of useful indicators and will be clear to the most of .Net developers.
 
@@ -191,7 +191,7 @@ To show how many attempts were performed, BenchmarkDotNet has an ability to use 
 public int Accesses { get; set; }
 ```
 
-Another useful feature is making benchmark for original solution as [**baseline**](https://benchmarkdotnet.org/articles/features/baselines.html). It is used to display the ratio of how speed of other benchmarks differs from the baseline.
+Another useful feature is making benchmark for original solution as [baseline](https://benchmarkdotnet.org/articles/features/baselines.html). It is used to display the ratio of how speed of other benchmarks differs from the baseline.
 
 Alright, now everything is ready to write the code of the first benchmark:
 
@@ -341,7 +341,7 @@ This trick is mostly inspired by the way how ["Array.Empty<T>"](https://docs.mic
 
 Empty arrays are best candidates for caching, because their construction doesn't require any parameters, but only a generic type parameter.
 
-When you invoke `Array.Empty<MyClass>`, it internally invokes a static read-only field `Empty` of static generic class `EmptyArray<MyClass`, which initializes and returns an empty array of type *MyClass (have a look at [sources](https://github.com/dotnet/runtime/blob/3705185af806e273ccef98e44699400f0416c452/src/libraries/System.Private.CoreLib/src/System/Array.cs#L694-L704))*. Static field is initialized during the time of a first access to the field of the class *EmptyArray*. This is guaranteed from the fact how generics and static classes work in **CLR** (Common Language Runtime). For your information, that's how you can implement a [simple thread-safe singleton](https://csharpindepth.com/articles/singleton) in .Net.
+When you invoke `Array.Empty<MyClass>`, it internally invokes a static read-only field `Empty` of static generic class `EmptyArray<MyClass`, which initializes and returns an empty array of type `MyClass` (have a look at [sources](https://github.com/dotnet/runtime/blob/3705185af806e273ccef98e44699400f0416c452/src/libraries/System.Private.CoreLib/src/System/Array.cs#L694-L704)). Static field is initialized during the time of a first access to the field of the class *EmptyArray*. This is guaranteed from the fact how generics and static classes work in **CLR** (Common Language Runtime). For your information, that's how you can implement a [simple thread-safe singleton](https://csharpindepth.com/articles/singleton) in .Net.
 
 ## How CLR compiles generic classes
 

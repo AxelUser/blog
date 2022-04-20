@@ -33,7 +33,7 @@ I advise you to have a look, because this API provides many interesting features
 
 Alright, let's try some MongoDB shell.
 
-Now we can start delete operation with such command:
+Now when we start the delete operation we can pass `JobId` into comment:
 ```js
 db.runCommand({
     "delete": "Events",
