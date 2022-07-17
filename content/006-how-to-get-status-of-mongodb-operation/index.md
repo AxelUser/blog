@@ -27,9 +27,7 @@ Secondly, this command returns operation that are started on specific MongoDB no
 
 The last thing is that you need to distinguish delete operations stated by your service from normal operations. In my case all those data-retention tasks has `JobId`, which is a unique key for operation. All I need is a way to mark MongoDB queries with this key.
 
-If we look through the output format for `$currentOp`, we will notice that it has a [comment](https://www.mongodb.com/docs/manual/reference/command/currentOp/#mongodb-data-currentOp.command) field, which can be attached when command is started. Some queries (e.g `find`) support [$comment](https://www.mongodb.com/docs/manual/reference/operator/query/comment/) operator, but the most universal way to pass a comment is to run a query via [database command](https://www.mongodb.com/docs/manual/reference/command/#database-commands).
-
-I advise you to have a look, because this API provides many interesting features, for example [delete command](https://www.mongodb.com/docs/manual/reference/command/delete/#mongodb-dbcommand-dbcmd.delete) has limit option, which may be used to delete large amount of data by parts.
+If we look through the output format for `$currentOp`, we will notice that it has a [comment](https://www.mongodb.com/docs/manual/reference/command/currentOp/#mongodb-data-currentOp.command) field, which can be attached when command is started. Some queries (e.g `find`) support [$comment](https://www.mongodb.com/docs/manual/reference/operator/query/comment/) operator, but the most universal way to pass a comment is to run a query via [database command](https://www.mongodb.com/docs/manual/reference/command/#database-commands). With this API we can run [delete command](https://www.mongodb.com/docs/manual/reference/command/delete/#mongodb-dbcommand-dbcmd.delete).
 
 Alright, let's try some MongoDB shell.
 
