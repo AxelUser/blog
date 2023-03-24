@@ -6,8 +6,8 @@ keywords:
 - "C#"
 - ".Net"
 - "Enums"
-title: "Bitwise shifts for flags"
-preview: "Use bitwise shift operator to easily increment your Flags"
+title: "Shift Your C# Enums"
+preview: "Discover the simple yet powerful technique of using bitwise shift operator in C# Enums, and how it can improve the readability and maintainability of your code."
 draft: false
 legacy: true
 ---

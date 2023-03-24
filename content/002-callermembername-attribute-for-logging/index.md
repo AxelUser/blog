@@ -5,8 +5,8 @@ tags:
 keywords:
 - "C#"
 - "CallerMemberName"
-title: "Use CallerMemberName for logging"
-preview: "Get caller information via attributes"
+title: "Using CallerMemberName for Improved Logging in C#"
+preview: 'Learn how to use "magic" attributes in C#, such as CallerFilePath, CallerLineNumber, and CallerMemberName, to retrieve caller information and improve logging functionality.'
 draft: false
 legacy: true
 ---

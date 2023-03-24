@@ -40,7 +40,7 @@ const BlogPage = ({data: { allMarkdownRemark: { edges } }}) => {
 export const query = graphql`
 	query {
 		allMarkdownRemark(
-			sort: { fields: [frontmatter___date], order: DESC }
+			sort: {frontmatter: {date: DESC}}
 			filter: {frontmatter: {draft: {ne: true}}}
 		) {
 			totalCount
