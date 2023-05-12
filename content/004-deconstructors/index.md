@@ -1,12 +1,12 @@
 ---
 date: "2018-11-15"
 tags:
-- "C#"
+  - "C#"
 keywords:
-- "C#"
-- "deconstructors"
-- "tuples"
-- "operation-result"
+  - "C#"
+  - "deconstructors"
+  - "tuples"
+  - "operation-result"
 title: "Benefits of deconstructors for custom types"
 preview: "How and when to use deconstruction syntax-sugar for your custom types in C#"
 draft: false
@@ -16,6 +16,7 @@ legacy: true
 ## About tuples in C# 7
 
 New tuples and its support in C# 7 are blazing-cool:
+
 - they are structures, so no heap allocations;
 - they have aliases for names of its fields (`tuple.Info` vs old `tuple.Item1`);
 - they bring syntax-sugar of deconstruction;
@@ -24,9 +25,10 @@ Moreover, the deconstruction can be used not only for build-in tuples, but also 
 
 ## Deconstruction for tuples
 
-Let's start with the original usage for tuples. If you are already familiar with it, you may jump to [the next block]( #implementing-deconstruction-for-custom-types).
+Let's start with the original usage for tuples. If you are already familiar with it, you may jump to [the next block](#implementing-deconstruction-for-custom-types).
 
 For example, you have a method, which returns a statistic about most frequent word in a form of a tuple with two fields: word and count. Below is the example of such method:
+
 ```csharp
 static (string, int) GetMostFrequentWord(string text)
 {
@@ -40,6 +42,7 @@ static (string, int) GetMostFrequentWord(string text)
 ```
 
 As you see, `GetMostFrequentWord` returns unnamed tuple, and you can access its fields via `Item1` and `Item2`:
+
 ```csharp
 static void Main(string[] args)
 {
@@ -50,6 +53,7 @@ static void Main(string[] args)
 ```
 
 On the other hand, if you implement named-tuple, those values can be accessed through aliases, you just need to make some changes into declaration of the tuple:
+
 ```csharp
 // we added aliases for the output below
 static (string word, int count) GetMostFrequentWord(string text)
@@ -67,6 +71,7 @@ static void Main(string[] args)
 ```
 
 However, our original need is just getting those fields `word` and `count`, we don't really care about grouping tuple. So be it: with the help of deconstruction, we can initialize only variables `word` and `count`:
+
 ```csharp
 static void Main(string[] args)
 {
@@ -76,12 +81,15 @@ static void Main(string[] args)
     Trace.WriteLine($"word: {word}, count: {count}");
 }
 ```
+
 In addition, you can even use `var` for completely deconstructed tuple, instead of specifying explicit types for every field:
+
 ```csharp
 var (word, count) = GetMostFrequentWord(text);
 ```
 
 If you don't need some fields from deconstruction, you can use another feature of C# 7 - [discards](https://docs.microsoft.com/ru-ru/dotnet/csharp/discards). For example, if we want to discard the creation of variable `count` during deconstruction, we can pass `_` instead:
+
 ```csharp
 static void Main(string[] args)
 {
@@ -94,6 +102,7 @@ static void Main(string[] args)
 ## Implementing deconstruction for custom types
 
 Using deconstruction of tuples is quite straightforward, how about user-defined types? You may want `GetMostFrequentWord` to return your own struct `WordStat`:
+
 ```csharp
 public struct WordStat
 {
@@ -120,13 +129,15 @@ static WordStat GetMostFrequentWordStats(string text)
 ```
 
 Generic tuples are great, but there are several reasons for using your own models:
+
 - Better readability, as your code became less "technical".
 - Easy refactoring, for example, if you want to change field names or add new ones.
 - Your model has domain specifics, but generic tuples - doesn't.
 
-So, we will use `WordStat` instead of a tuple, but can we use deconstruction for our model? 
+So, we will use `WordStat` instead of a tuple, but can we use deconstruction for our model?
 
 We are lucky because we can add this feature to our type. All is needed is adding new public method `Deconstruct` with `out` parameters, that will be extracted during deconstruction:
+
 ```csharp
 public void Deconstruct(out string word, out int count)
 {
@@ -136,6 +147,7 @@ public void Deconstruct(out string word, out int count)
 ```
 
 After that, smart compiler will use this method to produce deconstructed values:
+
 ```csharp
 static void Main(string[] args)
 {
@@ -150,6 +162,7 @@ Deconstructed fields must be of same types and in same order and count, as they 
 One more thing - `Deconstruct` may be an extension-method!
 
 Let's add a new field `WordLength` to `WordStat` and write an extension to get all those three fields:
+
 ```csharp
 public static class Extensions
 {
@@ -163,6 +176,7 @@ public static class Extensions
 ```
 
 Now we can get word's length from deconstruction:
+
 ```csharp
 static void Main(string[] args)
 {
@@ -175,6 +189,7 @@ static void Main(string[] args)
 ## Use-cases of deconstruction
 
 Imagine a service, which sends you some data, for example aggregational count of some records in some data-sources. Method takes a long time to aggregate. Let's say it's signature will be:
+
 ```csharp
 Task<int> Count(string[] dataSourcesUrls);
 ```
@@ -195,6 +210,7 @@ public class AggregationService
     }
 }
 ```
+
 ```csharp
 // Complex result
 public class OperationResult<TResult>
@@ -238,6 +254,7 @@ public class OperationResult<TResult>
     }
 }
 ```
+
 ```csharp
 // Consumer of our service
 public class Consumer
@@ -250,7 +267,7 @@ public class Consumer
             "https://www.maltsev.space/sources/2",
             "https://www.maltsev.space/sources/3"
         };
-        
+
         var service = new AggregationService();
 
         var countResult = await service.Count(urls).ConfigureAwait(false);
@@ -266,11 +283,12 @@ public class Consumer
 
 The main idea is that it is grouping result and errors, so we have full information about result of the operation and may react as we want. In our case we want to show user any result, even if it isn't full.
 
-So, as in the example with frequent word, our model of complex result just group everything together. It's useful when we construct complex result via our factory-methods, but then in the consumer we need only its fields. 
+So, as in the example with frequent word, our model of complex result just group everything together. It's useful when we construct complex result via our factory-methods, but then in the consumer we need only its fields.
 
-There may be different ways of how we consume these results, for example, we just need requested data, even if it may be equals `default` (empty). 
+There may be different ways of how we consume these results, for example, we just need requested data, even if it may be equals `default` (empty).
 
 So, we can use deconstruction and discards. Firstly, we create `Deconstruct` with all 4 fields:
+
 ```csharp
 public void Deconstruct(out TResult result, out bool success, out bool totalSuccess, out Exception exception)
 {
@@ -282,16 +300,18 @@ public void Deconstruct(out TResult result, out bool success, out bool totalSucc
 ```
 
 Then we can deconstruct it as we want:
+
 ```csharp
 var (count, _, totalSuccess, _) = await service.Count(urls).ConfigureAwait(false);
 
 if(totalSuccess)
-    Trace.WriteLine($"Total count: {count}");    
+    Trace.WriteLine($"Total count: {count}");
 ```
 
 And that's it, were are ready to go on!
 
 ## Further reading
+
 - [Documentation about deconstruction](https://docs.microsoft.com/ru-ru/dotnet/csharp/deconstruct)
 - [Some investigation about how new tuples work](https://blogs.msdn.microsoft.com/seteplia/2017/11/01/dissecting-the-tuples-in-c-7/)
 - [Article about different kinds of error handling, like OperationResult](https://www.codeproject.com/Articles/1022462/Error-Handling-in-SOLID-Csharp-NET-The-Operation-R)

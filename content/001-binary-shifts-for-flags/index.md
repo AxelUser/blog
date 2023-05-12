@@ -1,11 +1,11 @@
 ---
 date: "2018-10-26"
 tags:
-- "C#"
+  - "C#"
 keywords:
-- "C#"
-- ".Net"
-- "Enums"
+  - "C#"
+  - ".Net"
+  - "Enums"
 title: "Shift Your C# Enums"
 preview: "Discover the simple yet powerful technique of using bitwise shift operator in C# Enums, and how it can improve the readability and maintainability of your code."
 draft: false
@@ -13,6 +13,7 @@ legacy: true
 ---
 
 If you want easily increment your flags in `Enum`, you can represent it's values with bitwise shift operator:
+
 ```csharp
 [Flags]
 enum ProgrammingLanguages

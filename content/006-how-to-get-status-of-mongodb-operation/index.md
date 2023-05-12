@@ -1,7 +1,7 @@
 ---
 date: "2022-04-20"
 tags:
-- "MongoDB"
+  - "MongoDB"
 title: "Checking MongoDB Operation Status: A Simple Guide"
 preview: "Learn how to easily check the status of your MongoDB operations with this step-by-step guide."
 draft: false
@@ -10,11 +10,13 @@ draft: false
 When working with databases, it's not uncommon to inspect the status of a running query, whether it's for profiling purposes or as part of a polling mechanism for asynchronous operations. In this blog post, we'll explore how to use MongoDB's $currentOp stage to retrieve information about running queries and how to use this functionality to store the status of running operations.
 
 ## Background
+
 My use case involves building a background service that handles data retention. The service should be able to handle multiple requests and be tolerant to failures during deletion handling. To achieve this, I need to store the states of running operations so that they can be checked during failure recovery or regular reboot/deployment.
 
 To receive requests, I'll use a message broker like Kafka. The service will receive messages with a `JobId` and a condition specifying which data to delete. After the deletion is completed, the service will commit the message. If the service is restarted or fails, it will receive the uncommitted message again.
 
 ## Solution
+
 A straightforward solution is to store the state in another MongoDB collection. However, storing the state may be redundant since the only need for that state is to tell if the operation was completed, and if not, whether it is running or failed.
 
 Most of the databases I've worked with have special tables or views with information about all running queries, and MongoDB is no exception. It has a special query called [db.currentOp()](https://www.mongodb.com/docs/manual/reference/method/db.currentOp/) that returns a document with information about all running queries.
@@ -32,21 +34,25 @@ There are several things to keep in mind:
 If we look through the output format for `$currentOp`, we'll notice that it has a [comment](https://www.mongodb.com/docs/manual/reference/command/currentOp/#mongodb-data-currentOp.command) field that can be attached when a command is started. Some queries (e.g., `find`) support the [$comment](https://www.mongodb.com/docs/manual/reference/operator/query/comment/) operator, but the most universal way to pass a comment is to run a query via a [database command](https://www.mongodb.com/docs/manual/reference/command/#database-commands). With this API, we can run the delete command and pass the `JobId` into the comment field.
 
 ## Example
+
 Now, let's look at some MongoDB shell examples.
 
 ### Starting delete operation with "JobId"
 
 To pass `JobId` into the comment when we start the delete operation, we can use the following command:
+
 ```js
 db.runCommand({
-    "delete": "Events",
-    "ordered": false,
-    "comment": "job:blog-test",
-    "deletes": [{
-        "q": {"clientId": 0},
-        "limit": 0
-    }]
-})
+  delete: "Events",
+  ordered: false,
+  comment: "job:blog-test",
+  deletes: [
+    {
+      q: { clientId: 0 },
+      limit: 0,
+    },
+  ],
+});
 ```
 
 This MongoDB query is designed to delete all documents from the `"Events"` collection where the `"clientId"` field equals `0`. The query is executed using the `runCommand` method, which takes a single argument that is a document representing the command to be executed.
@@ -61,9 +67,9 @@ The command document contains several fields:
 
 - `"deletes"`: This field contains an array of objects, each representing a deletion operation to be executed. In this case, there is only one object, which contains two fields:
 
-    - `"q"`: This field specifies the query that will be used to match documents to be deleted. In this case, the query is searching for documents where the `"clientId"` field equals 0.
+  - `"q"`: This field specifies the query that will be used to match documents to be deleted. In this case, the query is searching for documents where the `"clientId"` field equals 0.
 
-    - `"limit"`: This field specifies the maximum number of documents to delete. In this case, it is set to 0, indicating that all documents matching the query should be deleted.
+  - `"limit"`: This field specifies the maximum number of documents to delete. In this case, it is set to 0, indicating that all documents matching the query should be deleted.
 
 When executed, this query will delete all documents from the `"Events"` collection where the `"clientId"` field equals `0`. The deletion will be executed in parallel and there is no limit to the number of documents that can be deleted. The optional comment included in the command document is "job:blog-test", which is our `JobId`.
 
@@ -73,10 +79,10 @@ MongoDB query below uses the aggregate method to find a specific operation that 
 
 ```js
 db.aggregate([
-    {"$currentOp": {"localOps": true}},
-    {"$match": {"command.comment": "job:blog-test"}},
-    {"$limit": 1}
-])
+  { $currentOp: { localOps: true } },
+  { $match: { "command.comment": "job:blog-test" } },
+  { $limit: 1 },
+]);
 ```
 
 The first stage of the pipeline is `$currentOp`, which returns information about the current operations running on the server. The `localOps` option is set to `true`, which limits the output to only show operations running on the same node as the query.

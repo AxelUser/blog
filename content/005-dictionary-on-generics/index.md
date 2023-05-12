@@ -1,10 +1,10 @@
 ---
 date: "2020-06-22"
 tags:
-- "C#"
+  - "C#"
 keywords:
-- "C#"
-- "generics"
+  - "C#"
+  - "generics"
 title: "Unlocking the Power of Generics: Simulating Dictionary Behavior in C#"
 preview: "Do you want to improve performance of caching? Get rid of Dictionary and use just CLR for that!"
 draft: false
@@ -21,9 +21,9 @@ legacy: true
 
 When you are integrating different services into each other, it's always a very time-consuming process to write clients for all of them. Luckily, if those RESTful services provide their API schema in **OpenAPI** (or previously named **Swagger**) format, chances are great that there's a generator of clients for this common type of schema format.
 
-.Net has several packages for client generation, for example [NSwag](https://github.com/RicoSuter/NSwag). There are different opinions on how generated clients should be look like, but let's consider that their constructors receive *HttpClient* instance for sending requests and classes themselves are derived from generated interfaces, containing all public methods for the API.
+.Net has several packages for client generation, for example [NSwag](https://github.com/RicoSuter/NSwag). There are different opinions on how generated clients should be look like, but let's consider that their constructors receive _HttpClient_ instance for sending requests and classes themselves are derived from generated interfaces, containing all public methods for the API.
 
-The first requirement helps to manipulate *HttpClient* creation and lifetime, which means that we can even reuse one from the pool. The second requirement will be handy, when it's needed to write unit-tests for code, that uses service's clients - in that case they must be mocked and mocking in .Net's frameworks "mostly" requires passing an interface.
+The first requirement helps to manipulate _HttpClient_ creation and lifetime, which means that we can even reuse one from the pool. The second requirement will be handy, when it's needed to write unit-tests for code, that uses service's clients - in that case they must be mocked and mocking in .Net's frameworks "mostly" requires passing an interface.
 
 To sum everything up, the generated code will follow the similar pattern:
 
@@ -39,7 +39,7 @@ public partial class SomeResourceClient : ISomeResourceClient
 
 	public SystemClient(HttpClient httpClient)
 	{
-		_httpClient = httpClient; 
+		_httpClient = httpClient;
 	}
 
 	public async Task<SwaggerResponse<string>> GetUpdaterLinkAsync(CancellationToken cancellationToken)
@@ -51,11 +51,11 @@ public partial class SomeResourceClient : ISomeResourceClient
 
 ## Automating client creation
 
-Although clients are implementing their own interfaces, it's still hard to test code, that creates clients via constructors. For a testable code it's required to have all those clients as dependencies or delegate their creation into a new dependency. It's possible to resolve clients via **Dependency Injection**, because *HttpClient* can be effectively taken from reusable pool via [IHttpClientFactory](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests), and most of the DI frameworks offer you a zero configuration for that feature.
+Although clients are implementing their own interfaces, it's still hard to test code, that creates clients via constructors. For a testable code it's required to have all those clients as dependencies or delegate their creation into a new dependency. It's possible to resolve clients via **Dependency Injection**, because _HttpClient_ can be effectively taken from reusable pool via [IHttpClientFactory](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests), and most of the DI frameworks offer you a zero configuration for that feature.
 
-However sometimes it's necessary to control base url to your service or to dynamically pass some values into request's headers, like authorization tokens or distributed tracing ids. So it may be preferred to pass a valid *HttpClient* manually and that's why for the sake of the article let's stick to this format.
+However sometimes it's necessary to control base url to your service or to dynamically pass some values into request's headers, like authorization tokens or distributed tracing ids. So it may be preferred to pass a valid _HttpClient_ manually and that's why for the sake of the article let's stick to this format.
 
-The most appropriate way of extracting object construction into dedicated dependency is implementing a [Factory](https://refactoring.guru/design-patterns/factory-method) for clients. Unfortunately, all clients implement different interfaces and it isn't possible to write base interface as returned value for the factory method. However it's still possible to invoke the creation of specific client by redesigning the factory into generic class. 
+The most appropriate way of extracting object construction into dedicated dependency is implementing a [Factory](https://refactoring.guru/design-patterns/factory-method) for clients. Unfortunately, all clients implement different interfaces and it isn't possible to write base interface as returned value for the factory method. However it's still possible to invoke the creation of specific client by redesigning the factory into generic class.
 
 Let's discuss possible interface:
 
@@ -90,9 +90,9 @@ Solution for the first question is quite trivial - invoking constructor via hand
 
 For the second problem another reflection-based mechanism should be involved. As I mentioned above, mocking frameworks for .Net work better, if they create mocks that implement base interfaces. Thus the factory method should expose client's interface in returned value. It can be easily achieved with the help of generic type parameter, but nevertheless factory method should create an object of the concrete class.
 
-So, factory should perform mapping between the interface and the implementation. Fortunately, all generated classes and interfaces are stored under dedicated namespace and are available during the start of an application. That's right - **mapping can be created by traversing though all classes in that namespace**. 
+So, factory should perform mapping between the interface and the implementation. Fortunately, all generated classes and interfaces are stored under dedicated namespace and are available during the start of an application. That's right - **mapping can be created by traversing though all classes in that namespace**.
 
-To execute search only once, it's better to put mapping code into a **static constructor**. Reflection will traverse through the whole assembly, find all client's interfaces with their implementations and save that relationships into a simple dictionary. Also it'a a good idea to **encapsulate mapping into another dependency**, which has private static field with that dictionary and produces the factory for required clients. Encapsulation will protect internal mapping from unexpected mutations and make namespace cleaner. 
+To execute search only once, it's better to put mapping code into a **static constructor**. Reflection will traverse through the whole assembly, find all client's interfaces with their implementations and save that relationships into a simple dictionary. Also it'a a good idea to **encapsulate mapping into another dependency**, which has private static field with that dictionary and produces the factory for required clients. Encapsulation will protect internal mapping from unexpected mutations and make namespace cleaner.
 
 The new dependency can be implemented as a factory provider, or in other words factory of factories. The interface is trivial:
 
@@ -109,7 +109,7 @@ Type of the client's implementation can be passed into client factory constructo
 public class SimpleClientFactoryProvider: IClientsFactoryProvider
 {
     private static readonly Dictionary<Type, Type> DiscoveredAllowedClientTypes;
-    
+
     static SimpleClientFactoryProvider()
     {
         DiscoveredAllowedClientTypes = GetAllTypes(Assembly.GetExecutingAssembly())
@@ -123,13 +123,13 @@ public class SimpleClientFactoryProvider: IClientsFactoryProvider
 
         return new ClientFactory<T>(implType);
     }
-    
+
     private static IEnumerable<(Type @interface, Type implementation)> GetAllTypes(Assembly assembly)
     {
         var clientsTypes = assembly.DefinedTypes
             .Where(type => type.CustomAttributes
                 .Any(attr => attr.AttributeType == typeof(RestClientAttribute)));
-        
+
         foreach (var clientType in clientsTypes)
         {
             var @interface = clientType.ImplementedInterfaces.First();
@@ -150,7 +150,7 @@ public class ClientFactory<T>: IClientFactory<T> where T : class
     {
         _clientImplType = clientImplType;
     }
-    
+
     public T Create(HttpClient client)
     {
         return (T) Activator.CreateInstance(_clientImplType, client)!;
@@ -184,7 +184,7 @@ public class ClientFactoryProvidersBenchmark
 
 Now it's time for benchmarks themselves. **Caching improves peeking of some value many times**, that's why benchmark should also perform several attempts of getting factories for each client.
 
-To show how many attempts were performed, BenchmarkDotNet has an ability to use custom benchmark parameters via another attribute [`Params`](https://benchmarkdotnet.org/articles/features/parameterization.html). It receives values of that parameter for each benchmark run and displays that value at its own column in report. For this benchmark let's choose numbers *100*, *1000* and *10000000*:
+To show how many attempts were performed, BenchmarkDotNet has an ability to use custom benchmark parameters via another attribute [`Params`](https://benchmarkdotnet.org/articles/features/parameterization.html). It receives values of that parameter for each benchmark run and displays that value at its own column in report. For this benchmark let's choose numbers _100_, _1000_ and _10000000_:
 
 ```csharp
 [Params(100, 1000, 10000000)]
@@ -256,7 +256,7 @@ public class CachedSimpleFactoryProvider: IClientsFactoryProvider
 {
     private static readonly Type FactoryType = typeof(ClientFactory<>);
     private static readonly Dictionary<Type, object> CachedClientFactories;
-    
+
     static CachedSimpleFactoryProvider()
     {
         CachedClientFactories = ClientTypesProvider.GetAllTypes(Assembly.GetExecutingAssembly())
@@ -283,7 +283,7 @@ Well, this solution isn't so elegant, but **casting is mostly used to overcome t
 
 Now it's obvious that we've reduced memory consumption using pre-allocated factories, but what about speed?
 
-Let's check the performance of this caching mechanism by writing a benchmark and compare results with the baseline: 
+Let's check the performance of this caching mechanism by writing a benchmark and compare results with the baseline:
 
 ```
 |                         Method | Accesses |           Mean |         Error |        StdDev | Ratio | RatioSD |      Gen 0 | Gen 1 | Gen 2 |   Allocated |
@@ -298,11 +298,9 @@ Let's check the performance of this caching mechanism by writing a benchmark and
 | CachedFactory_SequentialAccess | 10000000 | 746,398.580 us | 3,361.2568 us | 3,144.1217 us |  2.04 |    0.02 |          - |     - |     - |           - |
 ```
 
-Hm, seems like it's **became SLOWER, than the original simple solution**, but we may guess what operation caused such performance penalty. *Did we write something wrong or inefficient?*
+Hm, seems like it's **became SLOWER, than the original simple solution**, but we may guess what operation caused such performance penalty. _Did we write something wrong or inefficient?_
 
 Earlier I've mentioned that "dumb" casting from object to generic factory type. **This simple cast is overkill for current situation** - it involves type checking, but we know exactly what generic type stored under each key in dictionary.
-
-
 
 ```csharp
 public IClientFactory<T> GetClientFactory<T>() where T : class
@@ -341,13 +339,13 @@ This trick is mostly inspired by the way how ["Array.Empty<T>"](https://docs.mic
 
 Empty arrays are best candidates for caching, because their construction doesn't require any parameters, but only a generic type parameter.
 
-When you invoke `Array.Empty<MyClass>`, it internally invokes a static read-only field `Empty` of static generic class `EmptyArray<MyClass`, which initializes and returns an empty array of type `MyClass` (have a look at [sources](https://github.com/dotnet/runtime/blob/3705185af806e273ccef98e44699400f0416c452/src/libraries/System.Private.CoreLib/src/System/Array.cs#L694-L704)). Static field is initialized during the time of a first access to the field of the class *EmptyArray*. This is guaranteed from the fact how generics and static classes work in **CLR** (Common Language Runtime). For your information, that's how you can implement a [simple thread-safe singleton](https://csharpindepth.com/articles/singleton) in .Net.
+When you invoke `Array.Empty<MyClass>`, it internally invokes a static read-only field `Empty` of static generic class `EmptyArray<MyClass`, which initializes and returns an empty array of type `MyClass` (have a look at [sources](https://github.com/dotnet/runtime/blob/3705185af806e273ccef98e44699400f0416c452/src/libraries/System.Private.CoreLib/src/System/Array.cs#L694-L704)). Static field is initialized during the time of a first access to the field of the class _EmptyArray_. This is guaranteed from the fact how generics and static classes work in **CLR** (Common Language Runtime). For your information, that's how you can implement a [simple thread-safe singleton](https://csharpindepth.com/articles/singleton) in .Net.
 
 ## How CLR compiles generic classes
 
-Generics are types, that contain a type parameter, which isn't known at compile time (e.g. *List<T>*). When dotnet compiler sees open generic type, it compiles it into IL with the same generic type parameter.
+Generics are types, that contain a type parameter, which isn't known at compile time (e.g. _List<T>_). When dotnet compiler sees open generic type, it compiles it into IL with the same generic type parameter.
 
-After the type argument is passed into generic constructor (e.g. *List<MyClass>*), CLR will do the following:
+After the type argument is passed into generic constructor (e.g. _List<MyClass>_), CLR will do the following:
 
 1. Lookup if the closed generic (with concrete generic type argument) was requested before.
 2. If not - it will be compiled at run time.
@@ -362,7 +360,7 @@ Using the knowledge about how generics are compiled and how static fields are in
 
 ## Implementing a generic-based cached producer
 
-Let's create a new static class `CachedFactory<T>` with static field `Instance`, which is initialized with a factory for the concrete client implementing interface *T*. The factory creation is extracted into the method, that gets implementation type from static dictionary and creates a factory.
+Let's create a new static class `CachedFactory<T>` with static field `Instance`, which is initialized with a factory for the concrete client implementing interface _T_. The factory creation is extracted into the method, that gets implementation type from static dictionary and creates a factory.
 
 How new static factories can access the mapping information? One way is to make that dictionary public, as well as making this new class as public. However, as I mentioned before in the case of dictionary-based caching solution, that will pollute a namespace with things you should never access manually.
 
@@ -374,7 +372,7 @@ public partial class GenericClientFactoryProvider
     private class CachedFactory<T> where T : class
     {
         public static readonly IClientFactory<T>? Instance;
-        
+
         static CachedFactory()
         {
             Instance = CreateFactoryIfAllowed();
@@ -388,9 +386,9 @@ public partial class GenericClientFactoryProvider
 }
 ```
 
-However, there is also a caveat - **when a type *T* isn't stored in dictionary, the generic nevertheless will be compiled and stored at Method Table until the end of execution**. That's why the whole generics trick may be a bad idea, if the client interface is passed from user input.
+However, there is also a caveat - **when a type _T_ isn't stored in dictionary, the generic nevertheless will be compiled and stored at Method Table until the end of execution**. That's why the whole generics trick may be a bad idea, if the client interface is passed from user input.
 
-To make things a little bit fancier, **code with nested class may be extracted into own file**, if the factory provider will be marked as partial. It's up to you how to name that file, but I recommend you to write the name of the provider plus the name of cached factory, separated by the dot, like *GenericClientFactoryProvider.CachedFactory.cs*.
+To make things a little bit fancier, **code with nested class may be extracted into own file**, if the factory provider will be marked as partial. It's up to you how to name that file, but I recommend you to write the name of the provider plus the name of cached factory, separated by the dot, like _GenericClientFactoryProvider.CachedFactory.cs_.
 
 Provider will trigger client creation when accessing the field `Instance` of a closed generic `CachedFactory<T>` class for the first time:
 
@@ -403,7 +401,7 @@ public partial class GenericClientFactoryProvider : IClientsFactoryProvider
     {
         return CachedFactory<T>.Instance ?? throw new Exception($"Client type '{typeof(T)}' isn't supported");
     }
-    
+
     static GenericClientFactoryProvider()
     {
         DiscoveredAllowedClientTypes = ClientTypesProvider.GetAllTypes(Assembly.GetExecutingAssembly())
@@ -419,7 +417,7 @@ static GenericClientFactoryProvider()
 {
     DiscoveredAllowedClientTypes = ClientTypesProvider.GetAllTypes(Assembly.GetExecutingAssembly())
         .ToDictionary(tuple => tuple.@interface, tuple => tuple.implementation);
-    
+
     InitializeFactories(); // Eager initialization
 }
 
