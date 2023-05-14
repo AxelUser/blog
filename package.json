@@ -2,27 +2,31 @@
   "name": "maltsev-space",
   "version": "1.0.0",
   "private": true,
-  "description": "Maltsev Space",
+  "description": "maltsev-space",
   "author": "Alexey Maltsev",
   "keywords": [
     "gatsby"
   ],
   "scripts": {
-    "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "gatsby develop",
+    "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@types/typography": "^0.16.4",
+    "@vanilla-extract/css": "^1.11.0",
+    "@vanilla-extract/webpack-plugin": "^2.2.0",
     "gatsby": "^5.9.1",
     "gatsby-plugin-image": "^3.9.0",
     "gatsby-plugin-manifest": "^5.9.0",
     "gatsby-plugin-sharp": "^5.9.0",
-    "gatsby-plugin-sitemap": "^6.8.0",
+    "gatsby-plugin-sitemap": "^6.9.0",
     "gatsby-plugin-typography": "^5.9.0",
+    "gatsby-plugin-vanilla-extract": "^4.0.1",
     "gatsby-remark-autolink-headers": "^6.9.0",
     "gatsby-remark-prismjs": "^7.9.0",
     "gatsby-source-filesystem": "^5.9.0",
@@ -35,6 +39,10 @@
     "typography": "^0.16.21"
   },
   "devDependencies": {
-    "prettier": "^2.8.8"
+    "@types/node": "^18.16.5",
+    "@types/react": "^18.2.5",
+    "@types/react-dom": "^18.2.4",
+    "prettier": "2.8.8",
+    "typescript": "^5.0.4"
   }
 }

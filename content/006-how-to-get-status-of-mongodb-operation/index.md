@@ -52,7 +52,7 @@ db.runCommand({
       limit: 0,
     },
   ],
-});
+})
 ```
 
 This MongoDB query is designed to delete all documents from the `"Events"` collection where the `"clientId"` field equals `0`. The query is executed using the `runCommand` method, which takes a single argument that is a document representing the command to be executed.
@@ -82,7 +82,7 @@ db.aggregate([
   { $currentOp: { localOps: true } },
   { $match: { "command.comment": "job:blog-test" } },
   { $limit: 1 },
-]);
+])
 ```
 
 The first stage of the pipeline is `$currentOp`, which returns information about the current operations running on the server. The `localOps` option is set to `true`, which limits the output to only show operations running on the same node as the query.
