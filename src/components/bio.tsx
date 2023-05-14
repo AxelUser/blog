@@ -1,8 +1,8 @@
-import * as React from "react";
-import * as blogStyles from "../styles.module.css";
+import * as React from "react"
+import * as styles from "./bio.css"
 
 const Bio = () => (
-  <div className={blogStyles.bio}>
+  <div className={styles.container}>
     <p>Hi!</p>
     <p>My name is Alexey and I'm a software engineer.</p>
     <p>
@@ -13,6 +13,6 @@ const Bio = () => (
       <a href="https://github.com/AxelUser">GitHub</a>.
     </p>
   </div>
-);
+)
 
-export default Bio;
+export default Bio

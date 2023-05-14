@@ -1,4 +1,4 @@
-import Typography from "typography";
+import Typography from "typography"
 
 const typography = new Typography({
   googleFonts: [
@@ -38,6 +38,6 @@ const typography = new Typography({
       marginBottom: rhythm(1),
     },
   }),
-});
+})
 
-export default typography;
+export default typography

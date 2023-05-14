@@ -1,24 +1,24 @@
-module.exports = {
+import type { GatsbyConfig } from "gatsby"
+
+const config: GatsbyConfig = {
   siteMetadata: {
-    title: `Maltsev's Space`,
+    title: `Maltsev Space`,
     author: `Alexey Maltsev`,
     currentYear: new Date().getFullYear(),
     siteUrl: `https://www.maltsev.space`,
+    googleSiteVerification: "8Dy4lxRZAH8BAi86GsiP9mlM_ELJLCh839CXT3W32SI",
   },
+  // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
+  // If you use VSCode you can also use the GraphQL plugin
+  // Learn more at: https://gatsby.dev/graphql-typegen
+  graphqlTypegen: true,
   plugins: [
-    {
-      resolve: "gatsby-plugin-typography",
-      options: {
-        pathToConfigModule: "src/typography.js",
-      },
-    },
+    "gatsby-plugin-vanilla-extract",
     "gatsby-plugin-image",
     "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "Maltsev's Space",
-        start_url: "/",
         icon: "src/images/icon.png",
       },
     },
@@ -26,6 +26,12 @@ module.exports = {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: ["gatsby-remark-autolink-headers", "gatsby-remark-prismjs"],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-typography",
+      options: {
+        pathToConfigModule: "src/utils/typography",
       },
     },
     "gatsby-plugin-sharp",
@@ -55,4 +61,6 @@ module.exports = {
       __key: "blog",
     },
   ],
-};
+}
+
+export default config
