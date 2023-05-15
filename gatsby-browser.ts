@@ -1,1 +1,1 @@
-require("./src/styles/prism-darcula.css")
+require("./src/styles/prism.css")

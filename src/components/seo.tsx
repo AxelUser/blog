@@ -36,7 +36,7 @@ export function Seo(props: SeoProps) {
         name="google-site-verification"
         content={query.site.siteMetadata.googleSiteVerification}
       />
-      <body className={initialTheme} />
+      <html className={initialTheme} />
     </>
   )
 }

@@ -1,24 +1,16 @@
 import { createTheme } from "@vanilla-extract/css"
 
-export const rootColors = {
-  dark1: `rgb(35, 35, 35)`,
-  dark2: `rgb(60, 60, 60)`,
-  dark3: `rgb(120, 120, 120)`,
-  white: `rgb(210, 210, 210)`,
-  yellow: `rgb(218, 165, 32)`,
-}
-
 export const [initialTheme, vars] = createTheme({
   color: {
     bg: {
-      primary: rootColors.dark1,
+      primary: `#2e2e2e`,
     },
     text: {
-      primary: rootColors.white,
-      secondary: rootColors.dark3,
-      link: rootColors.yellow,
-      title: rootColors.yellow,
+      primary: `#F8F8FF`,
+      secondary: `#737373`,
+      link: `#e6a627`,
+      title: `#e6a627`,
     },
-    border: rootColors.dark3,
+    border: `#737373`,
   },
 })
