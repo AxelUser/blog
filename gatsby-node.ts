@@ -1,7 +1,7 @@
 import type { GatsbyNode } from "gatsby"
+import { createFilePath } from "gatsby-source-filesystem"
 import path from "path"
 import { BlogPostContext, BlogPostNode } from "./src/types/blogPost"
-import { createFilePath } from "gatsby-source-filesystem"
 
 export const onCreateNode: GatsbyNode["onCreateNode"] = ({
   node,

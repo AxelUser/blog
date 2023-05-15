@@ -1,10 +1,9 @@
-import * as React from "react"
 import { HeadFC, PageProps, graphql } from "gatsby"
-import "../styles/global.css"
+import * as React from "react"
 import Bio from "../components/bio"
+import BlogPostPreview from "../components/blogPostPreview"
 import Layout from "../components/layout"
 import { Seo } from "../components/seo"
-import BlogPostPreview from "../components/blogPostPreview"
 
 type BlogData = {
   allMarkdownRemark: {

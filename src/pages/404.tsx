@@ -1,5 +1,5 @@
+import { HeadFC, Link, PageProps } from "gatsby"
 import * as React from "react"
-import { Link, HeadFC, PageProps } from "gatsby"
 import { Seo } from "../components/seo"
 import { container } from "../styles/not-found.css"
 

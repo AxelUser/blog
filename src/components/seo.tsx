@@ -1,6 +1,5 @@
-import { HeadFC, HeadProps, graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
-import { initialTheme } from "../styles/theme.css"
 
 type SeoProps = { title: string }
 
@@ -36,7 +35,6 @@ export function Seo(props: SeoProps) {
         name="google-site-verification"
         content={query.site.siteMetadata.googleSiteVerification}
       />
-      <html className={initialTheme} />
     </>
   )
 }

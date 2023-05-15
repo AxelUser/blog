@@ -1,12 +1,12 @@
-import * as React from "react"
-import { BlogPostContext } from "../types/blogPost"
 import { HeadFC } from "gatsby"
+import * as React from "react"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
-import Tags from "../components/tags"
-import { container, meta, text } from "./blogPost.css"
-import { Seo } from "../components/seo"
 import Navigation from "../components/navigation"
+import { Seo } from "../components/seo"
+import Tags from "../components/tags"
+import { BlogPostContext } from "../types/blogPost"
+import { container, meta, text } from "./blogPost.css"
 
 const BlogPostTemplate = ({
   pageContext: { current, prev, next },

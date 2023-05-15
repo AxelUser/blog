@@ -1,6 +1,6 @@
-import { createTheme } from "@vanilla-extract/css"
+import { createGlobalTheme } from "@vanilla-extract/css"
 
-export const [initialTheme, vars] = createTheme({
+export const vars = createGlobalTheme(`:root`, {
   color: {
     bg: {
       primary: `#2e2e2e`,

@@ -1,6 +1,5 @@
 import { Link, graphql, useStaticQuery } from "gatsby"
 import * as React from "react"
-import { initialTheme } from "../styles/theme.css"
 import { container } from "./layout.css"
 
 interface FooterProps {
