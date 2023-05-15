@@ -6,7 +6,7 @@ import Layout from "../components/layout"
 import { Seo } from "../components/seo"
 
 type BlogData = {
-  allMarkdownRemark: {
+  allMdx: {
     edges: {
       node: {
         id: string
@@ -26,7 +26,7 @@ type BlogData = {
 
 const BlogPage: React.FC<PageProps<BlogData>> = ({
   data: {
-    allMarkdownRemark: { edges },
+    allMdx: { edges },
   },
 }) => {
   return (
@@ -55,7 +55,7 @@ export const Head: HeadFC = () => {
 
 export const query = graphql`
   query BlogPostLists {
-    allMarkdownRemark(
+    allMdx(
       sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { draft: { ne: true } } }
     ) {

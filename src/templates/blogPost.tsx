@@ -10,8 +10,10 @@ import { container, meta, text } from "./blogPost.css"
 
 const BlogPostTemplate = ({
   pageContext: { current, prev, next },
+  children,
 }: {
   pageContext: BlogPostContext
+  children: any
 }) => {
   return (
     <Layout>
@@ -21,10 +23,7 @@ const BlogPostTemplate = ({
           <Tags tags={current.frontmatter.tags} />
         </span>
         <h1>{current.frontmatter.title}</h1>
-        <div
-          className={text}
-          dangerouslySetInnerHTML={{ __html: current.html }}
-        />
+        <div className={text}>{children}</div>
         <Navigation prev={prev} next={next} />
       </div>
       <Bio />

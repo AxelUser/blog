@@ -9,7 +9,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = ({
   actions,
 }) => {
   const { createNodeField } = actions
-  if (node.internal.type === "MarkdownRemark") {
+  if (node.internal.type === "Mdx") {
     const relativeFilePath = createFilePath({
       node,
       getNode,
@@ -24,7 +24,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = ({
 }
 
 type AllBlogPosts = {
-  allMarkdownRemark: {
+  allMdx: {
     edges: {
       node: BlogPostNode
     }[]
@@ -37,10 +37,12 @@ export const createPages: GatsbyNode["createPages"] = async ({
 }) => {
   const { data } = await graphql<AllBlogPosts>(`
     query AllBlogPosts {
-      allMarkdownRemark(sort: { frontmatter: { date: ASC } }) {
+      allMdx(sort: { frontmatter: { date: ASC } }) {
         edges {
           node {
-            html
+            internal {
+              contentFilePath
+            }
             fields {
               slug
             }
@@ -57,18 +59,17 @@ export const createPages: GatsbyNode["createPages"] = async ({
   `)
 
   const template = path.resolve(`./src/templates/blogPost.tsx`)
-  data?.allMarkdownRemark.edges.forEach((edge, idx) => {
-    const prev =
-      idx === 0 ? undefined : data.allMarkdownRemark.edges[idx - 1].node
+  data?.allMdx.edges.forEach((edge, idx) => {
+    const prev = idx === 0 ? undefined : data.allMdx.edges[idx - 1].node
     const next =
-      idx === data.allMarkdownRemark.edges.length - 1
+      idx === data.allMdx.edges.length - 1
         ? undefined
-        : data.allMarkdownRemark.edges[idx + 1].node
+        : data.allMdx.edges[idx + 1].node
 
     const createPage = (postPath: string) =>
       actions.createPage<BlogPostContext>({
         path: postPath,
-        component: template,
+        component: `${template}?__contentFilePath=${edge.node.internal.contentFilePath}`,
         context: { current: edge.node, prev, next },
       })
 

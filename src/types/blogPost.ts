@@ -1,5 +1,7 @@
 export type BlogPostNode = {
-  html: string
+  internal: {
+    contentFilePath: string
+  }
   fields: {
     slug: string
   }
