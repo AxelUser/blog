@@ -23,9 +23,13 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: "gatsby-transformer-remark",
+      resolve: "gatsby-plugin-mdx",
       options: {
-        plugins: ["gatsby-remark-autolink-headers", "gatsby-remark-prismjs"],
+        gatsbyRemarkPlugins: [
+          "gatsby-remark-autolink-headers",
+          "gatsby-remark-prismjs",
+        ],
+        extensions: [`.md`, `.mdx`],
       },
     },
     {

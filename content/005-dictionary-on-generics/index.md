@@ -335,17 +335,17 @@ So, is there a way to improve speed even more? Well, **that's when generics stea
 
 ## Delegate caching to JIT
 
-This trick is mostly inspired by the way how ["Array.Empty<T>"](https://docs.microsoft.com/en-us/dotnet/api/system.array.empty?view=netcore-3.1) works.
+This trick is mostly inspired by the way how [Array.Empty](https://docs.microsoft.com/en-us/dotnet/api/system.array.empty?view=netcore-3.1) works.
 
 Empty arrays are best candidates for caching, because their construction doesn't require any parameters, but only a generic type parameter.
 
-When you invoke `Array.Empty<MyClass>`, it internally invokes a static read-only field `Empty` of static generic class `EmptyArray<MyClass`, which initializes and returns an empty array of type `MyClass` (have a look at [sources](https://github.com/dotnet/runtime/blob/3705185af806e273ccef98e44699400f0416c452/src/libraries/System.Private.CoreLib/src/System/Array.cs#L694-L704)). Static field is initialized during the time of a first access to the field of the class _EmptyArray_. This is guaranteed from the fact how generics and static classes work in **CLR** (Common Language Runtime). For your information, that's how you can implement a [simple thread-safe singleton](https://csharpindepth.com/articles/singleton) in .Net.
+When you invoke `Array.Empty<MyClass>`, it internally invokes a static read-only field `Empty` of static generic class `EmptyArray<MyClass>`, which initializes and returns an empty array of type `MyClass` (have a look at [sources](https://github.com/dotnet/runtime/blob/3705185af806e273ccef98e44699400f0416c452/src/libraries/System.Private.CoreLib/src/System/Array.cs#L694-L704)). Static field is initialized during the time of a first access to the field of the class _EmptyArray_. This is guaranteed from the fact how generics and static classes work in **CLR** (Common Language Runtime). For your information, that's how you can implement a [simple thread-safe singleton](https://csharpindepth.com/articles/singleton) in .Net.
 
 ## How CLR compiles generic classes
 
-Generics are types, that contain a type parameter, which isn't known at compile time (e.g. _List<T>_). When dotnet compiler sees open generic type, it compiles it into IL with the same generic type parameter.
+Generics are types, that contain a type parameter, which isn't known at compile time (e.g. `List<T>`). When dotnet compiler sees open generic type, it compiles it into IL with the same generic type parameter.
 
-After the type argument is passed into generic constructor (e.g. _List<MyClass>_), CLR will do the following:
+After the type argument is passed into generic constructor (e.g. `List<MyClass>`), CLR will do the following:
 
 1. Lookup if the closed generic (with concrete generic type argument) was requested before.
 2. If not - it will be compiled at run time.
