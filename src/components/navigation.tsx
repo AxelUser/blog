@@ -1,19 +1,19 @@
 import { Link } from "gatsby"
 import * as React from "react"
-import { BlogPostNode } from "../types/blogPost"
+import { BlogPostInfo } from "../common/types"
 import { linkNext, navigation } from "./navigation.css"
 
 interface NavLinkProps extends React.HTMLAttributes<HTMLSpanElement> {
   prefix: string
-  to?: BlogPostNode
+  to?: BlogPostInfo
 }
 
 const NavigationLink: React.FC<NavLinkProps> = ({ prefix, to, ...rest }) => {
   if (to) {
     return (
       <span {...rest}>
-        <Link to={`/blog/${to.fields.slug}`}>
-          {prefix}: {to.frontmatter.title}
+        <Link to={to.link}>
+          {prefix}: {to.title}
         </Link>
       </span>
     )
@@ -23,8 +23,8 @@ const NavigationLink: React.FC<NavLinkProps> = ({ prefix, to, ...rest }) => {
 }
 
 const Navigation: React.FC<{
-  prev: BlogPostNode | undefined
-  next: BlogPostNode | undefined
+  prev: BlogPostInfo | undefined
+  next: BlogPostInfo | undefined
 }> = ({ prev, next }) => {
   return (
     <nav className={navigation}>

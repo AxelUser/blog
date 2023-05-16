@@ -3,18 +3,9 @@ import React from "react"
 
 type SeoProps = { title: string }
 
-type Query = {
-  site: {
-    siteMetadata: {
-      title: string
-      googleSiteVerification: string
-    }
-  }
-}
-
 export function Seo(props: SeoProps) {
-  const query = useStaticQuery<Query>(graphql`
-    query {
+  const query = useStaticQuery<Queries.SeoMetaQuery>(graphql`
+    query SeoMeta {
       site {
         siteMetadata {
           title
@@ -25,15 +16,15 @@ export function Seo(props: SeoProps) {
   `)
 
   const title = props.title
-    ? `${query.site.siteMetadata.title} | ${props.title}`
-    : query.site.siteMetadata.title
+    ? `${query?.site?.siteMetadata?.title} | ${props.title}`
+    : query?.site?.siteMetadata?.title
 
   return (
     <>
       <title>{title}</title>
       <meta
         name="google-site-verification"
-        content={query.site.siteMetadata.googleSiteVerification}
+        content={query?.site?.siteMetadata?.googleSiteVerification || undefined}
       />
     </>
   )

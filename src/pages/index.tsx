@@ -5,26 +5,7 @@ import BlogPostPreview from "../components/blogPostPreview"
 import Layout from "../components/layout"
 import { Seo } from "../components/seo"
 
-type BlogData = {
-  allMdx: {
-    edges: {
-      node: {
-        id: string
-        frontmatter: {
-          title: string
-          tags: string[]
-          date: string
-          preview: string
-        }
-        fields: {
-          slug: string
-        }
-      }
-    }[]
-  }
-}
-
-const BlogPage: React.FC<PageProps<BlogData>> = ({
+const BlogPage: React.FC<PageProps<Queries.BlogPostListsQuery>> = ({
   data: {
     allMdx: { edges },
   },
@@ -35,11 +16,14 @@ const BlogPage: React.FC<PageProps<BlogData>> = ({
       <div>
         {edges.map(({ node }) => (
           <BlogPostPreview
-            title={node.frontmatter.title}
-            description={node.frontmatter.preview}
-            date={node.frontmatter.date}
-            tags={node.frontmatter.tags}
-            link={`/blog/${node.fields.slug}`}
+            title={node?.frontmatter?.title || ""}
+            description={node?.frontmatter?.preview || ""}
+            date={node?.frontmatter?.date || ""}
+            tags={
+              node?.frontmatter?.tags?.filter((t): t is string => t != null) ||
+              []
+            }
+            link={`/blog/${node?.fields?.slug}`}
           />
         ))}
       </div>

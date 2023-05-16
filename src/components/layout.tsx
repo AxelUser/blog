@@ -4,17 +4,7 @@ import { container } from "./layout.css"
 
 interface FooterProps {
   author: string
-  currentYear: string
-}
-
-interface LayoutQuery {
-  site: {
-    siteMetadata: {
-      title: string
-      author: string
-      currentYear: string
-    }
-  }
+  currentYear: number
 }
 
 const Header = () => (
@@ -34,8 +24,8 @@ const Footer = ({ author, currentYear }: FooterProps) => (
 )
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const query = useStaticQuery<LayoutQuery>(graphql`
-    query {
+  const query = useStaticQuery<Queries.SiteMetaQuery>(graphql`
+    query SiteMeta {
       site {
         siteMetadata {
           title
@@ -51,8 +41,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <Header />
       {children}
       <Footer
-        author={query.site.siteMetadata.author}
-        currentYear={query.site.siteMetadata.currentYear}
+        author={query?.site?.siteMetadata?.author || ""}
+        currentYear={query?.site?.siteMetadata?.currentYear || 0}
       />
     </div>
   )

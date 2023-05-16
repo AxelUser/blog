@@ -1,11 +1,11 @@
 import { HeadFC } from "gatsby"
 import * as React from "react"
+import { BlogPostContext } from "../common/types"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Navigation from "../components/navigation"
 import { Seo } from "../components/seo"
 import Tags from "../components/tags"
-import { BlogPostContext } from "../types/blogPost"
 import { container, meta, text } from "./blogPost.css"
 
 const BlogPostTemplate = ({
@@ -19,10 +19,10 @@ const BlogPostTemplate = ({
     <Layout>
       <div className={container}>
         <span className={meta}>
-          <time>{current.frontmatter.date}</time>
-          <Tags tags={current.frontmatter.tags} />
+          <time>{current.date}</time>
+          <Tags tags={current.tags} />
         </span>
-        <h1>{current.frontmatter.title}</h1>
+        <h1>{current.title}</h1>
         <div className={text}>{children}</div>
         <Navigation prev={prev} next={next} />
       </div>
@@ -34,7 +34,7 @@ const BlogPostTemplate = ({
 export const Head: HeadFC<{}, BlogPostContext> = ({
   pageContext: { current },
 }) => {
-  return <Seo title={current.frontmatter.title} />
+  return <Seo title={current.title} />
 }
 
 export default BlogPostTemplate
