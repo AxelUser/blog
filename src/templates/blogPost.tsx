@@ -1,4 +1,4 @@
-import { HeadFC } from "gatsby"
+import { HeadFC, graphql } from "gatsby"
 import * as React from "react"
 import { BlogPostContext } from "../common/types"
 import Bio from "../components/bio"
@@ -9,22 +9,22 @@ import Tags from "../components/tags"
 import { container, meta, text } from "./blogPost.css"
 
 const BlogPostTemplate = ({
-  pageContext: { current, prev, next },
+  data: { current, next, previous },
   children,
 }: {
-  pageContext: BlogPostContext
+  data: Queries.BlogPostByIdQuery
   children: any
 }) => {
   return (
     <Layout>
       <div className={container}>
         <span className={meta}>
-          <time>{current.date}</time>
-          <Tags tags={current.tags} />
+          <time>{current!.frontmatter.date}</time>
+          <Tags tags={current!.frontmatter.tags} />
         </span>
-        <h1>{current.title}</h1>
+        <h1>{current?.frontmatter.title}</h1>
         <div className={text}>{children}</div>
-        <Navigation prev={prev} next={next} />
+        <Navigation prev={previous} next={next} />
       </div>
       <Bio />
     </Layout>
@@ -32,9 +32,49 @@ const BlogPostTemplate = ({
 }
 
 export const Head: HeadFC<{}, BlogPostContext> = ({
-  pageContext: { current },
+  pageContext: { id, nextId, previousId },
 }) => {
-  return <Seo title={current.title} />
+  return <Seo title={id} />
 }
+
+export const pageQuery = graphql`
+  query BlogPostById(
+    $id: String!
+    $previousPostId: String
+    $nextPostId: String
+  ) {
+    current: mdx(id: { eq: $id }) {
+      id
+      fields {
+        path
+      }
+      frontmatter {
+        title
+        preview
+        date(formatString: "DD MMM, YYYY")
+        tags
+      }
+    }
+    previous: mdx(id: { eq: $previousPostId }) {
+      id
+      fields {
+        path
+      }
+      frontmatter {
+        title
+      }
+    }
+
+    next: mdx(id: { eq: $nextPostId }) {
+      id
+      fields {
+        path
+      }
+      frontmatter {
+        title
+      }
+    }
+  }
+`
 
 export default BlogPostTemplate

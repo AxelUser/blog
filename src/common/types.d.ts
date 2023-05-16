@@ -6,7 +6,7 @@ export type BlogPostInfo = {
 }
 
 export type BlogPostContext = {
-  current: BlogPostInfo
-  prev: BlogPostInfo | undefined
-  next: BlogPostInfo | undefined
+  id: string
+  previousId?: string
+  nextId?: string
 }
