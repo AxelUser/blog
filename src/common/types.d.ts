@@ -3,8 +3,3 @@ export type BlogPostContext = {
   previousId?: string
   nextId?: string
 }
-
-export type PageLinkInfo = {
-  title: string
-  link: string
-}

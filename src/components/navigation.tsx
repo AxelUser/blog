@@ -1,7 +1,11 @@
 import { Link } from "gatsby"
 import * as React from "react"
-import { PageLinkInfo } from "../common/types"
 import { linkNext, navigation } from "./navigation.css"
+
+type PageLinkInfo = {
+  title: string
+  link: string
+}
 
 interface NavLinkProps extends React.HTMLAttributes<HTMLSpanElement> {
   prefix: string
