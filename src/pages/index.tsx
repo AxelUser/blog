@@ -16,14 +16,14 @@ const BlogPage: React.FC<PageProps<Queries.BlogPostListsQuery>> = ({
       <div>
         {edges.map(({ node }) => (
           <BlogPostPreview
-            title={node?.frontmatter?.title || ""}
-            description={node?.frontmatter?.preview || ""}
-            date={node?.frontmatter?.date || ""}
+            title={node.frontmatter.title}
+            description={node.frontmatter.preview}
+            date={node.frontmatter.date}
             tags={
               node?.frontmatter?.tags?.filter((t): t is string => t != null) ||
               []
             }
-            link={`/blog/${node?.fields?.slug}`}
+            link={node.fields.path}
           />
         ))}
       </div>
@@ -47,14 +47,13 @@ export const query = graphql`
         node {
           id
           fields {
-            slug
+            path
           }
           frontmatter {
             title
             preview
             date(formatString: "DD MMM, YYYY")
             tags
-            legacy
           }
         }
       }

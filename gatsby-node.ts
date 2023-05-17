@@ -14,10 +14,16 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = ({
       node,
       getNode,
       basePath: "src/content",
+      trailingSlash: false,
     })
     createNodeField({
       node,
-      name: "slug",
+      name: "path",
+      value: `/blog${relativeFilePath}`,
+    })
+    createNodeField({
+      node,
+      name: "legacyPath",
       value: relativeFilePath,
     })
   }
@@ -31,19 +37,24 @@ export const createPages: GatsbyNode["createPages"] = async ({
     query AllBlogPosts {
       allMdx(sort: { frontmatter: { date: ASC } }) {
         edges {
+          previous {
+            id
+          }
           node {
+            id
             internal {
               contentFilePath
             }
             fields {
-              slug
+              legacyPath
+              path
             }
             frontmatter {
-              title
-              date(formatString: "DD MMM, YYYY")
-              tags
               legacy
             }
+          }
+          next {
+            id
           }
         }
       }
@@ -51,60 +62,54 @@ export const createPages: GatsbyNode["createPages"] = async ({
   `)
 
   const template = path.resolve(`./src/templates/blogPost.tsx`)
-  data?.allMdx.edges.forEach(({ node }, idx) => {
-    const prev = idx === 0 ? undefined : data.allMdx.edges[idx - 1].node
-    const next =
-      idx === data.allMdx.edges.length - 1
-        ? undefined
-        : data.allMdx.edges[idx + 1].node
-
-    const createPage = (prefix?: string) =>
+  data?.allMdx.edges.forEach(({ node, next, previous }) => {
+    const createPage = (path: string) =>
       actions.createPage<BlogPostContext>({
-        path: `${prefix}/${node?.fields?.slug}`,
+        path: path,
         component: `${template}?__contentFilePath=${node.internal.contentFilePath}`,
         context: {
-          current: {
-            title: node.frontmatter?.title || "",
-            date: node.frontmatter?.date || "",
-            tags:
-              node.frontmatter?.tags?.filter((t): t is string => t != null) ||
-              [],
-            link: `/blog/${node?.fields?.slug}`,
-          },
-          prev:
-            prev != null
-              ? {
-                  title: prev.frontmatter?.title || "",
-                  date: prev.frontmatter?.date || "",
-                  tags:
-                    prev.frontmatter?.tags?.filter(
-                      (t): t is string => t != null
-                    ) || [],
-                  link: `/blog/${prev?.fields?.slug}`,
-                }
-              : undefined,
-          next:
-            next != null
-              ? {
-                  title: next.frontmatter?.title || "",
-                  date: next.frontmatter?.date || "",
-                  tags:
-                    next.frontmatter?.tags?.filter(
-                      (t): t is string => t != null
-                    ) || [],
-                  link: `/blog/${next?.fields?.slug}`,
-                }
-              : undefined,
+          id: node.id,
+          previousId: previous?.id,
+          nextId: next?.id,
         },
       })
 
-    const slug = node?.fields?.slug
-    if (slug != null) {
-      createPage("/blog")
+    const { path, legacyPath } = node?.fields!
+    if (path != null && legacyPath != null) {
+      createPage(path)
 
       if (node?.frontmatter?.legacy) {
-        createPage()
+        createPage(legacyPath)
       }
     }
   })
 }
+
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =
+  ({ actions }) => {
+    const { createTypes } = actions
+
+    createTypes(`
+      type SiteSiteMetadata {
+        author: String!
+        currentYear: Int!
+      }
+
+      type Mdx implements Node {
+        frontmatter: Frontmatter!
+        fields: Fields!
+      }
+
+      type Frontmatter {
+        title: String!
+        date: Date! @dateformat
+        preview: String!
+        tags: [String!]!
+      }
+
+      type Fields {
+        path: String!
+        legacyPath: String!
+      }
+    `)
+  }

@@ -1,6 +1,10 @@
 import React from "react"
 
-const Tags: React.FC<{ tags: string[] }> = ({ tags }) => {
+type TagsProps = {
+  readonly tags: string[]
+}
+
+const Tags: React.FC<TagsProps> = ({ tags }) => {
   return (
     <>
       {tags.map(tag => (
