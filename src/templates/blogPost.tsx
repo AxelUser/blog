@@ -1,6 +1,5 @@
 import { HeadFC, graphql } from "gatsby"
 import * as React from "react"
-import { BlogPostContext } from "../common/types"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Navigation from "../components/navigation"
@@ -20,29 +19,40 @@ const BlogPostTemplate = ({
       <div className={container}>
         <span className={meta}>
           <time>{current!.frontmatter.date}</time>
-          <Tags tags={current!.frontmatter.tags} />
+          <Tags tags={[...current!.frontmatter.tags]} />
         </span>
         <h1>{current?.frontmatter.title}</h1>
         <div className={text}>{children}</div>
-        <Navigation prev={previous} next={next} />
+        <Navigation
+          prev={
+            previous != null
+              ? {
+                  link: previous.fields.path,
+                  title: previous.frontmatter.title,
+                }
+              : undefined
+          }
+          next={
+            next != null
+              ? {
+                  link: next.fields.path,
+                  title: next.frontmatter.title,
+                }
+              : undefined
+          }
+        />
       </div>
       <Bio />
     </Layout>
   )
 }
 
-export const Head: HeadFC<{}, BlogPostContext> = ({
-  pageContext: { id, nextId, previousId },
-}) => {
-  return <Seo title={id} />
+export const Head: HeadFC<Queries.BlogPostByIdQuery> = ({ data }) => {
+  return <Seo title={data.current!.frontmatter.title} />
 }
 
 export const pageQuery = graphql`
-  query BlogPostById(
-    $id: String!
-    $previousPostId: String
-    $nextPostId: String
-  ) {
+  query BlogPostById($id: String!, $previousId: String, $nextId: String) {
     current: mdx(id: { eq: $id }) {
       id
       fields {
@@ -55,7 +65,7 @@ export const pageQuery = graphql`
         tags
       }
     }
-    previous: mdx(id: { eq: $previousPostId }) {
+    previous: mdx(id: { eq: $previousId }) {
       id
       fields {
         path
@@ -65,7 +75,7 @@ export const pageQuery = graphql`
       }
     }
 
-    next: mdx(id: { eq: $nextPostId }) {
+    next: mdx(id: { eq: $nextId }) {
       id
       fields {
         path

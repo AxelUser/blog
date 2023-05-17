@@ -1,11 +1,11 @@
 import { Link } from "gatsby"
 import * as React from "react"
-import { BlogPostInfo } from "../common/types"
+import { PageLinkInfo } from "../common/types"
 import { linkNext, navigation } from "./navigation.css"
 
 interface NavLinkProps extends React.HTMLAttributes<HTMLSpanElement> {
   prefix: string
-  to?: BlogPostInfo
+  to?: PageLinkInfo
 }
 
 const NavigationLink: React.FC<NavLinkProps> = ({ prefix, to, ...rest }) => {
@@ -23,8 +23,8 @@ const NavigationLink: React.FC<NavLinkProps> = ({ prefix, to, ...rest }) => {
 }
 
 const Navigation: React.FC<{
-  prev: BlogPostInfo | undefined
-  next: BlogPostInfo | undefined
+  prev?: PageLinkInfo
+  next?: PageLinkInfo
 }> = ({ prev, next }) => {
   return (
     <nav className={navigation}>
