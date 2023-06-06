@@ -4,6 +4,7 @@ import Bio from "../components/bio"
 import BlogPostPreview from "../components/blogPostPreview"
 import Layout from "../components/layout"
 import { Seo } from "../components/seo"
+import Grid from "../components/visualization/grid"
 
 const BlogPage: React.FC<PageProps<Queries.BlogPostListsQuery>> = ({
   data: {
@@ -13,6 +14,7 @@ const BlogPage: React.FC<PageProps<Queries.BlogPostListsQuery>> = ({
   return (
     <Layout>
       <Bio />
+      <Grid height={200} width={300} cols={2} rows={2} />
       <div>
         {edges.map(({ node }) => (
           <BlogPostPreview
