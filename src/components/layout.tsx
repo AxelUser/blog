@@ -1,6 +1,6 @@
 import { Link, graphql, useStaticQuery } from "gatsby"
 import * as React from "react"
-import { container } from "./layout.css"
+import { container, themeToggle } from "./layout.css"
 
 interface FooterProps {
   author: string
@@ -12,6 +12,7 @@ const Header = () => (
     <nav>
       <Link to="/">Blog</Link>
     </nav>
+    <ModeToggle />
   </header>
 )
 
@@ -45,6 +46,31 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         currentYear={query?.site?.siteMetadata?.currentYear || 0}
       />
     </div>
+  )
+}
+
+function getDefaultTheme(): boolean {
+  const savedTheme = window.localStorage.getItem("theme")
+  return savedTheme == "dark"
+}
+
+const ModeToggle = () => {
+  const [isDark, setIsDark] = React.useState(getDefaultTheme())
+
+  React.useEffect(() => {
+    if (isDark === true) {
+      document.body.classList.add("dark")
+    } else {
+      document.body.classList.remove("dark")
+    }
+
+    window.localStorage.setItem("theme", isDark ? "dark" : "light")
+  }, [isDark])
+
+  return (
+    <span className={themeToggle} onClick={() => setIsDark(!isDark)}>
+      {isDark ? "Light" : "Dark"}
+    </span>
   )
 }
 

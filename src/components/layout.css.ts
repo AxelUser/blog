@@ -8,23 +8,38 @@ export const container = style({
   margin: `auto`,
 })
 
+export const themeToggle = style({
+  paddingBottom: `6px`,
+  cursor: `pointer`,
+})
+
 globalStyle(`header`, {
   display: `flex`,
+  height: `5rem`,
+  alignItems: `center`,
+  justifyContent: `space-between`,
+})
+
+globalStyle(`header > *`, {
+  marginLeft: `1.1rem`,
+  marginRight: `1.1rem`,
 })
 
 globalStyle(`header nav`, {
-  padding: `1.45rem 1.1rem`,
+  display: `flex`,
+  rowGap: `1.1rem`,
   fontWeight: `bold`,
 })
 
 globalStyle(`header nav a`, {
   fontSize: `1.05rem`,
-  paddingBottom: `0.3rem`,
+  paddingBottom: `6px`,
   color: vars.color.text.primary,
 })
 
 globalStyle(`header nav a:hover`, {
   borderBottomWidth: `2px`,
+  paddingBottom: `4px`,
   borderBottomStyle: `solid`,
   borderBottomColor: vars.color.text.primary,
 })
