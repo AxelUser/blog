@@ -159,7 +159,7 @@ When a developer adds a new class implementing `IValue`, for example, `DateTimeV
 ```csharp
 public record DateTimeValue(DateTimeOffset Value) : IValue
 {
-    // Complication error - we don't implement Visit for this value type yet!
+    // Compilation error - we don't implement Visit for this value type yet!
     public T Accept<T>(IValueVisitor<T> visitor) => visitor.Visit(this);
 }
 ```
