@@ -1,6 +1,6 @@
 import { Link, graphql, useStaticQuery } from "gatsby"
 import * as React from "react"
-import { container } from "./layout.css"
+import { container, navBar, navBarLink } from "./layout.css"
 
 interface FooterProps {
   author: string
@@ -9,8 +9,13 @@ interface FooterProps {
 
 const Header = () => (
   <header>
-    <nav>
-      <Link to="/">Blog</Link>
+    <nav className={navBar}>
+      <Link className={navBarLink} to="/">
+        Blog
+      </Link>
+      <Link className={navBarLink} to="/art">
+        Art
+      </Link>
     </nav>
   </header>
 )

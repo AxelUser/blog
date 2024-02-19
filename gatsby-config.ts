@@ -60,9 +60,17 @@ const config: GatsbyConfig = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "blog",
-        path: "./content/",
+        path: "./content/blog",
       },
       __key: "blog",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "art",
+        path: "./content/art",
+      },
+      __key: "art",
     },
   ],
 }

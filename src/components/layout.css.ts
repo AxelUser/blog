@@ -8,28 +8,37 @@ export const container = style({
   margin: `auto`,
 })
 
-globalStyle(`header`, {
+export const navBar = style({
   display: `flex`,
-})
-
-globalStyle(`header nav`, {
-  padding: `1.45rem 1.1rem`,
+  gap: `1.5rem`,
+  padding: `1.45rem 1.1rem 1rem 1.1rem`,
   fontWeight: `bold`,
 })
 
-globalStyle(`header nav a`, {
+export const navBarLink = style({
   fontSize: `1.05rem`,
   paddingBottom: `0.3rem`,
   color: vars.color.text.primary,
+
+  "::after": {
+    content: ``,
+    display: `block`,
+    height: `2px`,
+    width: `100%`,
+    background: vars.color.text.primary,
+    opacity: 0,
+    transition: `all 0.2s`,
+    pointerEvents: `none`,
+  },
+
+  selectors: {
+    "&:hover::after": {
+      opacity: 1,
+    },
+  },
 })
 
-globalStyle(`header nav a:hover`, {
-  borderBottomWidth: `2px`,
-  borderBottomStyle: `solid`,
-  borderBottomColor: vars.color.text.primary,
-})
-
-globalStyle(`footer`, {
+globalStyle(`${container} footer`, {
   marginTop: `2rem`,
   marginBottom: `1.3rem`,
   display: `flex`,
