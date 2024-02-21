@@ -52,7 +52,7 @@ export const Head: HeadFC<Queries.BlogPostByIdQuery> = ({ data }) => {
 }
 
 export const pageQuery = graphql`
-  query BlogPostById($id: String!, $previousId: String, $nextId: String) {
+  query BlogPostById($previousId: String, $id: String!, $nextId: String) {
     current: mdx(id: { eq: $id }) {
       id
       fields {

@@ -68,8 +68,8 @@ export const createPages: GatsbyNode["createPages"] = async ({
         component: `${template}?__contentFilePath=${node.internal.contentFilePath}`,
         context: {
           id: node.id,
-          previousId: previous?.id,
-          nextId: next?.id,
+          previousId: previous?.id ?? "",
+          nextId: next?.id ?? "",
         },
       })
 
