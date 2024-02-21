@@ -199,7 +199,7 @@ while (true)
 }
 ```
 
-Viola, now not only the bug is fixed, but also the chance of missed type handling is reduced, so in overall we strengthen our type-safety guarantees.
+Voilà, now not only the bug is fixed, but also the chance of missed type handling is reduced, so in overall we strengthen our type-safety guarantees.
 
 ## Final thoughts
 

@@ -37,9 +37,6 @@ export const createPages: GatsbyNode["createPages"] = async ({
     query AllBlogPosts {
       allMdx(sort: { frontmatter: { date: ASC } }) {
         edges {
-          previous {
-            id
-          }
           node {
             id
             internal {
@@ -53,16 +50,18 @@ export const createPages: GatsbyNode["createPages"] = async ({
               legacy
             }
           }
-          next {
-            id
-          }
         }
       }
     }
   `)
 
   const template = path.resolve(`./src/templates/blogPost.tsx`)
-  data?.allMdx.edges.forEach(({ node, next, previous }) => {
+  const pages = data?.allMdx.edges.flatMap(e => e.node)
+
+  pages?.forEach((node, idx) => {
+    const previous = idx !== 0 ? pages[idx - 1] : null
+    const next = idx < pages.length - 1 ? pages[idx + 1] : null
+
     const createPage = (path: string) =>
       actions.createPage<BlogPostContext>({
         path: path,
