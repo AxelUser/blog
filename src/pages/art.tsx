@@ -1,25 +1,8 @@
 import { HeadFC, PageProps, graphql } from "gatsby"
-import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import * as React from "react"
+import Gallery, { ImageData } from "../components/gallery"
 import Layout from "../components/layout"
 import { Seo } from "../components/seo"
-
-type GalleryProps = {
-  images: ImageData[]
-}
-
-type ImageData = {
-  name: string
-  image: IGatsbyImageData
-}
-
-const Gallery: React.FC<GalleryProps> = ({ images }) => (
-  <div>
-    {images.map(img => (
-      <GatsbyImage alt={img.name} image={img.image} />
-    ))}
-  </div>
-)
 
 const ArtPage: React.FC<PageProps<Queries.ArtImagesQuery>> = ({ data }) => {
   const images: ImageData[] = data.allFile.nodes.map(n => ({
