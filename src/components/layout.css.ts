@@ -12,7 +12,7 @@ export const container = style({
 export const navBar = style({
   display: `flex`,
   gap: `1.5rem`,
-  padding: `1.45rem 1.1rem 1rem 1.1rem`,
+  padding: `1.45rem ${vars.paddings.contentRight} 1rem ${vars.paddings.contentLeft}`,
   fontWeight: `bold`,
 })
 

@@ -8,8 +8,8 @@ export const container = style({
   minHeight: `11.1rem`,
   paddingTop: `2rem`,
   paddingBottom: `0.28rem`,
-  paddingLeft: `1.1rem`,
-  paddingRight: `1.1rem`,
+  paddingLeft: vars.paddings.contentLeft,
+  paddingRight: vars.paddings.contentRight,
 })
 
 export const meta = style({

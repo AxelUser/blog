@@ -2,7 +2,7 @@ import { globalStyle, style } from "@vanilla-extract/css"
 import { vars } from "../styles/theme.css"
 
 export const container = style({
-  padding: `0.5rem 1.1rem 2rem 1.1rem`,
+  padding: `0.5rem ${vars.paddings.contentRight} 2rem ${vars.paddings.contentLeft}`,
 })
 
 globalStyle(`${container} > h1`, {
