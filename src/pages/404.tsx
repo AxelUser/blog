@@ -1,17 +1,20 @@
 import { HeadFC, Link, PageProps } from "gatsby"
 import * as React from "react"
+import Layout from "../components/layout"
 import { Seo } from "../components/seo"
-import { container } from "../styles/not-found.css"
+import { backLink, container } from "./404.css"
 
 const NotFoundPage: React.FC<PageProps> = () => {
   return (
-    <main>
+    <Layout>
       <div className={container}>
         <h1>Page not found</h1>
         <small>or maybe it's hidden somewhere</small>
-        <Link to="/">Go back to light</Link>
+        <Link className={backLink} to="/">
+          Go back to light
+        </Link>
       </div>
-    </main>
+    </Layout>
   )
 }
 

@@ -1,23 +1,23 @@
-import { globalStyle, style } from "@vanilla-extract/css"
-import { vars } from "./theme.css"
+import { style } from "@vanilla-extract/css"
+import { vars } from "../styles/theme.css"
 
 export const container = style({
   display: `flex`,
   flexDirection: `column`,
   justifyContent: `center`,
   alignItems: `center`,
-  minHeight: `100vh`,
+  margin: `auto`,
 })
 
-globalStyle(`${container} a`, {
+export const backLink = style({
   marginTop: `3rem`,
   color: vars.color.text.link,
   borderBottomWidth: `1px`,
   borderBottomStyle: `solid`,
   borderBottomColor: `transparent`,
-})
 
-globalStyle(`${container} a:hover`, {
-  color: vars.color.text.link,
-  borderBottomColor: vars.color.text.link,
+  ":hover": {
+    color: vars.color.text.link,
+    borderBottomColor: vars.color.text.link,
+  },
 })
