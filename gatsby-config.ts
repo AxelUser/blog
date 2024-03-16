@@ -38,6 +38,12 @@ const config: GatsbyConfig = {
         pathToConfigModule: "src/utils/typography",
       },
     },
+    {
+      resolve: `gatsby-transformer-json`,
+      options: {
+        typeName: `Json`,
+      },
+    },
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
@@ -70,7 +76,6 @@ const config: GatsbyConfig = {
         name: "art",
         path: "./content/art",
       },
-      __key: "art",
     },
   ],
 }

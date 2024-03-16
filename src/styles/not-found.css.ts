@@ -4,9 +4,9 @@ import { vars } from "./theme.css"
 export const container = style({
   display: `flex`,
   flexDirection: `column`,
-  height: `100vh`,
   justifyContent: `center`,
   alignItems: `center`,
+  minHeight: `100vh`,
 })
 
 globalStyle(`${container} a`, {

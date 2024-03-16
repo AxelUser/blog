@@ -1,6 +1,6 @@
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import * as React from "react"
-import { container, imageCard } from "./gallery.css"
+import { container, imageCardPortrait } from "./gallery.css"
 
 type GalleryProps = {
   images: ImageData[]
@@ -14,7 +14,7 @@ export type ImageData = {
 const Gallery: React.FC<GalleryProps> = ({ images }) => (
   <div className={container}>
     {images.map(img => (
-      <div className={imageCard}>
+      <div className={imageCardPortrait}>
         <GatsbyImage alt={img.name} image={img.image} />
       </div>
     ))}

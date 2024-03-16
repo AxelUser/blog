@@ -8,6 +8,7 @@ globalStyle(`*`, {
 globalStyle(`body`, {
   color: vars.color.text.primary,
   backgroundColor: vars.color.bg.primary,
+  minHeight: `100vh`,
 })
 
 globalStyle(`a`, {

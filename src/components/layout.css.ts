@@ -6,6 +6,7 @@ export const container = style({
   flexDirection: `column`,
   maxWidth: `700px`,
   margin: `auto`,
+  minHeight: `100vh`,
 })
 
 export const navBar = style({
@@ -39,6 +40,10 @@ export const navBarLink = style({
 })
 
 globalStyle(`${container} footer`, {
+  marginTop: `auto`,
+})
+
+globalStyle(`${container} footer small`, {
   marginTop: `2rem`,
   marginBottom: `1.3rem`,
   display: `flex`,
