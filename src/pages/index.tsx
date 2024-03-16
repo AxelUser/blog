@@ -1,8 +1,7 @@
 import { HeadFC, PageProps, graphql } from "gatsby"
 import * as React from "react"
-import Bio from "../components/bio"
 import ContentPreview from "../components/contentPreview"
-import Layout from "../components/layout"
+import Layout, { BioDisplay } from "../components/layout"
 import { Seo } from "../components/seo"
 
 const BlogPage: React.FC<PageProps<Queries.BlogPostListsQuery>> = ({
@@ -11,8 +10,7 @@ const BlogPage: React.FC<PageProps<Queries.BlogPostListsQuery>> = ({
   },
 }) => {
   return (
-    <Layout>
-      <Bio />
+    <Layout displayBio={BioDisplay.BeforeContent}>
       <div>
         {edges.map(({ node }) => (
           <ContentPreview

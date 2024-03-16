@@ -1,8 +1,7 @@
 import { HeadFC, PageProps, graphql } from "gatsby"
 import * as React from "react"
-import Bio from "../../components/bio"
 import ContentPreview from "../../components/contentPreview"
-import Layout from "../../components/layout"
+import Layout, { BioDisplay } from "../../components/layout"
 import { Seo } from "../../components/seo"
 import { artTitle } from "./index.css"
 
@@ -23,18 +22,15 @@ const ArtPage: React.FC<PageProps<Queries.GalleryCollectionsQuery>> = ({
     path: n.relativeDirectory,
   }))
   return (
-    <Layout>
-      <Bio />
-      <div>
-        <h1 className={artTitle}>AI Art</h1>
-        {collections.map(c => (
-          <ContentPreview
-            title={c.title}
-            description={c.description}
-            link={c.path}
-          />
-        ))}
-      </div>
+    <Layout displayBio={BioDisplay.BeforeContent}>
+      <h1 className={artTitle}>AI Art</h1>
+      {collections.map(c => (
+        <ContentPreview
+          title={c.title}
+          description={c.description}
+          link={c.path}
+        />
+      ))}
     </Layout>
   )
 }

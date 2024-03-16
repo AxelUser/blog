@@ -3,8 +3,9 @@ import { getImage } from "gatsby-plugin-image"
 import React from "react"
 import { ArtCollectionPageContext } from "../common/types"
 import Gallery, { ImageData } from "../components/gallery"
-import Layout from "../components/layout"
+import Layout, { BioDisplay } from "../components/layout"
 import { Seo } from "../components/seo"
+import { artCollectionInfo } from "./artCollection.css"
 
 const ArtCollectionPage: React.FC<
   PageProps<Queries.ArtCollectionImagesQuery, ArtCollectionPageContext>
@@ -16,9 +17,11 @@ const ArtCollectionPage: React.FC<
       image: n.childImageSharp!.gatsbyImageData,
     }))
   return (
-    <Layout>
-      <h1>{pageContext.title}</h1>
-      <p>{pageContext.description}</p>
+    <Layout displayBio={BioDisplay.BeforeContent}>
+      <div className={artCollectionInfo}>
+        <h1>{pageContext.title}</h1>
+        <p>{pageContext.description}</p>
+      </div>
       <Gallery images={images} />
     </Layout>
   )
@@ -26,8 +29,11 @@ const ArtCollectionPage: React.FC<
 
 export default ArtCollectionPage
 
-export const Head: HeadFC = () => {
-  return <Seo title="Art" />
+export const Head: HeadFC<
+  Queries.ArtCollectionImagesQuery,
+  ArtCollectionPageContext
+> = ({ pageContext }) => {
+  return <Seo title={`Art | ${pageContext.title}`} />
 }
 
 export const query = graphql`

@@ -1,5 +1,6 @@
 import { Link, graphql, useStaticQuery } from "gatsby"
 import * as React from "react"
+import Bio from "./bio"
 import { container, navBar, navBarLink } from "./layout.css"
 
 interface FooterProps {
@@ -28,7 +29,17 @@ const Footer = ({ author, currentYear }: FooterProps) => (
   </footer>
 )
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+export enum BioDisplay {
+  BeforeContent,
+  AfterContent,
+}
+
+export type LayoutProps = {
+  displayBio?: BioDisplay
+  children?: React.ReactNode
+}
+
+const Layout: React.FC<LayoutProps> = ({ displayBio, children }) => {
   const query = useStaticQuery<Queries.SiteMetaQuery>(graphql`
     query SiteMeta {
       site {
@@ -44,7 +55,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={container}>
       <Header />
+      {displayBio == BioDisplay.BeforeContent && <Bio />}
       {children}
+      {displayBio == BioDisplay.AfterContent && <Bio />}
       <Footer
         author={query?.site?.siteMetadata?.author || ""}
         currentYear={query?.site?.siteMetadata?.currentYear || 0}
