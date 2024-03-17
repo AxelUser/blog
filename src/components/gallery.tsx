@@ -1,6 +1,8 @@
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
-import * as React from "react"
+import React, { useContext } from "react"
 import { container, imageCardPortrait } from "./gallery.css"
+import Lightbox from "./lightbox/lightbox"
+import LightboxContext from "./lightbox/lightboxConext"
 
 type GalleryProps = {
   images: ImageData[]
@@ -11,14 +13,19 @@ export type ImageData = {
   image: IGatsbyImageData
 }
 
-const Gallery: React.FC<GalleryProps> = ({ images }) => (
-  <div className={container}>
-    {images.map(img => (
-      <div className={imageCardPortrait}>
-        <GatsbyImage alt={img.name} image={img.image} />
-      </div>
-    ))}
-  </div>
-)
+const Gallery: React.FC<GalleryProps> = ({ images }) => {
+  var { show } = useContext(LightboxContext)
+
+  return (
+    <div className={container}>
+      <Lightbox />
+      {images.map(img => (
+        <div className={imageCardPortrait} onClick={() => show()}>
+          <GatsbyImage alt={img.name} image={img.image} />
+        </div>
+      ))}
+    </div>
+  )
+}
 
 export default Gallery
