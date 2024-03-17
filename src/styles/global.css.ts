@@ -1,4 +1,4 @@
-import { globalStyle } from "@vanilla-extract/css"
+import { globalStyle, style } from "@vanilla-extract/css"
 import { vars } from "./theme.css"
 
 globalStyle(`*`, {
@@ -18,4 +18,8 @@ globalStyle(`a`, {
 
 globalStyle(`a:hover`, {
   color: `inherit`,
+})
+
+export const noScroll = style({
+  overflow: "hidden",
 })
