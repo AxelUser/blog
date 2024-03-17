@@ -9,4 +9,8 @@ export const container = style({
 export const imageCardPortrait = style({
   marginBottom: "1rem",
   breakInside: "avoid",
+
+  ":hover": {
+    cursor: "pointer",
+  },
 })
