@@ -9,7 +9,7 @@ export const modal = style({
   width: "100%",
   height: "100%",
   overflow: "auto",
-  backgroundColor: "black",
+  backgroundColor: "#000000f2",
 })
 
 export const closeModal = style({
@@ -23,4 +23,17 @@ export const closeModal = style({
   ":hover": {
     cursor: "pointer",
   },
+})
+
+export const lightboxContent = style({
+  position: "relative",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+})
+
+export const fullImage = style({
+  margin: "auto",
+  maxWidth: "80vw",
+  maxHeight: "80vh",
 })
