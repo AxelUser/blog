@@ -15,7 +15,6 @@ const ArtCollectionPage: React.FC<
     .map(n => ({
       name: n.name,
       image: n.childImageSharp!.gatsbyImageData,
-      originalUrl: n.childImageSharp!.fluid!.srcWebp!,
     }))
   return (
     <Layout displayBio={BioDisplay.BeforeContent}>
@@ -49,14 +48,7 @@ export const query = graphql`
       nodes {
         name
         childImageSharp {
-          id
-          gatsbyImageData(
-            height: 400
-            transformOptions: { cropFocus: ATTENTION, fit: INSIDE }
-          )
-          fluid {
-            srcWebp
-          }
+          gatsbyImageData
         }
       }
     }

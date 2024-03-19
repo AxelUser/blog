@@ -18,6 +18,14 @@ export const meta = style({
   color: vars.color.text.secondary,
 })
 
+export const contentCoverImageContainer = style({
+  zIndex: -1,
+  position: "absolute",
+  maxWidth: "400px",
+})
+
+export const contnetCoverImage = style({})
+
 globalStyle(`${container}:hover`, {
   backgroundColor: vars.color.text.primary,
   color: vars.color.bg.primary,

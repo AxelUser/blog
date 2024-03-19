@@ -1,9 +1,10 @@
+import { IGatsbyImageData } from "gatsby-plugin-image"
 import React, { createContext, useEffect, useState } from "react"
 import { noScroll } from "../../styles/global.css"
 
 export type LightboxContextProps = {
-  currentImage: string | null
-  show: (imageId: string) => void
+  currentImage: IGatsbyImageData | null
+  show: (image: IGatsbyImageData) => void
   hide: () => void
 }
 
@@ -16,7 +17,7 @@ export const LightboxContext = createContext<LightboxContextProps>({
 export const LightboxProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  var [currentImage, setImage] = useState<string | null>(null)
+  var [currentImage, setImage] = useState<IGatsbyImageData | null>(null)
 
   useEffect(() => {
     var html = document.getElementsByTagName("html")[0]

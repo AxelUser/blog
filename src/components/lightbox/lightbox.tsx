@@ -1,3 +1,4 @@
+import { GatsbyImage } from "gatsby-plugin-image"
 import React, { useContext } from "react"
 import { closeModal, fullImage, lightboxContent, modal } from "./lightbox.css"
 import { LightboxContext } from "./lightboxContext"
@@ -13,7 +14,12 @@ const Lightbox: React.FC = () => {
         &times;
       </span>
       <div className={lightboxContent}>
-        <img className={fullImage} src={currentImage} />
+        <GatsbyImage
+          className={fullImage}
+          alt=""
+          image={currentImage}
+          objectFit="contain"
+        />
       </div>
     </div>
   )

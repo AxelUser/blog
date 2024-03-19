@@ -11,7 +11,6 @@ type GalleryProps = {
 export type ImageData = {
   name: string
   image: IGatsbyImageData
-  originalUrl: string
 }
 
 const Gallery: React.FC<GalleryProps> = ({ images }) => {
@@ -21,10 +20,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
     <div className={container}>
       <Lightbox />
       {images.map(img => (
-        <div
-          className={imageCardPortrait}
-          onClick={() => show(img.originalUrl)}
-        >
+        <div className={imageCardPortrait} onClick={() => show(img.image)}>
           <GatsbyImage alt={img.name} image={img.image} />
         </div>
       ))}

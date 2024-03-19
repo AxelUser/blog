@@ -1,6 +1,11 @@
 import { Link } from "gatsby"
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import React from "react"
-import { container, meta } from "./contentPreview.css"
+import {
+  container,
+  contentCoverImageContainer,
+  meta,
+} from "./contentPreview.css"
 import Tags from "./tags"
 
 interface PreviewProps {
@@ -9,6 +14,7 @@ interface PreviewProps {
   tags?: string[]
   date?: string
   link: string
+  coverImage?: IGatsbyImageData
 }
 
 const ContentPreview: React.FC<PreviewProps> = ({
@@ -17,6 +23,7 @@ const ContentPreview: React.FC<PreviewProps> = ({
   tags,
   date,
   link,
+  coverImage,
 }) => {
   const metaPreview =
     date != null && tags != null ? (
@@ -26,8 +33,16 @@ const ContentPreview: React.FC<PreviewProps> = ({
       </div>
     ) : null
 
+  const cover =
+    coverImage != null ? (
+      <div className={contentCoverImageContainer}>
+        <GatsbyImage alt="" image={coverImage} />
+      </div>
+    ) : null
+
   return (
     <div className={container}>
+      {cover}
       {metaPreview}
       <Link to={link}>
         <h1>{title}</h1>

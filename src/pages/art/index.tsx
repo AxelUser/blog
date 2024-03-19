@@ -1,4 +1,5 @@
 import { HeadFC, PageProps, graphql } from "gatsby"
+import { IGatsbyImageData } from "gatsby-plugin-image"
 import * as React from "react"
 import ContentPreview from "../../components/contentPreview"
 import Layout, { BioDisplay } from "../../components/layout"
@@ -9,6 +10,7 @@ type Collection = {
   title: string
   description: string
   path: string
+  coverImage: IGatsbyImageData
 }
 
 const ArtPage: React.FC<PageProps<Queries.GalleryCollectionsQuery>> = ({
@@ -20,6 +22,7 @@ const ArtPage: React.FC<PageProps<Queries.GalleryCollectionsQuery>> = ({
     title: n.childrenJson![0]!.title!,
     description: n.childrenJson![0]!.description!,
     path: n.relativeDirectory,
+    coverImage: n.childrenJson![0]!.cover!.childImageSharp!.gatsbyImageData,
   }))
   return (
     <Layout displayBio={BioDisplay.BeforeContent}>
@@ -29,6 +32,7 @@ const ArtPage: React.FC<PageProps<Queries.GalleryCollectionsQuery>> = ({
           title={c.title}
           description={c.description}
           link={c.path}
+          coverImage={c.coverImage}
         />
       ))}
     </Layout>
@@ -54,6 +58,11 @@ export const query = graphql`
         childrenJson {
           title
           description
+          cover {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
         }
       }
     }
