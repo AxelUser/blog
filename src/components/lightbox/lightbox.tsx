@@ -1,6 +1,6 @@
 import { GatsbyImage } from "gatsby-plugin-image"
 import React, { useContext } from "react"
-import { closeModal, fullImage, lightboxContent, modal } from "./lightbox.css"
+import { closeModal, fullImage, modal } from "./lightbox.css"
 import { LightboxContext } from "./lightboxContext"
 
 export type LightboxProps = {
@@ -24,14 +24,12 @@ const Lightbox: React.FC<LightboxProps> = ({ onHidden }) => {
       <span className={closeModal} onClick={() => close()}>
         &times;
       </span>
-      <div className={lightboxContent}>
-        <GatsbyImage
-          className={fullImage}
-          alt=""
-          image={currentImage}
-          objectFit="contain"
-        />
-      </div>
+      <GatsbyImage
+        className={fullImage}
+        alt=""
+        image={currentImage}
+        objectFit="contain"
+      />
     </div>
   )
 }
