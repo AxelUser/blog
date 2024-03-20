@@ -32,7 +32,6 @@ const ArtPage: React.FC<PageProps<Queries.GalleryCollectionsQuery>> = ({
           title={c.title}
           description={c.description}
           link={c.path}
-          coverImage={c.coverImage}
         />
       ))}
     </Layout>
