@@ -1,10 +1,10 @@
 import { HeadFC, PageProps, graphql } from "gatsby"
 import { IGatsbyImageData } from "gatsby-plugin-image"
 import * as React from "react"
-import ContentPreview from "../../components/contentPreview"
-import Layout, { BioDisplay } from "../../components/layout"
-import { Seo } from "../../components/seo"
-import { artTitle } from "./index.css"
+import ContentPreview from "../components/contentPreview"
+import Layout, { BioDisplay } from "../components/layout"
+import { Seo } from "../components/seo"
+import { artTitle } from "../styles/art.css"
 
 type Collection = {
   title: string
