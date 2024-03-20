@@ -1,7 +1,7 @@
 import type { GatsbyNode } from "gatsby"
 import { createFilePath } from "gatsby-source-filesystem"
 import path from "path"
-import { BlogPostContext } from "./src/common/types"
+import { ArtCollectionPageContext, BlogPostContext } from "./src/common/types"
 
 export const onCreateNode: GatsbyNode["onCreateNode"] = ({
   node,
@@ -33,55 +33,92 @@ export const createPages: GatsbyNode["createPages"] = async ({
   graphql,
   actions,
 }) => {
-  const { data } = await graphql<Queries.AllBlogPostsQuery>(`
-    query AllBlogPosts {
-      allMdx(sort: { frontmatter: { date: ASC } }) {
-        edges {
-          node {
-            id
-            internal {
-              contentFilePath
-            }
-            fields {
-              legacyPath
-              path
-            }
-            frontmatter {
-              legacy
+  const createBlogPosts = async () => {
+    const { data } = await graphql<Queries.AllBlogPostsQuery>(`
+      query AllBlogPosts {
+        allMdx(sort: { frontmatter: { date: ASC } }) {
+          edges {
+            node {
+              id
+              internal {
+                contentFilePath
+              }
+              fields {
+                legacyPath
+                path
+              }
+              frontmatter {
+                legacy
+              }
             }
           }
         }
       }
-    }
-  `)
+    `)
 
-  const template = path.resolve(`./src/templates/blogPost.tsx`)
-  const pages = data?.allMdx.edges.flatMap(e => e.node)
+    const template = path.resolve(`./src/templates/blogPost.tsx`)
+    const pages = data?.allMdx.edges.flatMap(e => e.node)
 
-  pages?.forEach((node, idx) => {
-    const previous = idx !== 0 ? pages[idx - 1] : null
-    const next = idx < pages.length - 1 ? pages[idx + 1] : null
+    pages?.forEach((node, idx) => {
+      const previous = idx !== 0 ? pages[idx - 1] : null
+      const next = idx < pages.length - 1 ? pages[idx + 1] : null
 
-    const createPage = (path: string) =>
-      actions.createPage<BlogPostContext>({
-        path: path,
-        component: `${template}?__contentFilePath=${node.internal.contentFilePath}`,
-        context: {
-          id: node.id,
-          previousId: previous?.id ?? "",
-          nextId: next?.id ?? "",
-        },
-      })
+      const createPage = (path: string) =>
+        actions.createPage<BlogPostContext>({
+          path: path,
+          component: `${template}?__contentFilePath=${node.internal.contentFilePath}`,
+          context: {
+            id: node.id,
+            previousId: previous?.id ?? "",
+            nextId: next?.id ?? "",
+          },
+        })
 
-    const { path, legacyPath } = node?.fields!
-    if (path != null && legacyPath != null) {
-      createPage(path)
+      const { path, legacyPath } = node?.fields!
+      if (path != null && legacyPath != null) {
+        createPage(path)
 
-      if (node?.frontmatter?.legacy) {
-        createPage(legacyPath)
+        if (node?.frontmatter?.legacy) {
+          createPage(legacyPath)
+        }
       }
-    }
-  })
+    })
+  }
+
+  const createGalleryPages = async () => {
+    const { data } = await graphql<Queries.GalleryCollectionPagesQuery>(`
+      query GalleryCollectionPages {
+        allFile(filter: { base: { eq: "gallery-index.json" } }) {
+          nodes {
+            relativeDirectory
+            childrenJson {
+              title
+              description
+            }
+          }
+        }
+      }
+    `)
+
+    const template = path.resolve(`./src/templates/artCollection.tsx`)
+
+    data?.allFile.nodes
+      .filter(n => n.childrenJson != null)
+      .forEach(n => {
+        actions.createPage<ArtCollectionPageContext>({
+          path: `art/${n.relativeDirectory}`,
+          component: `${template}`,
+          context: {
+            title: n.childrenJson![0]!.title!,
+            description: n.childrenJson![0]!.description!,
+            directory: n.relativeDirectory,
+          },
+        })
+      })
+  }
+
+  await createBlogPosts()
+  await createGalleryPages()
 }
 
 export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =

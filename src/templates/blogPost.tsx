@@ -1,7 +1,6 @@
 import { HeadFC, graphql } from "gatsby"
 import * as React from "react"
-import Bio from "../components/bio"
-import Layout from "../components/layout"
+import Layout, { BioDisplay } from "../components/layout"
 import Navigation from "../components/navigation"
 import { Seo } from "../components/seo"
 import Tags from "../components/tags"
@@ -15,7 +14,7 @@ const BlogPostTemplate = ({
   children: any
 }) => {
   return (
-    <Layout>
+    <Layout displayBio={BioDisplay.AfterContent}>
       <div className={container}>
         <span className={meta}>
           <time>{current!.frontmatter.date}</time>
@@ -42,7 +41,6 @@ const BlogPostTemplate = ({
           }
         />
       </div>
-      <Bio />
     </Layout>
   )
 }

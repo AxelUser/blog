@@ -13,4 +13,8 @@ export const vars = createGlobalTheme(`:root`, {
     },
     border: `#737373`,
   },
+  paddings: {
+    contentLeft: `1.1rem`,
+    contentRight: `1.1rem`,
+  },
 })
