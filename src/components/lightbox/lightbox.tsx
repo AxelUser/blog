@@ -3,14 +3,25 @@ import React, { useContext } from "react"
 import { closeModal, fullImage, lightboxContent, modal } from "./lightbox.css"
 import { LightboxContext } from "./lightboxContext"
 
-const Lightbox: React.FC = () => {
+export type LightboxProps = {
+  onHidden?: () => void
+}
+
+const Lightbox: React.FC<LightboxProps> = ({ onHidden }) => {
   var { currentImage, hide } = useContext(LightboxContext)
 
   if (currentImage == null) return null
 
+  const close = () => {
+    hide()
+    if (onHidden != null) {
+      onHidden()
+    }
+  }
+
   return (
     <div className={modal}>
-      <span className={closeModal} onClick={() => hide()}>
+      <span className={closeModal} onClick={() => close()}>
         &times;
       </span>
       <div className={lightboxContent}>
