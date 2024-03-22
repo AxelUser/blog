@@ -1,5 +1,6 @@
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import React, { useContext, useEffect, useState } from "react"
+import { useSwipeable } from "react-swipeable"
 import {
   closeModal,
   content,
@@ -44,12 +45,17 @@ const Lightbox: React.FC<LightboxProps> = ({ images }) => {
     setCurrentImageIdx((currentImageIdx + 1) % images.length)
   }
 
+  var swipeHandlers = useSwipeable({
+    onSwipedLeft: () => showPrev(),
+    onSwipedRight: () => showNext(),
+  })
+
   return (
     <div className={modal}>
       <span className={closeModal} onClick={() => hide()}>
         &times;
       </span>
-      <div className={content}>
+      <div className={content} {...swipeHandlers}>
         {supportNavigation && (
           <span
             className={`${navigationButton} ${prevButton}`}
