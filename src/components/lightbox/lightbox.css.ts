@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css"
+import { createVar, style } from "@vanilla-extract/css"
 
 export const modal = style({
   position: "fixed",
@@ -11,7 +11,7 @@ export const modal = style({
   backgroundColor: "#000000f2",
 
   display: "flex",
-  flexDirection: "column",
+  flexDirection: "row",
   justifyContent: "center",
 })
 
@@ -26,6 +26,38 @@ export const closeModal = style({
   ":hover": {
     cursor: "pointer",
   },
+})
+
+const buttonMargin = createVar()
+
+export const content = style({
+  display: "flex",
+  flexDirection: "row",
+  width: "100vw",
+  vars: {
+    [buttonMargin]: "5rem",
+  },
+})
+
+export const navigationButton = style({
+  cursor: "pointer",
+  fontSize: "35px",
+  fontWeight: "bold",
+  userSelect: "none",
+
+  "@media": {
+    "(pointer:coarse)": {
+      display: "none",
+    },
+  },
+})
+
+export const prevButton = style({
+  margin: `auto 0 auto ${buttonMargin}`,
+})
+
+export const nextButton = style({
+  margin: `auto ${buttonMargin} auto 0`,
 })
 
 export const fullImage = style({

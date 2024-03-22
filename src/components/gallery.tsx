@@ -1,5 +1,5 @@
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useMemo } from "react"
 import { useQueryParamString } from "react-use-query-param-string"
 import { container, imageCardPortrait } from "./gallery.css"
 import Lightbox from "./lightbox/lightbox"
@@ -46,9 +46,13 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
     }
   }, [currentImage])
 
+  const imageData = useMemo(() => {
+    return images.map(img => img.image)
+  }, images)
+
   return (
     <div className={container}>
-      <Lightbox />
+      <Lightbox images={imageData} />
       {images.map(img => (
         <div className={imageCardPortrait} onClick={() => show(img.image)}>
           <GatsbyImage alt={img.name} image={img.image} />
