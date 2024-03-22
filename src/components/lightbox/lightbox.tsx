@@ -34,7 +34,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images }) => {
   }, [currentImageIdx])
 
   const showPrev = () => {
-    if (currentImageIdx - 1 == 0) {
+    if (currentImageIdx - 1 < 0) {
       setCurrentImageIdx(images.length - 1)
     } else {
       setCurrentImageIdx(currentImageIdx - 1)
@@ -46,8 +46,8 @@ const Lightbox: React.FC<LightboxProps> = ({ images }) => {
   }
 
   var swipeHandlers = useSwipeable({
-    onSwipedLeft: () => showPrev(),
-    onSwipedRight: () => showNext(),
+    onSwipedLeft: () => showNext(),
+    onSwipedRight: () => showPrev(),
   })
 
   return (
