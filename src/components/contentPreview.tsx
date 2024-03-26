@@ -41,14 +41,14 @@ const ContentPreview: React.FC<PreviewProps> = ({
     ) : null
 
   return (
-    <div className={container}>
-      {cover}
-      {metaPreview}
-      <Link to={link}>
+    <Link to={link}>
+      <div className={container}>
+        {cover}
+        {metaPreview}
         <h1>{title}</h1>
         <p>{description}</p>
-      </Link>
-    </div>
+      </div>
+    </Link>
   )
 }
 
