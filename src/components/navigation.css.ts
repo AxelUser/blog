@@ -1,28 +1,39 @@
-import { globalStyle, style } from "@vanilla-extract/css"
+import { createVar, globalStyle, style } from "@vanilla-extract/css"
 import { vars } from "../styles/theme.css"
 
-export const navigation = style({
+const linkTextColor = createVar()
+
+export const container = style({
   marginTop: `2rem`,
   display: `flex`,
   gap: `1.5rem`,
+
   "@media": {
     "(max-width: 650px)": {
       flexDirection: `column`,
     },
   },
+
+  vars: {
+    [linkTextColor]: vars.color.text.primary,
+  },
 })
 
-globalStyle(`${navigation} a`, {
-  color: vars.color.text.link,
-})
+export const navCard = style({
+  display: "flex",
+  flexDirection: "column",
+  border: `1px solid ${vars.color.border}`,
+  borderRadius: "8px",
 
-globalStyle(`${navigation} a:hover`, {
-  borderBottomWidth: `1px`,
-  borderBottomStyle: `solid`,
-  borderBottomColor: vars.color.text.link,
-})
+  padding: ".5rem",
 
-globalStyle(`${navigation} span`, {
+  ":hover": {
+    cursor: "pointer",
+    vars: {
+      [linkTextColor]: vars.color.text.link,
+    },
+  },
+
   "@media": {
     "(min-width: 650px)": {
       maxWidth: `300px`,
@@ -30,10 +41,27 @@ globalStyle(`${navigation} span`, {
   },
 })
 
-export const linkNext = style({
+export const navDirectionInfo = style({
+  fontSize: "12px",
+  fontWeight: "bold",
+  color: vars.color.text.secondary,
+})
+
+export const navLink = style({
+  color: linkTextColor,
+
+  ":hover": {
+    color: linkTextColor,
+  },
+})
+
+globalStyle(`${container} :nth-child(2)`, {
   marginLeft: `auto`,
+  alignItems: "flex-end",
+
   "@media": {
     "(max-width: 650px)": {
+      alignItems: "flex-start",
       marginLeft: 0,
     },
   },

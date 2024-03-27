@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import * as React from "react"
-import { linkNext, navigation } from "./navigation.css"
+import { container, navCard, navDirectionInfo, navLink } from "./navigation.css"
 
 type PageLinkInfo = {
   title: string
@@ -12,12 +12,13 @@ interface NavLinkProps extends React.HTMLAttributes<HTMLSpanElement> {
   to?: PageLinkInfo
 }
 
-const NavigationLink: React.FC<NavLinkProps> = ({ prefix, to, ...rest }) => {
+const NavigationLink: React.FC<NavLinkProps> = ({ prefix, to }) => {
   if (to) {
     return (
-      <span {...rest}>
-        <Link to={to.link}>
-          {prefix}: {to.title}
+      <span className={navCard}>
+        <span className={navDirectionInfo}>{prefix}</span>
+        <Link className={navLink} to={to.link}>
+          {to.title}
         </Link>
       </span>
     )
@@ -31,9 +32,9 @@ const Navigation: React.FC<{
   next?: PageLinkInfo
 }> = ({ prev, next }) => {
   return (
-    <nav className={navigation}>
+    <nav className={container}>
       <NavigationLink prefix="Previous" to={prev} />
-      <NavigationLink prefix="Next" to={next} className={linkNext} />
+      <NavigationLink prefix="Next" to={next} />
     </nav>
   )
 }
