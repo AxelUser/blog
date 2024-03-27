@@ -15,12 +15,10 @@ interface NavLinkProps extends React.HTMLAttributes<HTMLSpanElement> {
 const NavigationLink: React.FC<NavLinkProps> = ({ prefix, to }) => {
   if (to) {
     return (
-      <span className={navCard}>
+      <Link to={to.link} className={navCard}>
         <span className={navDirectionInfo}>{prefix}</span>
-        <Link className={navLink} to={to.link}>
-          {to.title}
-        </Link>
-      </span>
+        <span className={navLink}>{to.title}</span>
+      </Link>
     )
   }
 
