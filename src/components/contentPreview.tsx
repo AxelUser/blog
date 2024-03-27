@@ -5,6 +5,8 @@ import {
   container,
   contentCoverImageContainer,
   meta,
+  previewDescription,
+  previewTitle,
 } from "./contentPreview.css"
 import Tags from "./tags"
 
@@ -45,8 +47,8 @@ const ContentPreview: React.FC<PreviewProps> = ({
       <div className={container}>
         {cover}
         {metaPreview}
-        <h1>{title}</h1>
-        <p>{description}</p>
+        <h1 className={previewTitle}>{title}</h1>
+        <p className={previewDescription}>{description}</p>
       </div>
     </Link>
   )
