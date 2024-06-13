@@ -11,16 +11,25 @@ draft: false
 legacy: true
 ---
 
-Since C# 4.5 you can use "magic" attributes to retrieve caller information:
+In software development, especially when working with large codebases, tracking down where and how methods are called can be a challenging task. Debugging and logging become essential tools in a developer's toolkit to understand the flow of execution and identify issues.
 
-- CallerFilePath
-- CallerLineNumber
-- CallerMemberName
+Since C# 4.5, the language introduced a set of "magic" attributes that greatly simplify this process. These attributes automatically provide information about the caller, making your code cleaner and more maintainable.
 
-These attributes are targeted to change default value of optional parameters in methods. They pass the information about place in code, where method was called.
+This blog post will delve into how these attributes work, provide examples of their use, and demonstrate how they can enhance your debugging and logging efforts.
 
-Well, compiler always translate optional parameters into default values, if other behavior is not defined.
-For example, you have some logging method:
+## Understanding Caller Information Attributes
+
+Caller information attributes are designed to retrieve metadata about the caller of a method. They are `CallerFilePath`, `CallerLineNumber` and `CallerMemberName`.
+
+These attributes allow you to change the default values of optional parameters in methods, providing valuable information about the location in the code where the method was called.
+
+## What is a Caller?
+
+In programming, a *caller* is the piece of code that invokes (calls) a method or function. Understanding the context of the caller can help in debugging and maintaining code, as it tells you where a particular method was called from within your application.
+
+## Default Behavior of Optional Parameters
+
+By default, the compiler translates optional parameters into their default values if no other value is provided. For example, consider the following logging method:
 
 ```csharp
 void Log(string msg, string method = null)
@@ -29,16 +38,19 @@ void Log(string msg, string method = null)
 }
 ```
 
-If you invoke it like `Log(msg)`, compiler will translate this invocation into `Log(msg, null)`.
+If you call this method with `Log(msg)`, the compiler translates this to `Log(msg, null)`.
 
-So, with this trio you can tune this behavior. Just put them before optional parameters at you method and the compiler will change pre-defined values:
+## Enhancing Optional Parameters with Caller Attributes
 
-- `[CallerFilePath]` will pass the full path of your source code file, where method was invoked.
-- `[CallerLineNumber]` will pass the line number (`int`) of code, where method was invoked.
-- `[CallerMemberName]` will pass the name of member (ctor, method, property, event, etc), which invoked method.
+You can enhance this behavior using caller attributes. By placing these attributes before the optional parameters in your method, the compiler will automatically fill in the predefined values:
 
-For example, you want to write tracing or logging, and you want to know place in code, where some event occurred.
-Now, you can just write like this:
+- `CallerFilePath` passes the full path of the source code file where the method was called.
+- `CallerLineNumber` passes the line number (as an integer) where the method was called.
+- `CallerMemberName` passes the name of the member (constructor, method, property, event, etc.) that called the method.
+
+## Example: Tracing or Logging
+
+For instance, if you want to write tracing or logging code and need to know where an event occurred, you can use these attributes as shown below:
 
 ```csharp
 public static void TraceEvent(string message,
@@ -53,7 +65,7 @@ public static void TraceEvent(string message,
 }
 ```
 
-And then invoke like that:
+When you invoke this method:
 
 ```csharp
 static void Main(string[] args)
@@ -62,17 +74,18 @@ static void Main(string[] args)
 }
 ```
 
-You will see the output:
+You will see output similar to:
 
-```
+```plaintext
 event: Started
 member name: Main
 source file path: C:\some\path\to\source\CallerInfoTest.Cli\CallerInfoTest.Cli\Program.cs
 source line number: 11
 ```
 
-And if you aware of `INotifyPropertyChanged`, you can implement `PropertyChanged`
-event invocator without any hassle, like always passing name of a property, that was changed:
+### Example: Implementing INotifyPropertyChanged
+
+If you are familiar with `INotifyPropertyChanged`, you can implement the PropertyChanged event without the hassle of always passing the name of the property that was changed. Here is an example:
 
 ```csharp
 public class ViewModel: INotifyPropertyChanged
@@ -99,4 +112,10 @@ public class ViewModel: INotifyPropertyChanged
 }
 ```
 
-[Documentation about these attributes](https://docs.microsoft.com/ru-ru/dotnet/csharp/programming-guide/concepts/caller-information)
+In this example, the `OnPropertyChanged` method uses the `[CallerMemberName]` attribute to automatically provide the name of the property that has changed, eliminating the need to manually specify it each time.
+
+## Final thoughts
+
+Leveraging caller information attributes in C# can significantly simplify your debugging, logging, and event-handling code, making it more robust and easier to maintain. 
+
+By automatically providing information about the caller, these attributes save you time and reduce the likelihood of errors in your code. For more details on these attributes, you can refer to the [official documentation](https://docs.microsoft.com/ru-ru/dotnet/csharp/programming-guide/concepts/caller-information) about these attributes.
