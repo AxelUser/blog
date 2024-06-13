@@ -10,6 +10,11 @@ export const container = style({
   marginBottom: `1rem`,
 })
 
+export const glowingText = style({
+  color: vars.color.text.primary,
+  textShadow: `0 0 12px ${vars.color.text.link}`,
+})
+
 globalStyle(`${container} a`, {
   color: vars.color.text.link,
 })

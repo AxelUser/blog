@@ -116,6 +116,6 @@ In this example, the `OnPropertyChanged` method uses the `[CallerMemberName]` at
 
 ## Final thoughts
 
-Leveraging caller information attributes in C# can significantly simplify your debugging, logging, and event-handling code, making it more robust and easier to maintain. 
+Leveraging caller information attributes in C# can significantly simplify your debugging, logging, and event-handling code, making it more robust and easier to maintain.
 
 By automatically providing information about the caller, these attributes save you time and reduce the likelihood of errors in your code. For more details on these attributes, you can refer to the [official documentation](https://docs.microsoft.com/ru-ru/dotnet/csharp/programming-guide/concepts/caller-information) about these attributes.
