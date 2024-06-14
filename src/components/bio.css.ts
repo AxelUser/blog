@@ -12,7 +12,7 @@ export const container = style({
 
 export const glowingText = style({
   color: vars.color.text.primary,
-  textShadow: `0 0 12px ${vars.color.text.link}`,
+  textShadow: `0 0 10px ${vars.color.text.link}`,
 })
 
 globalStyle(`${container} a`, {
